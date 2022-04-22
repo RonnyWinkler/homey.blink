@@ -1,0 +1,17 @@
+{
+    "title": {
+        "en": "Local storage of the SyncModule !{{is|isn't}} full",
+        "de": "Lokaler Speicher des SyncModuls !{{ist|ist nicht}} belegt"
+    },
+    "hint": {
+        "en": "This Flow will continue if the local storage of the SyncModule is/isn't full.",
+        "de": "Dieser Flow wird fortgeführt, wenn der lokale Speicher des SyncModuls belegt/nicht belegt ist."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=system"
+        }
+      ]
+}

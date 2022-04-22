@@ -1,0 +1,49 @@
+{
+  "id": "com.blinkforhome",
+  "version": "0.0.1",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "name": {
+    "en": "Blink for Home",
+    "de": "Blink for Home"
+  },
+  "description": {
+    "en": "Smart security designed for every home",
+    "de": "Intelligente Sicherheit für jedes Zuhause"
+  },
+  "tags": {
+    "en": [
+      "Blink",
+      "Camera",
+      "Secutiy"
+    ],
+    "de": [
+      "Blink",
+      "Kamera",
+      "Secutiy",
+      "Sicherheit"
+    ]
+  },
+  "category": [
+    "security"
+  ],
+  "author": {
+    "name": "Ronny Winkler",
+    "email": "ronny.winkler@web.de"
+  },
+  "brandColor":"#3FA0D6",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png"
+  },
+  "source": "https://github.com/RonnyWinkler/homey.blink",
+  "homeyCommunityTopicId": 0,
+  "permissions": [],
+  "contributing": {
+      "donate": {
+          "paypal": {
+              "username": "winklerronny"
+          }
+      }
+  }
+}

@@ -1,0 +1,24 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "When an API error occurs.",
+        "de": "Wenn ein API-Fehler auftritt."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account"
+        }
+    ],
+    "tokens": [
+        {
+            "name": "reason",
+            "type": "string",
+            "title": {
+                "en": "Reason",
+                "de": "Ursache"
+            }
+        }
+    ]
+}

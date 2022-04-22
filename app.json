@@ -1,0 +1,1049 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.blinkforhome",
+  "version": "0.0.1",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "name": {
+    "en": "Blink for Home",
+    "de": "Blink for Home"
+  },
+  "description": {
+    "en": "Smart security designed for every home",
+    "de": "Intelligente Sicherheit für jedes Zuhause"
+  },
+  "tags": {
+    "en": [
+      "Blink",
+      "Camera",
+      "Secutiy"
+    ],
+    "de": [
+      "Blink",
+      "Kamera",
+      "Secutiy",
+      "Sicherheit"
+    ]
+  },
+  "category": [
+    "security"
+  ],
+  "author": {
+    "name": "Ronny Winkler",
+    "email": "ronny.winkler@web.de"
+  },
+  "brandColor": "#3FA0D6",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png"
+  },
+  "source": "https://github.com/RonnyWinkler/homey.blink",
+  "homeyCommunityTopicId": 0,
+  "permissions": [],
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "winklerronny"
+      }
+    }
+  },
+  "flow": {
+    "triggers": [
+      {
+        "highlight": true,
+        "title": {
+          "en": "When the camera is online.",
+          "de": "Wenn die Kamera online ist."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera|owl"
+          }
+        ],
+        "id": "alarm_camera_offline_false"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "When the camera is offline.",
+          "de": "Wenn die Kamera offline ist."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera|owl"
+          }
+        ],
+        "id": "alarm_camera_offline_true"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "When the SyncModule storage is free again.",
+          "de": "Wenn der SyncModul-Speicher wieder frei ist."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=system"
+          }
+        ],
+        "id": "alarm_local_storage_full_false"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "When the SyncModule storage is full.",
+          "de": "Wenn der SyncModul-Speicher komplett belegt ist."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=system"
+          }
+        ],
+        "id": "alarm_local_storage_full_true"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "When an API error occurs.",
+          "de": "Wenn ein API-Fehler auftritt."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "reason",
+            "type": "string",
+            "title": {
+              "en": "Reason",
+              "de": "Ursache"
+            }
+          }
+        ],
+        "id": "api_state_error"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "When the API access is flawless.",
+          "de": "Wenn der API-Zugriff fehlerfrei ist."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account"
+          }
+        ],
+        "id": "api_state_ok"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "When the cloud video usage has changed",
+          "de": "Wenn sich die Cloud Video-Speichernutzung geändert hat"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "measure_cloud_usage",
+            "type": "number",
+            "title": {
+              "en": "Cloud video usage (%)",
+              "de": "Cloud Video-Speichernutzung (%)"
+            },
+            "example": "15"
+          }
+        ],
+        "id": "measure_cloud_usage_changed"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "When the SyncModule video usage has changed",
+          "de": "Wenn sich die SyncModule Video-Speichernutzung geändert hat"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=system"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "measure_local_usage",
+            "type": "number",
+            "title": {
+              "en": "SyncModule video usage (%)",
+              "de": "SyncModule Video-Speichernutzung (%)"
+            },
+            "example": "15"
+          }
+        ],
+        "id": "measure_local_usage_changed"
+      },
+      {
+        "title": {
+          "en": "When a camera snapshot was created.",
+          "de": "Wenn eine Kamera-Foto aufgenommen wurde."
+        },
+        "titleFormatted": {
+          "en": "When a camera snapshot was created.",
+          "de": "Wenn eine Kamera-Foto aufgenommen wurde."
+        },
+        "hint": {
+          "en": "Triggers when a camera snapshot was created.",
+          "de": "Wird ausgelöst, Wenn eine Kamera-Foto aufgenommen wurde."
+        },
+        "tokens": [
+          {
+            "name": "device_name",
+            "type": "string",
+            "title": {
+              "en": "Camera name",
+              "de": "Kamera-Name"
+            }
+          },
+          {
+            "name": "image",
+            "type": "image",
+            "title": {
+              "en": "Snapshot image",
+              "de": "Kamera-Foto"
+            }
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera|owl"
+          }
+        ],
+        "id": "snapshot_created"
+      }
+    ],
+    "conditions": [
+      {
+        "title": {
+          "en": "API error !{{is|isn't}} present",
+          "de": "API-Fehler !{{ist|ist nicht}} vorhanden"
+        },
+        "hint": {
+          "en": "This Flow will continue if API error is/isn't currently present.",
+          "de": "Dieser Flow wird fortgeführt, wenn API-Fehler derzeit vorhanden/nicht vorhanden sind."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account"
+          }
+        ],
+        "id": "alarm_api_error"
+      },
+      {
+        "title": {
+          "en": "Camera !{{is|isn't}} offline",
+          "de": "Kamera !{{ist|ist nicht}} offline"
+        },
+        "hint": {
+          "en": "This Flow will continue if the camera is/isn't currently offline/online.",
+          "de": "Dieser Flow wird fortgeführt, wenn die Kamera derzeit offline/online ist."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera|owl"
+          }
+        ],
+        "id": "alarm_camera_offline"
+      },
+      {
+        "title": {
+          "en": "Local storage of the SyncModule !{{is|isn't}} full",
+          "de": "Lokaler Speicher des SyncModuls !{{ist|ist nicht}} belegt"
+        },
+        "hint": {
+          "en": "This Flow will continue if the local storage of the SyncModule is/isn't full.",
+          "de": "Dieser Flow wird fortgeführt, wenn der lokale Speicher des SyncModuls belegt/nicht belegt ist."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=system"
+          }
+        ],
+        "id": "alarm_local_storage_full"
+      },
+      {
+        "title": {
+          "en": "Cloud video usage !{{is|isn't}} higher than",
+          "de": "Cloud Video-Speichernutzung !{{ist|ist nicht}} größer als"
+        },
+        "titleFormatted": {
+          "en": "Cloud video usage !{{is|isn't}} higher than [[value]]",
+          "de": "Cloud Video-Speichernutzung !{{ist|ist nicht}} größer als [[value]]"
+        },
+        "hint": {
+          "en": "Cloud video usage (%)",
+          "de": "Cloud Video-Speichernutzung (%)"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account"
+          },
+          {
+            "name": "value",
+            "type": "number"
+          }
+        ],
+        "id": "measure_cloud_usage"
+      },
+      {
+        "title": {
+          "en": "SyncModule video usage !{{is|isn't}} higher than",
+          "de": "SyncModule Video-Speichernutzung !{{ist|ist nicht}} größer als"
+        },
+        "titleFormatted": {
+          "en": "SyncModule video usage !{{is|isn't}} higher than [[value]]",
+          "de": "SyncModule Video-Speichernutzung !{{ist|ist nicht}} größer als [[value]]"
+        },
+        "hint": {
+          "en": "SyncModule video usage (%)",
+          "de": "SyncModule Video-Speichernutzung (%)"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=system"
+          },
+          {
+            "name": "value",
+            "type": "number"
+          }
+        ],
+        "id": "measure_local_usage"
+      }
+    ],
+    "actions": [
+      {
+        "title": {
+          "en": "Create a camera snapshot.",
+          "de": "Kamera-Foto aufnehmen."
+        },
+        "titleFormatted": {
+          "en": "Requests a new camera snapshot.",
+          "de": "Fordert ein neues Kamera-Foto an."
+        },
+        "hint": {
+          "en": "Use this action to request a new camera snapshot. After retrieving the new image, a second flow is triggered where you can use the image as flow token.",
+          "de": "Verwende diese Aktion, um ein neues Kamera-Foto anzufordern. Nach Erstellung des Fotos wird ein weiterer Flow gestartet, in dem du das Bild als Flow-Token verwenden kannst."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera|owl"
+          }
+        ],
+        "id": "create_snapshot"
+      },
+      {
+        "title": {
+          "en": "Recors a camera video.",
+          "de": "Kamera-Video aufnehmen."
+        },
+        "titleFormatted": {
+          "en": "Starts recording a new camera video.",
+          "de": "Startet die Aufnahme eines neues Kamera-Videos."
+        },
+        "hint": {
+          "en": "Use this action to request the recording of a new camera video.",
+          "de": "Verwende diese Aktion, um die Aufnahme eines neues Kamera-Videos zu starten."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera|owl"
+          }
+        ],
+        "id": "create_video"
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "id": "account",
+      "name": {
+        "en": "Account",
+        "de": "Konto"
+      },
+      "images": {
+        "large": "/drivers/account/assets/images/large.png",
+        "small": "/drivers/account/assets/images/small.png"
+      },
+      "class": "sensor",
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "status_storage",
+        "measure_cloud_usage",
+        "measure_cloud_autodelete_days",
+        "alarm_api_error"
+      ],
+      "pair": [
+        {
+          "id": "account",
+          "navigation": {
+            "next": "check_account"
+          }
+        },
+        {
+          "id": "check_account",
+          "template": "loading",
+          "navigation": {
+            "prev": "account",
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "check_pin",
+          "template": "loading",
+          "navigation": {
+            "prev": "account",
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "pin",
+          "navigation": {
+            "prev": "account",
+            "next": "check_pin"
+          }
+        },
+        {
+          "id": "account_error",
+          "navigation": {
+            "prev": "account"
+          }
+        },
+        {
+          "id": "pin_error",
+          "navigation": {
+            "prev": "pin"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "account"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Data retrieval",
+            "de": "Datenabruf"
+          },
+          "children": [
+            {
+              "id": "status_interval",
+              "type": "number",
+              "value": 1,
+              "label": {
+                "en": "State retrieval interval (min)",
+                "de": "Status-Abruf (min)"
+              },
+              "hint": {
+                "en": "Retrieval interval of device and account states from Blink in minutes.",
+                "de": "Abruf-Intervall von Geräte- und Account-Status von Blink in Minuten."
+              }
+            },
+            {
+              "id": "motion_check_enabled",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Motion alert check enabled",
+                "de": "Bewegungsalarm-Prüfung aktiviert"
+              },
+              "hint": {
+                "en": "Enables checking for motion alerts based on new video recordings.",
+                "de": "Aktiviert die Prüfung auf Bewegungsalarme anhand neuer Videoaufnahmen."
+              }
+            },
+            {
+              "id": "motion_interval_cloud",
+              "type": "number",
+              "value": 10,
+              "label": {
+                "en": "Motion alert interval cloud (sec)",
+                "de": "Bewegungsalarm-Intervall Cloud (sec)"
+              },
+              "hint": {
+                "en": "Retrieval interval of motion alerts from Blink Cloud in seconds (>10 sec to avoid blocking).",
+                "de": "Abruf-Intervall von Bewegungsalarmen von der Blink-Cound in Sekunden (>10 sec zur Vermeidung von Sperrungen)."
+              }
+            },
+            {
+              "id": "motion_interval_local",
+              "type": "number",
+              "value": 15,
+              "label": {
+                "en": "Motion alert interval local (sec)",
+                "de": "Bewegungsalarm-Intervall lokal (sec)"
+              },
+              "hint": {
+                "en": "Retrieval interval of motion alerts from local SyncModule in seconds (>15 sec to avoid blocking).",
+                "de": "Abruf-Intervall von Bewegungsalarmen von lokalem SyncModul in Sekunden (>15 sec zur Vermeidung von Sperrungen)."
+              }
+            },
+            {
+              "id": "alarm_api_wait",
+              "type": "number",
+              "value": 10,
+              "label": {
+                "en": "API error alarm after (min)",
+                "de": "API-Fehler Alarm nach (min)"
+              },
+              "hint": {
+                "en": "Triggers the alert when the API error occurs for more than the specified time.",
+                "de": "Löst den Alarm aus, wenn der API-Fehler länger als die angegebene Zeit auftritt."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information",
+            "de": "Geräte-Information"
+          },
+          "children": [
+            {
+              "id": "account_id",
+              "type": "label",
+              "label": {
+                "en": "Account ID",
+                "de": "Konto-ID"
+              }
+            },
+            {
+              "id": "api_state",
+              "type": "label",
+              "label": {
+                "en": "API state",
+                "de": "API-Status"
+              },
+              "hint": {
+                "en": "API status including http error code: \n403: Forbidden, rate limit exceeded; \n409: Conflict, parallel request running, device busy.",
+                "de": "API-Status incl. http-Fehlercode: \n403: Forbidden, Zugriffslimit überschritten; \n409: Conflict, Parallele Anfrage läuft, Gerät belegt."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "camera",
+      "name": {
+        "en": "Camera",
+        "de": "Kamera"
+      },
+      "images": {
+        "large": "/drivers/camera/assets/images/large.png",
+        "small": "/drivers/camera/assets/images/small.png"
+      },
+      "class": "sensor",
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "onoff",
+        "alarm_motion",
+        "alarm_camera_offline",
+        "measure_wifi",
+        "measure_lfr",
+        "measure_temperature",
+        "measure_battery",
+        "alarm_battery",
+        "video_timestamp"
+      ],
+      "energy": {
+        "batteries": [
+          "AA"
+        ]
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "list_devices2"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "account_error"
+        },
+        {
+          "id": "list_devices2",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "list_devices",
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information",
+            "de": "Geräte-Information"
+          },
+          "children": [
+            {
+              "id": "account_device",
+              "type": "label",
+              "label": {
+                "en": "Account",
+                "de": "Konto"
+              },
+              "hint": {
+                "en": "The account device (parent device) this device is assigned to.",
+                "de": "Konto (Homey-Gerät), dem dieses Gerät zugeordnet ist."
+              }
+            },
+            {
+              "id": "account_id",
+              "type": "label",
+              "label": {
+                "en": "Account ID",
+                "de": "Konto-ID"
+              }
+            },
+            {
+              "id": "camera_id",
+              "type": "label",
+              "label": {
+                "en": "Camera ID",
+                "de": "Kamera-ID"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "owl",
+      "name": {
+        "en": "Mini camera",
+        "de": "Mini-Kamera"
+      },
+      "images": {
+        "large": "/drivers/owl/assets/images/large.png",
+        "small": "/drivers/owl/assets/images/small.png"
+      },
+      "class": "sensor",
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "onoff",
+        "alarm_motion",
+        "alarm_camera_offline",
+        "video_timestamp"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "list_devices2"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "account_error"
+        },
+        {
+          "id": "list_devices2",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "list_devices",
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information",
+            "de": "Geräte-Information"
+          },
+          "children": [
+            {
+              "id": "account_device",
+              "type": "label",
+              "label": {
+                "en": "Account",
+                "de": "Konto"
+              },
+              "hint": {
+                "en": "The account device (parent device) this device is assigned to.",
+                "de": "Konto (Homey-Gerät), dem dieses Gerät zugeordnet ist."
+              }
+            },
+            {
+              "id": "account_id",
+              "type": "label",
+              "label": {
+                "en": "Account ID",
+                "de": "Konto-ID"
+              }
+            },
+            {
+              "id": "camera_id",
+              "type": "label",
+              "label": {
+                "en": "Camera ID",
+                "de": "Kamera-ID"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system",
+      "name": {
+        "en": "System",
+        "de": "System"
+      },
+      "images": {
+        "large": "/drivers/system/assets/images/large.png",
+        "small": "/drivers/system/assets/images/small.png"
+      },
+      "class": "sensor",
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "onoff",
+        "measure_wifi_syncmodule",
+        "measure_local_usage",
+        "alarm_local_storage_full"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "list_devices2"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "account_error"
+        },
+        {
+          "id": "list_devices2",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "list_devices",
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information",
+            "de": "Geräte-Information"
+          },
+          "children": [
+            {
+              "id": "account_device",
+              "type": "label",
+              "label": {
+                "en": "Account",
+                "de": "Konto"
+              },
+              "hint": {
+                "en": "The account device (parent device) this device is assigned to.",
+                "de": "Konto (Homey-Gerät), dem dieses Gerät zugeordnet ist."
+              }
+            },
+            {
+              "id": "account_id",
+              "type": "label",
+              "label": {
+                "en": "Account ID",
+                "de": "Konto-ID"
+              }
+            },
+            {
+              "id": "system_id",
+              "type": "label",
+              "label": {
+                "en": "System ID",
+                "de": "System-ID"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "alarm_api_error": {
+      "type": "boolean",
+      "title": {
+        "en": "API error",
+        "de": "API-Fehler"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "API state: ERROR",
+        "de": "API-Status: FEHLER"
+      },
+      "insightsTitleFalse": {
+        "en": "API state: ok",
+        "de": "API-Status: ok"
+      },
+      "icon": "/assets/alarm_api_error.svg"
+    },
+    "alarm_camera_offline": {
+      "type": "boolean",
+      "title": {
+        "en": "Offline",
+        "de": "Offline"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Camera is offline",
+        "de": "Kamera ist offline"
+      },
+      "insightsTitleFalse": {
+        "en": "Camera is online",
+        "de": "Kamera ist online"
+      },
+      "icon": "/assets/alarm_camera_offline.svg"
+    },
+    "alarm_local_storage_full": {
+      "type": "boolean",
+      "title": {
+        "en": "SyncModule storage full",
+        "de": "SyncModul-Speicher belegt"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "SyncModule storage full",
+        "de": "SyncModul-Speicher belegt"
+      },
+      "insightsTitleFalse": {
+        "en": "SyncModule storage available",
+        "de": "SyncModul-Speicher verfügbar"
+      },
+      "icon": "/assets/alarm_local_storage_full.svg"
+    },
+    "measure_cloud_autodelete_days": {
+      "type": "number",
+      "title": {
+        "en": "Cloud autodelete",
+        "de": "Cloud Löschung"
+      },
+      "uiComponent": "sensor",
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "units": {
+        "de": "Tage",
+        "en": "days"
+      },
+      "icon": "/assets/measure_cloud_autodelete_days.svg"
+    },
+    "measure_cloud_usage": {
+      "type": "number",
+      "title": {
+        "en": "Cloud video usage",
+        "de": "Cloud Video-Speicher"
+      },
+      "uiComponent": "sensor",
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "units": "%",
+      "icon": "/assets/measure_cloud_usage.svg"
+    },
+    "measure_lfr": {
+      "type": "number",
+      "title": {
+        "en": "SyncModule signal",
+        "de": "SyncModule-Signal"
+      },
+      "uiComponent": "sensor",
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "units": "%",
+      "icon": "/assets/measure_lfr.svg"
+    },
+    "measure_local_usage": {
+      "type": "number",
+      "title": {
+        "en": "SyncModule video usage",
+        "de": "SyncModule Video-Speicher"
+      },
+      "uiComponent": "sensor",
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "units": "%",
+      "icon": "/assets/measure_local_usage.svg"
+    },
+    "measure_wifi": {
+      "type": "number",
+      "title": {
+        "en": "WiFi signal",
+        "de": "WiFi-Signal"
+      },
+      "uiComponent": "sensor",
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "units": "%",
+      "icon": "/assets/measure_wifi.svg"
+    },
+    "measure_wifi_syncmodule": {
+      "type": "number",
+      "title": {
+        "en": "WiFi signal SyncModule",
+        "de": "WiFi-Signal SyncModul"
+      },
+      "uiComponent": "sensor",
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "units": "%",
+      "icon": "/assets/measure_wifi.svg"
+    },
+    "status_storage": {
+      "type": "enum",
+      "title": {
+        "en": "Storage",
+        "de": "Speicherung"
+      },
+      "uiComponent": "sensor",
+      "insights": false,
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/status_storage.svg",
+      "values": [
+        {
+          "id": "local",
+          "title": {
+            "en": "local",
+            "de": "lokal"
+          }
+        },
+        {
+          "id": "cloud",
+          "title": {
+            "en": "cloud",
+            "de": "Cloud"
+          }
+        }
+      ]
+    },
+    "video_timestamp": {
+      "type": "number",
+      "title": {
+        "en": "Video timestamp",
+        "de": "Video Zeitpunkt"
+      },
+      "uiComponent": null,
+      "insights": false,
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/video_timestamp.svg"
+    }
+  }
+}

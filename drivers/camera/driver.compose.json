@@ -1,0 +1,58 @@
+{
+    "id": "camera",
+    "name": {
+        "en": "Camera",
+        "de": "Kamera"
+    },
+    "images": {
+        "large": "/drivers/camera/assets/images/large.png",
+        "small": "/drivers/camera/assets/images/small.png"
+    },
+    "class": "sensor",
+    "connectivity": [ "cloud" ],
+    "capabilities": [
+        "onoff",
+
+        "alarm_motion",
+        "alarm_camera_offline",
+        
+        "measure_wifi",
+        "measure_lfr",
+
+        "measure_temperature",
+
+        "measure_battery",
+        "alarm_battery",
+
+        "video_timestamp"
+    ],
+    "energy": {
+        "batteries": ["AA"]
+    },
+    "pair": [
+        {
+            "id": "list_devices",
+            "template": "list_devices",
+            "navigation": {
+                "next": "list_devices2"
+            },
+            "options": { "singular": true }
+        },
+        {
+            "id": "account_error"
+        },
+        {
+            "id": "list_devices2",
+            "template": "list_devices",
+            "navigation": {
+                "prev": "list_devices",
+                "next": "add_devices"
+            },
+            "options": { "singular": false }
+        },
+        {
+              "id": "add_devices",
+              "template": "add_devices"
+        }
+    ]
+}

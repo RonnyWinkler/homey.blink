@@ -1,0 +1,25 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "When the cloud video usage has changed",
+        "de": "Wenn sich die Cloud Video-Speichernutzung geändert hat"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account"
+        }
+    ],
+    "tokens": [
+        {
+            "name": "measure_cloud_usage",
+            "type": "number",
+            "title": {
+                "en": "Cloud video usage (%)",
+                "de": "Cloud Video-Speichernutzung (%)"
+            },
+            "example": "15"
+        }
+    ]
+}

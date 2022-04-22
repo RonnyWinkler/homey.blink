@@ -1,0 +1,20 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "API error",
+        "de": "API-Fehler"
+    },
+    "getable": true,
+    "setable": false,
+    "uiComponent": "sensor",
+    "insights": true,
+    "insightsTitleTrue": { 
+        "en": "API state: ERROR",
+        "de": "API-Status: FEHLER"
+    },
+    "insightsTitleFalse": { 
+        "en": "API state: ok",
+        "de": "API-Status: ok"
+    },
+    "icon": "/assets/alarm_api_error.svg"
+}

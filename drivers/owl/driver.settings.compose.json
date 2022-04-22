@@ -1,0 +1,39 @@
+[
+    {
+        "type": "group",
+        "label": {
+            "en": "Device Information",
+            "de": "Geräte-Information"
+        },
+        "children": [
+            {
+                "id": "account_device",
+                "type": "label",
+                "label": {
+                    "en": "Account",
+                    "de": "Konto"
+                },
+                "hint": {
+                    "en": "The account device (parent device) this device is assigned to.",
+                    "de": "Konto (Homey-Gerät), dem dieses Gerät zugeordnet ist."
+                }
+            },
+            {
+                "id": "account_id",
+                "type": "label",
+                "label": {
+                    "en": "Account ID",
+                    "de": "Konto-ID"
+                }
+            },
+            {
+                "id": "camera_id",
+                "type": "label",
+                "label": {
+                    "en": "Camera ID",
+                    "de": "Kamera-ID"
+                }
+            }
+        ]
+    }
+]

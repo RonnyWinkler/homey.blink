@@ -1,0 +1,46 @@
+<script type="application/javascript">
+
+    Homey.setTitle(Homey.__("pair.account.title"));
+
+    Homey.emit("getSettings").then(function (settings) {
+        if (settings){
+            document.getElementById('email').value = settings.email; 
+            document.getElementById('pw').value = settings.pw; 
+        }
+    });
+
+    function settingsChanged(){
+        let value = {
+            "email": document.getElementById('email').value,
+            "pw": document.getElementById('pw').value
+        };
+        Homey.emit("settingsChanged", value).then(function (result) {
+        });
+    }
+
+    // function check(){
+    //     let value = {
+    //         "email": document.getElementById('email').value,
+    //         "pw": document.getElementById('pw').value
+    //     };
+    //     Homey.emit("check", value).then(function (result) {
+    //         Homey.alert(result);
+    //     });
+    // }
+
+  </script>
+
+<div id="accountSetup" class="tabcontent">
+    <fieldset>
+        <legend><span data-i18n="pair.account.account_settings"></span></legend>
+        <div class="field row">
+            <label for="email"><span data-i18n="pair.account.email"></span></label>
+            <input id="email" type="text" value="" oninput="settingsChanged()"/>
+            <label for="pw"><span data-i18n="pair.account.pw"></span></label>
+            <input id="pw" type="password" value="" oninput="settingsChanged()"/>
+        </div>
+    </fieldset>
+    <!-- <fieldset>
+        <p><button id="check" class="left" onclick="check()"><span data-i18n="pair.db.check"></span></button></p>
+    </fieldset> -->
+</div>

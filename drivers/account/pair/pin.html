@@ -1,0 +1,29 @@
+<script type="application/javascript">
+
+    Homey.setTitle(Homey.__("pair.pin.title"));
+
+    Homey.emit("getSettings").then(function (settings) {
+        if (settings){
+            document.getElementById('pin').value = settings.pin; 
+        }
+    });
+
+    function settingsChanged(){
+        let value = {
+            "pin": document.getElementById('pin').value,
+        };
+        Homey.emit("settingsChanged", value).then(function (result) {
+        });
+    }
+
+  </script>
+
+<div id="accountSetup" class="tabcontent">
+    <fieldset>
+        <legend><span data-i18n="pair.pin.pin_settings"></span></legend>
+        <div class="field row">
+            <label for="pin"><span data-i18n="pair.pin.pin"></span></label>
+            <input id="pin" type="password" value="" oninput="settingsChanged()"/>
+        </div>
+    </fieldset>
+</div>

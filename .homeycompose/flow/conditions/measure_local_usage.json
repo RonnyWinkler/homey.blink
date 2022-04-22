@@ -1,0 +1,24 @@
+{
+    "title": {
+        "en": "SyncModule video usage !{{is|isn't}} higher than",
+        "de": "SyncModule Video-Speichernutzung !{{ist|ist nicht}} größer als"
+    },
+    "titleFormatted": {
+        "en": "SyncModule video usage !{{is|isn't}} higher than [[value]]",
+        "de": "SyncModule Video-Speichernutzung !{{ist|ist nicht}} größer als [[value]]"
+    },
+    "hint": {
+        "en": "SyncModule video usage (%)",
+        "de": "SyncModule Video-Speichernutzung (%)"
+    },
+    "args": [{
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=system"
+        },
+        {
+            "name": "value",
+            "type": "number"
+        }
+    ]
+}

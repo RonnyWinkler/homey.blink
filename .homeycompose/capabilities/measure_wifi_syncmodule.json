@@ -1,0 +1,13 @@
+{
+    "type": "number",
+    "title": {
+        "en": "WiFi signal SyncModule",
+        "de": "WiFi-Signal SyncModul"
+    },
+    "uiComponent": "sensor",
+    "insights": true,
+    "getable": true,
+    "setable": false,
+    "units": "%",
+    "icon": "/assets/measure_wifi.svg"
+}

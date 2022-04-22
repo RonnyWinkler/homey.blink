@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(0.829501,0,0,0.876901,30.1822,-67.6901)">
+        <path d="M450,187.5C450,139.207 408.552,100 357.5,100L172.5,100C121.448,100 80,139.207 80,187.5L80,362.5C80,410.793 121.448,450 172.5,450L357.5,450C408.552,450 450,410.793 450,362.5L450,187.5Z" style="fill:none;stroke:black;stroke-width:4.88px;"/>
+    </g>
+    <g transform="matrix(0.750501,0,0,0.793387,51.1173,-44.7236)">
+        <path d="M450,187.5C450,139.207 408.552,100 357.5,100L172.5,100C121.448,100 80,139.207 80,187.5L80,362.5C80,410.793 121.448,450 172.5,450L357.5,450C408.552,450 450,410.793 450,362.5L450,187.5Z" style="fill:none;stroke:black;stroke-width:5.4px;"/>
+    </g>
+    <g transform="matrix(2.63809,0,0,2.63809,-792.045,-156.304)">
+        <circle cx="395" cy="125" r="15"/>
+    </g>
+    <g transform="matrix(3.69333,0,0,3.69333,-1208.86,-288.208)">
+        <circle cx="395" cy="125" r="15" style="fill:none;stroke:black;stroke-width:1.13px;"/>
+    </g>
+    <path d="M172.44,430L327.56,430" style="fill:none;stroke:black;stroke-width:4.17px;"/>
+    <path d="M172.44,326.915L172.44,343.878L327.56,343.878L327.56,326.915" style="fill:none;stroke:black;stroke-width:4.17px;"/>
+    <path d="M172.44,461.537L100,461.537L100,480L400,480L400,461.537L327.56,461.537" style="fill:none;stroke:black;stroke-width:4.17px;"/>
+    <path d="M217,343.878L217,370L172.44,430.652L172.44,461.537L100,461.537L100,480L400,480L400,461.537L327.56,461.537L327.56,430.652L284,370L284,343.878" style="fill:none;stroke:black;stroke-width:4.17px;"/>
+    <path d="M172.44,461.537L327.56,461.537" style="fill:none;stroke:black;stroke-width:4.17px;"/>
+</svg>

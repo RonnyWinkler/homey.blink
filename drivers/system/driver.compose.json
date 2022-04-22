@@ -1,0 +1,45 @@
+{
+    "id": "system",
+    "name": {
+        "en": "System",
+        "de": "System"
+    },
+    "images": {
+        "large": "/drivers/system/assets/images/large.png",
+        "small": "/drivers/system/assets/images/small.png"
+    },
+    "class": "sensor",
+    "connectivity": [ "cloud" ],
+    "capabilities": [
+        "onoff",
+        "measure_wifi_syncmodule",
+        "measure_local_usage",
+        "alarm_local_storage_full"
+    ],
+    "pair": [
+        {
+            "id": "list_devices",
+            "template": "list_devices",
+            "navigation": {
+                "next": "list_devices2"
+            },
+            "options": { "singular": true }
+        },
+        {
+            "id": "account_error"
+        },
+        {
+            "id": "list_devices2",
+            "template": "list_devices",
+            "navigation": {
+                "prev": "list_devices",
+                "next": "add_devices"
+            },
+            "options": { "singular": false }
+        },
+        {
+              "id": "add_devices",
+              "template": "add_devices"
+        }
+    ]
+}

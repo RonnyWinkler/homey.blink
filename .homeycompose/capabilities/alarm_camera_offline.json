@@ -1,0 +1,20 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Offline",
+        "de": "Offline"
+    },
+    "getable": true,
+    "setable": false,
+    "uiComponent": "sensor",
+    "insights": true,
+    "insightsTitleTrue": { 
+        "en": "Camera is offline",
+        "de": "Kamera ist offline"
+    },
+    "insightsTitleFalse": { 
+        "en": "Camera is online",
+        "de": "Kamera ist online"
+    },
+    "icon": "/assets/alarm_camera_offline.svg"
+}

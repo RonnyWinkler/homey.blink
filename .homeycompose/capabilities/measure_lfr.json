@@ -1,0 +1,13 @@
+{
+    "type": "number",
+    "title": {
+        "en": "SyncModule signal",
+        "de": "SyncModule-Signal"
+    },
+    "uiComponent": "sensor",
+    "insights": true,
+    "getable": true,
+    "setable": false,
+    "units": "%",
+    "icon": "/assets/measure_lfr.svg"
+}

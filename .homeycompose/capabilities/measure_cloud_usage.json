@@ -1,0 +1,13 @@
+{
+    "type": "number",
+    "title": {
+        "en": "Cloud video usage",
+        "de": "Cloud Video-Speicher"
+    },
+    "uiComponent": "sensor",
+    "insights": true,
+    "getable": true,
+    "setable": false,
+    "units": "%",
+    "icon": "/assets/measure_cloud_usage.svg"
+}

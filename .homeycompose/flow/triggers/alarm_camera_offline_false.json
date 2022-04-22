@@ -1,0 +1,14 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "When the camera is online.",
+        "de": "Wenn die Kamera online ist."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera|owl"
+        }
+      ]
+}

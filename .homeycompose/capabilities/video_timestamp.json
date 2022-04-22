@@ -1,0 +1,12 @@
+{
+    "type": "number",
+    "title": {
+        "en": "Video timestamp",
+        "de": "Video Zeitpunkt"
+    },
+    "uiComponent": null,
+    "insights": false,
+    "getable": true,
+    "setable": false,
+    "icon": "/assets/video_timestamp.svg"
+}

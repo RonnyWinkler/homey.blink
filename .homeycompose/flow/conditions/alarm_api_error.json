@@ -1,0 +1,17 @@
+{
+    "title": {
+        "en": "API error !{{is|isn't}} present",
+        "de": "API-Fehler !{{ist|ist nicht}} vorhanden"
+    },
+    "hint": {
+        "en": "This Flow will continue if API error is/isn't currently present.",
+        "de": "Dieser Flow wird fortgeführt, wenn API-Fehler derzeit vorhanden/nicht vorhanden sind."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account"
+        }
+      ]
+}

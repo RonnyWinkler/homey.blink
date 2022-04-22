@@ -1,0 +1,21 @@
+{
+    "title": {
+        "en": "Recors a camera video.",
+        "de": "Kamera-Video aufnehmen."
+    },
+    "titleFormatted": {
+        "en": "Starts recording a new camera video.",
+        "de": "Startet die Aufnahme eines neues Kamera-Videos."
+    },
+    "hint": {
+        "en": "Use this action to request the recording of a new camera video.",
+        "de": "Verwende diese Aktion, um die Aufnahme eines neues Kamera-Videos zu starten."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera|owl"
+        }
+    ]
+}

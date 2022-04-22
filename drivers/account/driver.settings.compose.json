@@ -1,0 +1,105 @@
+[
+    {
+        "type": "group",
+        "label": {
+            "en": "Data retrieval",
+            "de": "Datenabruf"
+        },
+        "children": [
+            {
+                "id": "status_interval",
+                "type": "number",
+                "value": 1,
+                "label": {
+                    "en": "State retrieval interval (min)",
+                    "de": "Status-Abruf (min)"
+                },
+                "hint": {
+                    "en": "Retrieval interval of device and account states from Blink in minutes.",
+                    "de": "Abruf-Intervall von Geräte- und Account-Status von Blink in Minuten."
+                }
+            },
+            {
+                "id": "motion_check_enabled",
+                "type": "checkbox",
+                "value": true,
+                "label": {
+                    "en": "Motion alert check enabled",
+                    "de": "Bewegungsalarm-Prüfung aktiviert"
+                },
+                "hint": {
+                    "en": "Enables checking for motion alerts based on new video recordings.",
+                    "de": "Aktiviert die Prüfung auf Bewegungsalarme anhand neuer Videoaufnahmen."
+                }
+            },
+            {
+                "id": "motion_interval_cloud",
+                "type": "number",
+                "value": 10,
+                "label": {
+                    "en": "Motion alert interval cloud (sec)",
+                    "de": "Bewegungsalarm-Intervall Cloud (sec)"
+                },
+                "hint": {
+                    "en": "Retrieval interval of motion alerts from Blink Cloud in seconds (>10 sec to avoid blocking).",
+                    "de": "Abruf-Intervall von Bewegungsalarmen von der Blink-Cound in Sekunden (>10 sec zur Vermeidung von Sperrungen)."
+                }
+            },
+            {
+                "id": "motion_interval_local",
+                "type": "number",
+                "value": 15,
+                "label": {
+                    "en": "Motion alert interval local (sec)",
+                    "de": "Bewegungsalarm-Intervall lokal (sec)"
+                },
+                "hint": {
+                    "en": "Retrieval interval of motion alerts from local SyncModule in seconds (>15 sec to avoid blocking).",
+                    "de": "Abruf-Intervall von Bewegungsalarmen von lokalem SyncModul in Sekunden (>15 sec zur Vermeidung von Sperrungen)."
+                }
+            },
+            {
+                "id": "alarm_api_wait",
+                "type": "number",
+                "value": 10,
+                "label": {
+                    "en": "API error alarm after (min)",
+                    "de": "API-Fehler Alarm nach (min)"
+                },
+                "hint": {
+                    "en": "Triggers the alert when the API error occurs for more than the specified time.",
+                    "de": "Löst den Alarm aus, wenn der API-Fehler länger als die angegebene Zeit auftritt."
+                }
+            }
+        ]
+    },
+    {
+        "type": "group",
+        "label": {
+            "en": "Device Information",
+            "de": "Geräte-Information"
+        },
+        "children": [
+            {
+                "id": "account_id",
+                "type": "label",
+                "label": {
+                    "en": "Account ID",
+                    "de": "Konto-ID"
+                }
+            },
+            {
+                "id": "api_state",
+                "type": "label",
+                "label": {
+                    "en": "API state",
+                    "de": "API-Status"
+                },
+                "hint": {
+                    "en": "API status including http error code: \n403: Forbidden, rate limit exceeded; \n409: Conflict, parallel request running, device busy.",
+                    "de": "API-Status incl. http-Fehlercode: \n403: Forbidden, Zugriffslimit überschritten; \n409: Conflict, Parallele Anfrage läuft, Gerät belegt."
+                }
+            }
+        ]
+    }
+]

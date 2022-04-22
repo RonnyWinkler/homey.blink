@@ -1,0 +1,28 @@
+{
+    "type": "enum",
+    "title": {
+        "en": "Storage",
+        "de": "Speicherung"
+    },
+    "uiComponent": "sensor",
+    "insights": false,
+    "getable": true,
+    "setable": false,
+    "icon": "/assets/status_storage.svg",
+    "values": [
+        {
+            "id": "local",
+            "title": {
+                "en": "local",
+                "de": "lokal"
+            }
+        },
+        {
+            "id": "cloud",
+            "title": {
+                "en": "cloud",
+                "de": "Cloud"
+            }
+        }
+    ]
+}

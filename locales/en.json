@@ -1,0 +1,34 @@
+{
+    "pair": {
+        "account": {
+            "title": "Connect Blink account",
+            "account_settings": "Blink credentials",
+            "email": "eMail address",
+            "pw": "Password",
+            "error": "The login data is invalid!"
+        },
+        "pin": {
+            "title": "2FA check",
+            "pin_settings": "Blink PIN code",
+            "pin": "PIN ode",
+            "error": "The PIN is invalid!"
+        },
+        "device": {
+            "title": "Connect Blink device",
+            "account": "Account",
+            "account_missing": "Please add a Blink account as a device first."  
+        }
+    },
+    "devices": {
+        "account": {
+            "login_error": "Login error",
+            "api_error_device": "Read account/device data",
+            "api_error_motion_cloud": "Reading motion/video data (cloud)",
+            "api_error_motion_local": "Reading motion/video data (SyncModule)"
+        },
+        "camera": {
+            "snapshot": "Snapshot",
+            "snapshot_error": "Camera busy or offline."
+        }
+    }
+}

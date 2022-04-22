@@ -1,0 +1,14 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "When the SyncModule storage is free again.",
+        "de": "Wenn der SyncModul-Speicher wieder frei ist."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=system"
+        }
+      ]
+}

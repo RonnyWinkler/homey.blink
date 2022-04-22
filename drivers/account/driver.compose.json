@@ -1,0 +1,75 @@
+{
+    "id": "account",
+    "name": {
+        "en": "Account",
+        "de": "Konto"
+    },
+    "images": {
+        "large": "/drivers/account/assets/images/large.png",
+        "small": "/drivers/account/assets/images/small.png"
+    },
+    "class": "sensor",
+    "connectivity": [ "cloud" ],
+    "capabilities": [
+        "status_storage",
+        "measure_cloud_usage",
+        "measure_cloud_autodelete_days",
+        "alarm_api_error"
+    ],
+    "pair": [
+        {
+            "id": "account",
+            "navigation": {
+                "next": "check_account"
+            }
+        },
+        {
+            "id": "check_account",
+            "template": "loading",
+            "navigation": {
+                "prev": "account",
+                "next": "list_devices"
+            }
+        },
+        {
+            "id": "check_pin",
+            "template": "loading",
+            "navigation": {
+                "prev": "account",
+                "next": "list_devices"
+            }
+        },
+        {
+            "id": "pin",
+            "navigation": {
+                "prev": "account",
+                "next": "check_pin"
+            }
+        },
+        {
+            "id": "account_error",
+            "navigation": {
+                "prev": "account"
+            }
+        },
+        {
+            "id": "pin_error",
+            "navigation": {
+                "prev": "pin"
+            }
+        },
+        {
+            "id": "list_devices",
+            "template": "list_devices",
+            "navigation": {
+                "next": "add_devices",
+                "prev": "account"
+            },
+            "options": { "singular": true }
+          },
+          {
+              "id": "add_devices",
+              "template": "add_devices"
+          }
+    ]
+}

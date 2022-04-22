@@ -1,0 +1,17 @@
+{
+    "title": {
+        "en": "Camera !{{is|isn't}} offline",
+        "de": "Kamera !{{ist|ist nicht}} offline"
+    },
+    "hint": {
+        "en": "This Flow will continue if the camera is/isn't currently offline/online.",
+        "de": "Dieser Flow wird fortgeführt, wenn die Kamera derzeit offline/online ist."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera|owl"
+        }
+      ]
+}

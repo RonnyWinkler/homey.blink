@@ -1,0 +1,16 @@
+{
+    "type": "number",
+    "title": {
+        "en": "Cloud autodelete",
+        "de": "Cloud Löschung"
+    },
+    "uiComponent": "sensor",
+    "insights": true,
+    "getable": true,
+    "setable": false,
+    "units": {
+        "de": "Tage",
+        "en": "days"
+    },
+    "icon": "/assets/measure_cloud_autodelete_days.svg"
+}

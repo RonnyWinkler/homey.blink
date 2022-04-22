@@ -1,0 +1,34 @@
+{
+    "pair": {
+        "account": {
+            "title": "Blink-Konto verbinden",
+            "account_settings": "Blink-Anmeldedaten",
+            "email": "eMail-Adresse",
+            "pw": "Passwort",
+            "error": "Die Anmeldedaten sind ungültig!"
+        },
+        "pin": {
+            "title": "2FA Prüfung",
+            "pin_settings": "Blink PIN-Code",
+            "pin": "PIN-Code",
+            "error": "Die PIN ist ungültig!"
+        },
+        "device": {
+            "title": "Blink-Gerät verbinden",
+            "account": "Konto",
+            "account_missing": "Bitte füge zuerst ein Blink-Konto als Gerät ein."  
+        }
+    },
+    "devices": {
+        "account": {
+            "login_error": "Anmelde-Fehler",
+            "api_error_device": "Lesen von Konto-/Gerätedaten",
+            "api_error_motion_cloud": "Lesen von Bewegungs-/Videodaten (Cloud)",
+            "api_error_motion_local": "Lesen von Bewegungs-/Videodaten (SyncModul)"
+        },
+        "camera": {
+            "snapshot": "Foto",
+            "snapshot_error": "Kamera belegt oder offline."
+        }
+    }
+}

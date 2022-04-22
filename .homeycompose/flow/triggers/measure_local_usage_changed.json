@@ -1,0 +1,25 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "When the SyncModule video usage has changed",
+        "de": "Wenn sich die SyncModule Video-Speichernutzung geändert hat"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=system"
+        }
+    ],
+    "tokens": [
+        {
+            "name": "measure_local_usage",
+            "type": "number",
+            "title": {
+                "en": "SyncModule video usage (%)",
+                "de": "SyncModule Video-Speichernutzung (%)"
+            },
+            "example": "15"
+        }
+    ]
+}

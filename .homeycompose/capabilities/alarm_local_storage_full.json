@@ -1,0 +1,20 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "SyncModule storage full",
+        "de": "SyncModul-Speicher belegt"
+    },
+    "getable": true,
+    "setable": false,
+    "uiComponent": "sensor",
+    "insights": true,
+    "insightsTitleTrue": { 
+        "en": "SyncModule storage full",
+        "de": "SyncModul-Speicher belegt"
+    },
+    "insightsTitleFalse": { 
+        "en": "SyncModule storage available",
+        "de": "SyncModul-Speicher verfügbar"
+    },
+    "icon": "/assets/alarm_local_storage_full.svg"
+}
