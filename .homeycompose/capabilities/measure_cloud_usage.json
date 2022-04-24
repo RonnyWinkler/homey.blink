@@ -2,7 +2,8 @@
     "type": "number",
     "title": {
         "en": "Cloud video usage",
-        "de": "Cloud Video-Speicher"
+        "de": "Cloud Video-Speicher",
+        "nl": "Cloud videogebruik"
     },
     "uiComponent": "sensor",
     "insights": true,

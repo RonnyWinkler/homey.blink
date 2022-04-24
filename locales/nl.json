@@ -1,0 +1,34 @@
+{
+    "pair": {
+        "account": {
+            "title": "Blink rekening koppelen",
+            "account_settings": "Blink referenties",
+            "email": "E-mailadres",
+            "pw": "Wachtwoord",
+            "error": "De inloggegevens zijn ongeldig!"
+        },
+        "pin": {
+            "title": "2FA controle",
+            "pin_settings": "Blink PIN code",
+            "pin": "PIN code",
+            "error": "De pincode is ongeldig!"
+        },
+        "device": {
+            "title": "Verbind Blink-apparaat",
+            "account": "Rekening",
+            "account_missing": "Voeg eerst een Blink-account toe als apparaat."  
+        }
+    },
+    "devices": {
+        "account": {
+            "login_error": "Login fout",
+            "api_error_device": "Account-/apparaatgegevens lezen",
+            "api_error_motion_cloud": "Bewegings-/videogegevens lezen (cloud)",
+            "api_error_motion_local": "Bewegings-/videogegevens lezen (SyncModule)"
+        },
+        "camera": {
+            "snapshot": "Momentopname",
+            "snapshot_error": "Camera bezet of offline."
+        }
+    }
+}

@@ -1,15 +1,19 @@
 {
+    "highlight": true,
     "title": {
         "en": "When a camera snapshot was created.",
-        "de": "Wenn eine Kamera-Foto aufgenommen wurde."
+        "de": "Wenn eine Kamera-Foto aufgenommen wurde.",
+        "nl": "Wanneer een cameramomentopname is gemaakt."
     },
     "titleFormatted":{
         "en": "When a camera snapshot was created.",
-        "de": "Wenn eine Kamera-Foto aufgenommen wurde."
+        "de": "Wenn eine Kamera-Foto aufgenommen wurde.",
+        "nl": "Wanneer een cameramomentopname is gemaakt."
     },
     "hint": {
         "en": "Triggers when a camera snapshot was created.",
-        "de": "Wird ausgelöst, Wenn eine Kamera-Foto aufgenommen wurde."
+        "de": "Wird ausgelöst, Wenn eine Kamera-Foto aufgenommen wurde.",
+        "nl": "Wordt geactiveerd wanneer een camera-snapshot is gemaakt."
     },
     "tokens": [
         {
@@ -17,7 +21,8 @@
             "type": "string",
             "title": {
                 "en": "Camera name",
-                "de": "Kamera-Name"
+                "de": "Kamera-Name",
+                "nl": "Cameranaam"
             }
         },
         {
@@ -25,7 +30,8 @@
             "type": "image",
             "title": {
                 "en": "Snapshot image",
-                "de": "Kamera-Foto"
+                "de": "Kamera-Foto",
+                "nl": "Momentopname"
             }
           }
     ],

@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.blinkforhome",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -53,7 +53,8 @@
         "highlight": true,
         "title": {
           "en": "When the camera is online.",
-          "de": "Wenn die Kamera online ist."
+          "de": "Wenn die Kamera online ist.",
+          "nl": "Wanneer de camera online is."
         },
         "args": [
           {
@@ -67,8 +68,46 @@
       {
         "highlight": true,
         "title": {
+          "en": "When a camera is offline.",
+          "de": "Wenn eine Kamera offline ist.",
+          "nl": "Wanneer een camera offline is."
+        },
+        "titleFormatted": {
+          "en": "When a camera is offline.",
+          "de": "Wenn eine Kamera offline ist.",
+          "nl": "Wanneer een camera offline is."
+        },
+        "hint": {
+          "en": "Triggers when a camera is offline. The camara name is provided by a token.",
+          "de": "Wird ausgelöst, Wenn eine Kamera offline ist. Der Kameraname wird über einen Token bereitgestellt.",
+          "nl": "Wordt geactiveerd wanneer een camera offline is. De cameranaam wordt geleverd door een token."
+        },
+        "tokens": [
+          {
+            "name": "device_name",
+            "type": "string",
+            "title": {
+              "en": "Camera name",
+              "de": "Kamera-Name",
+              "nl": "Cameranaam"
+            }
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account"
+          }
+        ],
+        "id": "alarm_camera_offline_general"
+      },
+      {
+        "highlight": true,
+        "title": {
           "en": "When the camera is offline.",
-          "de": "Wenn die Kamera offline ist."
+          "de": "Wenn die Kamera offline ist.",
+          "nl": "Wanneer de camera offline is."
         },
         "args": [
           {
@@ -83,7 +122,8 @@
         "highlight": true,
         "title": {
           "en": "When the SyncModule storage is free again.",
-          "de": "Wenn der SyncModul-Speicher wieder frei ist."
+          "de": "Wenn der SyncModul-Speicher wieder frei ist.",
+          "nl": "Wanneer de SyncModule-opslag weer vrij is."
         },
         "args": [
           {
@@ -98,7 +138,8 @@
         "highlight": true,
         "title": {
           "en": "When the SyncModule storage is full.",
-          "de": "Wenn der SyncModul-Speicher komplett belegt ist."
+          "de": "Wenn der SyncModul-Speicher komplett belegt ist.",
+          "nl": "Wanneer de SyncModule-opslag vol is."
         },
         "args": [
           {
@@ -112,8 +153,55 @@
       {
         "highlight": true,
         "title": {
+          "en": "When a motion was detected.",
+          "de": "Wenn eine Bewegung erkannt wurde.",
+          "nl": "Wanneer een beweging werd gedetecteerd."
+        },
+        "titleFormatted": {
+          "en": "When a motion was detected.",
+          "de": "Wenn eine Bewegung erkannt wurde.",
+          "nl": "Wanneer een beweging werd gedetecteerd."
+        },
+        "hint": {
+          "en": "Triggers when a motion was detected by a camera. The camara name is provided by a token.",
+          "de": "Wird ausgelöst, Wenn eine Bewegung durch eine Kamera erkannt wurde. Der Kameraname wird über einen Token bereitgestellt.",
+          "nl": "Wordt geactiveerd wanneer een beweging is gedetecteerd door een camera. De cameranaam wordt geleverd door een token."
+        },
+        "tokens": [
+          {
+            "name": "device_name",
+            "type": "string",
+            "title": {
+              "en": "Camera name",
+              "de": "Kamera-Name",
+              "nl": "Cameranaam"
+            }
+          },
+          {
+            "name": "date_time",
+            "type": "string",
+            "title": {
+              "en": "Date/time",
+              "de": "Datum/Zeit",
+              "nl": "Datum/Tijd"
+            }
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account"
+          }
+        ],
+        "id": "alarm_motion_general"
+      },
+      {
+        "highlight": true,
+        "title": {
           "en": "When an API error occurs.",
-          "de": "Wenn ein API-Fehler auftritt."
+          "de": "Wenn ein API-Fehler auftritt.",
+          "nl": "Wanneer een API-fout optreedt."
         },
         "args": [
           {
@@ -128,7 +216,8 @@
             "type": "string",
             "title": {
               "en": "Reason",
-              "de": "Ursache"
+              "de": "Ursache",
+              "nl": "Reden"
             }
           }
         ],
@@ -138,7 +227,8 @@
         "highlight": true,
         "title": {
           "en": "When the API access is flawless.",
-          "de": "Wenn der API-Zugriff fehlerfrei ist."
+          "de": "Wenn der API-Zugriff fehlerfrei ist.",
+          "nl": "Wanneer de API-toegang vlekkeloos is."
         },
         "args": [
           {
@@ -152,8 +242,9 @@
       {
         "highlight": true,
         "title": {
-          "en": "When the cloud video usage has changed",
-          "de": "Wenn sich die Cloud Video-Speichernutzung geändert hat"
+          "en": "When the cloud video usage has changed.",
+          "de": "Wenn sich die Cloud Video-Speichernutzung geändert hat.",
+          "nl": "Wanneer het videogebruik in de cloud is gewijzigd."
         },
         "args": [
           {
@@ -168,7 +259,8 @@
             "type": "number",
             "title": {
               "en": "Cloud video usage (%)",
-              "de": "Cloud Video-Speichernutzung (%)"
+              "de": "Cloud Video-Speichernutzung (%)",
+              "nl": "Gebruik van cloudvideo (%)"
             },
             "example": "15"
           }
@@ -178,8 +270,9 @@
       {
         "highlight": true,
         "title": {
-          "en": "When the SyncModule video usage has changed",
-          "de": "Wenn sich die SyncModule Video-Speichernutzung geändert hat"
+          "en": "When the SyncModule video usage has changed.",
+          "de": "Wenn sich die SyncModule Video-Speichernutzung geändert hat.",
+          "nl": "Wanneer het videogebruik van de SyncModule is gewijzigd."
         },
         "args": [
           {
@@ -194,7 +287,8 @@
             "type": "number",
             "title": {
               "en": "SyncModule video usage (%)",
-              "de": "SyncModule Video-Speichernutzung (%)"
+              "de": "SyncModule Video-Speichernutzung (%)",
+              "nl": "SyncModule videogebruik (%)"
             },
             "example": "15"
           }
@@ -202,17 +296,21 @@
         "id": "measure_local_usage_changed"
       },
       {
+        "highlight": true,
         "title": {
           "en": "When a camera snapshot was created.",
-          "de": "Wenn eine Kamera-Foto aufgenommen wurde."
+          "de": "Wenn eine Kamera-Foto aufgenommen wurde.",
+          "nl": "Wanneer een cameramomentopname is gemaakt."
         },
         "titleFormatted": {
           "en": "When a camera snapshot was created.",
-          "de": "Wenn eine Kamera-Foto aufgenommen wurde."
+          "de": "Wenn eine Kamera-Foto aufgenommen wurde.",
+          "nl": "Wanneer een cameramomentopname is gemaakt."
         },
         "hint": {
           "en": "Triggers when a camera snapshot was created.",
-          "de": "Wird ausgelöst, Wenn eine Kamera-Foto aufgenommen wurde."
+          "de": "Wird ausgelöst, Wenn eine Kamera-Foto aufgenommen wurde.",
+          "nl": "Wordt geactiveerd wanneer een camera-snapshot is gemaakt."
         },
         "tokens": [
           {
@@ -220,7 +318,8 @@
             "type": "string",
             "title": {
               "en": "Camera name",
-              "de": "Kamera-Name"
+              "de": "Kamera-Name",
+              "nl": "Cameranaam"
             }
           },
           {
@@ -228,7 +327,8 @@
             "type": "image",
             "title": {
               "en": "Snapshot image",
-              "de": "Kamera-Foto"
+              "de": "Kamera-Foto",
+              "nl": "Momentopname"
             }
           }
         ],
@@ -246,11 +346,13 @@
       {
         "title": {
           "en": "API error !{{is|isn't}} present",
-          "de": "API-Fehler !{{ist|ist nicht}} vorhanden"
+          "de": "API-Fehler !{{ist|ist nicht}} vorhanden",
+          "nl": "API-fout !{{is|is niet}} aanwezig"
         },
         "hint": {
           "en": "This Flow will continue if API error is/isn't currently present.",
-          "de": "Dieser Flow wird fortgeführt, wenn API-Fehler derzeit vorhanden/nicht vorhanden sind."
+          "de": "Dieser Flow wird fortgeführt, wenn API-Fehler derzeit vorhanden/nicht vorhanden sind.",
+          "nl": "Deze stroom wordt voortgezet als de API-fout op dit moment is/is niet aanwezig."
         },
         "args": [
           {
@@ -264,11 +366,13 @@
       {
         "title": {
           "en": "Camera !{{is|isn't}} offline",
-          "de": "Kamera !{{ist|ist nicht}} offline"
+          "de": "Kamera !{{ist|ist nicht}} offline",
+          "nl": "Camera !{{is|is niet}} offline"
         },
         "hint": {
-          "en": "This Flow will continue if the camera is/isn't currently offline/online.",
-          "de": "Dieser Flow wird fortgeführt, wenn die Kamera derzeit offline/online ist."
+          "en": "This Flow will continue if the camera is currently offline/online.",
+          "de": "Dieser Flow wird fortgeführt, wenn die Kamera derzeit offline/online ist.",
+          "nl": "Deze Flow gaat door als de camera momenteel offline/online is."
         },
         "args": [
           {
@@ -282,11 +386,13 @@
       {
         "title": {
           "en": "Local storage of the SyncModule !{{is|isn't}} full",
-          "de": "Lokaler Speicher des SyncModuls !{{ist|ist nicht}} belegt"
+          "de": "Lokaler Speicher des SyncModuls !{{ist|ist nicht}} belegt",
+          "nl": "Lokale opslag van de SyncModule !{{is|is niet}} vol"
         },
         "hint": {
           "en": "This Flow will continue if the local storage of the SyncModule is/isn't full.",
-          "de": "Dieser Flow wird fortgeführt, wenn der lokale Speicher des SyncModuls belegt/nicht belegt ist."
+          "de": "Dieser Flow wird fortgeführt, wenn der lokale Speicher des SyncModuls belegt/nicht belegt ist.",
+          "nl": "Deze Flow gaat door als de lokale opslag van de SyncModule is/in niet vol."
         },
         "args": [
           {
@@ -300,15 +406,18 @@
       {
         "title": {
           "en": "Cloud video usage !{{is|isn't}} higher than",
-          "de": "Cloud Video-Speichernutzung !{{ist|ist nicht}} größer als"
+          "de": "Cloud Video-Speichernutzung !{{ist|ist nicht}} größer als",
+          "nl": "Gebruik van cloudvideo's !{{is|is niet}} hoger dan"
         },
         "titleFormatted": {
           "en": "Cloud video usage !{{is|isn't}} higher than [[value]]",
-          "de": "Cloud Video-Speichernutzung !{{ist|ist nicht}} größer als [[value]]"
+          "de": "Cloud Video-Speichernutzung !{{ist|ist nicht}} größer als [[value]]",
+          "nl": "Cloud videogebruik !{{is|is niet}} hoger dan [[value]]"
         },
         "hint": {
           "en": "Cloud video usage (%)",
-          "de": "Cloud Video-Speichernutzung (%)"
+          "de": "Cloud Video-Speichernutzung (%)",
+          "nl": "Gebruik van cloudvideo (%)"
         },
         "args": [
           {
@@ -326,15 +435,18 @@
       {
         "title": {
           "en": "SyncModule video usage !{{is|isn't}} higher than",
-          "de": "SyncModule Video-Speichernutzung !{{ist|ist nicht}} größer als"
+          "de": "SyncModule Video-Speichernutzung !{{ist|ist nicht}} größer als",
+          "nl": "SyncModule videogebruik !{{is|is niet}} hoger dan"
         },
         "titleFormatted": {
           "en": "SyncModule video usage !{{is|isn't}} higher than [[value]]",
-          "de": "SyncModule Video-Speichernutzung !{{ist|ist nicht}} größer als [[value]]"
+          "de": "SyncModule Video-Speichernutzung !{{ist|ist nicht}} größer als [[value]]",
+          "nl": "SyncModule videogebruik !{{is|is niet}} hoger dan [[value]]"
         },
         "hint": {
           "en": "SyncModule video usage (%)",
-          "de": "SyncModule Video-Speichernutzung (%)"
+          "de": "SyncModule Video-Speichernutzung (%)",
+          "nl": "SyncModule videogebruik (%)"
         },
         "args": [
           {
@@ -354,15 +466,18 @@
       {
         "title": {
           "en": "Create a camera snapshot.",
-          "de": "Kamera-Foto aufnehmen."
+          "de": "Kamera-Foto aufnehmen.",
+          "nl": "Maak een cameramomentopname."
         },
         "titleFormatted": {
           "en": "Requests a new camera snapshot.",
-          "de": "Fordert ein neues Kamera-Foto an."
+          "de": "Fordert ein neues Kamera-Foto an.",
+          "nl": "Vraagt om een nieuwe momentopname van de camera."
         },
         "hint": {
           "en": "Use this action to request a new camera snapshot. After retrieving the new image, a second flow is triggered where you can use the image as flow token.",
-          "de": "Verwende diese Aktion, um ein neues Kamera-Foto anzufordern. Nach Erstellung des Fotos wird ein weiterer Flow gestartet, in dem du das Bild als Flow-Token verwenden kannst."
+          "de": "Verwende diese Aktion, um ein neues Kamera-Foto anzufordern. Nach Erstellung des Fotos wird ein weiterer Flow gestartet, in dem du das Bild als Flow-Token verwenden kannst.",
+          "nl": "Gebruik deze actie om een nieuwe momentopname van de camera aan te vragen. Na het ophalen van de nieuwe afbeelding wordt een tweede stroom getriggerd waarin u de afbeelding als stroomtoken kunt gebruiken."
         },
         "args": [
           {
@@ -375,16 +490,19 @@
       },
       {
         "title": {
-          "en": "Recors a camera video.",
-          "de": "Kamera-Video aufnehmen."
+          "en": "Record a camera video.",
+          "de": "Kamera-Video aufnehmen.",
+          "nl": "Neem een cameravideo op."
         },
         "titleFormatted": {
           "en": "Starts recording a new camera video.",
-          "de": "Startet die Aufnahme eines neues Kamera-Videos."
+          "de": "Startet die Aufnahme eines neues Kamera-Videos.",
+          "nl": "Begint met het opnemen van een nieuwe cameravideo."
         },
         "hint": {
           "en": "Use this action to request the recording of a new camera video.",
-          "de": "Verwende diese Aktion, um die Aufnahme eines neues Kamera-Videos zu starten."
+          "de": "Verwende diese Aktion, um die Aufnahme eines neues Kamera-Videos zu starten.",
+          "nl": "Gebruik deze actie om de opname van een nieuwe cameravideo aan te vragen."
         },
         "args": [
           {
@@ -868,7 +986,8 @@
       "type": "boolean",
       "title": {
         "en": "API error",
-        "de": "API-Fehler"
+        "de": "API-Fehler",
+        "nl": "API-fout"
       },
       "getable": true,
       "setable": false,
@@ -876,11 +995,13 @@
       "insights": true,
       "insightsTitleTrue": {
         "en": "API state: ERROR",
-        "de": "API-Status: FEHLER"
+        "de": "API-Status: FEHLER",
+        "nl": "API-status: FOUT"
       },
       "insightsTitleFalse": {
         "en": "API state: ok",
-        "de": "API-Status: ok"
+        "de": "API-Status: ok",
+        "nl": "API-status: ok"
       },
       "icon": "/assets/alarm_api_error.svg"
     },
@@ -888,7 +1009,8 @@
       "type": "boolean",
       "title": {
         "en": "Offline",
-        "de": "Offline"
+        "de": "Offline",
+        "nl": "Offline"
       },
       "getable": true,
       "setable": false,
@@ -896,11 +1018,13 @@
       "insights": true,
       "insightsTitleTrue": {
         "en": "Camera is offline",
-        "de": "Kamera ist offline"
+        "de": "Kamera ist offline",
+        "nl": "Camera is offline"
       },
       "insightsTitleFalse": {
         "en": "Camera is online",
-        "de": "Kamera ist online"
+        "de": "Kamera ist online",
+        "nl": "Camera is online"
       },
       "icon": "/assets/alarm_camera_offline.svg"
     },
@@ -908,7 +1032,8 @@
       "type": "boolean",
       "title": {
         "en": "SyncModule storage full",
-        "de": "SyncModul-Speicher belegt"
+        "de": "SyncModul-Speicher belegt",
+        "nl": "SyncModule-opslag vol"
       },
       "getable": true,
       "setable": false,
@@ -916,11 +1041,13 @@
       "insights": true,
       "insightsTitleTrue": {
         "en": "SyncModule storage full",
-        "de": "SyncModul-Speicher belegt"
+        "de": "SyncModul-Speicher belegt",
+        "nl": "SyncModule-opslag vol"
       },
       "insightsTitleFalse": {
         "en": "SyncModule storage available",
-        "de": "SyncModul-Speicher verfügbar"
+        "de": "SyncModul-Speicher verfügbar",
+        "nl": "SyncModule-opslag beschikbaar"
       },
       "icon": "/assets/alarm_local_storage_full.svg"
     },
@@ -928,15 +1055,17 @@
       "type": "number",
       "title": {
         "en": "Cloud autodelete",
-        "de": "Cloud Löschung"
+        "de": "Cloud Löschung",
+        "nl": "Cloud automatisch verwijderen"
       },
       "uiComponent": "sensor",
       "insights": true,
       "getable": true,
       "setable": false,
       "units": {
+        "en": "days",
         "de": "Tage",
-        "en": "days"
+        "nl": "dagen"
       },
       "icon": "/assets/measure_cloud_autodelete_days.svg"
     },
@@ -944,7 +1073,8 @@
       "type": "number",
       "title": {
         "en": "Cloud video usage",
-        "de": "Cloud Video-Speicher"
+        "de": "Cloud Video-Speicher",
+        "nl": "Cloud videogebruik"
       },
       "uiComponent": "sensor",
       "insights": true,
@@ -957,7 +1087,8 @@
       "type": "number",
       "title": {
         "en": "SyncModule signal",
-        "de": "SyncModule-Signal"
+        "de": "SyncModule-Signal",
+        "nl": "SyncModule signaal"
       },
       "uiComponent": "sensor",
       "insights": true,
@@ -970,7 +1101,8 @@
       "type": "number",
       "title": {
         "en": "SyncModule video usage",
-        "de": "SyncModule Video-Speicher"
+        "de": "SyncModule Video-Speicher",
+        "nl": "SyncModule videogebruik"
       },
       "uiComponent": "sensor",
       "insights": true,
@@ -983,7 +1115,8 @@
       "type": "number",
       "title": {
         "en": "WiFi signal",
-        "de": "WiFi-Signal"
+        "de": "WiFi-Signal",
+        "nl": "WiFi-signaal"
       },
       "uiComponent": "sensor",
       "insights": true,
@@ -996,7 +1129,8 @@
       "type": "number",
       "title": {
         "en": "WiFi signal SyncModule",
-        "de": "WiFi-Signal SyncModul"
+        "de": "WiFi-Signal SyncModul",
+        "nl": "WiFi-signaal SyncModule"
       },
       "uiComponent": "sensor",
       "insights": true,
@@ -1009,7 +1143,8 @@
       "type": "enum",
       "title": {
         "en": "Storage",
-        "de": "Speicherung"
+        "de": "Speicherung",
+        "nl": "Opslag"
       },
       "uiComponent": "sensor",
       "insights": false,
@@ -1021,14 +1156,16 @@
           "id": "local",
           "title": {
             "en": "local",
-            "de": "lokal"
+            "de": "lokal",
+            "nl": "lokaal"
           }
         },
         {
           "id": "cloud",
           "title": {
             "en": "cloud",
-            "de": "Cloud"
+            "de": "Cloud",
+            "nl": "Cloud"
           }
         }
       ]
@@ -1037,7 +1174,8 @@
       "type": "number",
       "title": {
         "en": "Video timestamp",
-        "de": "Video Zeitpunkt"
+        "de": "Video Zeitpunkt",
+        "nl": "Videotijdstempel"
       },
       "uiComponent": null,
       "insights": false,

@@ -2,7 +2,8 @@
     "highlight": true,
     "title": {
         "en": "When an API error occurs.",
-        "de": "Wenn ein API-Fehler auftritt."
+        "de": "Wenn ein API-Fehler auftritt.",
+        "nl": "Wanneer een API-fout optreedt."
     },
     "args": [
         {
@@ -17,7 +18,8 @@
             "type": "string",
             "title": {
                 "en": "Reason",
-                "de": "Ursache"
+                "de": "Ursache",
+                "nl": "Reden"
             }
         }
     ]

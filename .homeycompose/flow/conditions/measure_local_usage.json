@@ -1,15 +1,18 @@
 {
     "title": {
         "en": "SyncModule video usage !{{is|isn't}} higher than",
-        "de": "SyncModule Video-Speichernutzung !{{ist|ist nicht}} größer als"
+        "de": "SyncModule Video-Speichernutzung !{{ist|ist nicht}} größer als",
+        "nl": "SyncModule videogebruik !{{is|is niet}} hoger dan"
     },
     "titleFormatted": {
         "en": "SyncModule video usage !{{is|isn't}} higher than [[value]]",
-        "de": "SyncModule Video-Speichernutzung !{{ist|ist nicht}} größer als [[value]]"
+        "de": "SyncModule Video-Speichernutzung !{{ist|ist nicht}} größer als [[value]]",
+        "nl": "SyncModule videogebruik !{{is|is niet}} hoger dan [[value]]"
     },
     "hint": {
         "en": "SyncModule video usage (%)",
-        "de": "SyncModule Video-Speichernutzung (%)"
+        "de": "SyncModule Video-Speichernutzung (%)",
+        "nl": "SyncModule videogebruik (%)"
     },
     "args": [{
             "name": "device",

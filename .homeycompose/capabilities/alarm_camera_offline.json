@@ -2,7 +2,8 @@
     "type": "boolean",
     "title": {
         "en": "Offline",
-        "de": "Offline"
+        "de": "Offline",
+        "nl": "Offline"
     },
     "getable": true,
     "setable": false,
@@ -10,11 +11,13 @@
     "insights": true,
     "insightsTitleTrue": { 
         "en": "Camera is offline",
-        "de": "Kamera ist offline"
+        "de": "Kamera ist offline",
+        "nl": "Camera is offline"
     },
     "insightsTitleFalse": { 
         "en": "Camera is online",
-        "de": "Kamera ist online"
+        "de": "Kamera ist online",
+        "nl": "Camera is online"
     },
     "icon": "/assets/alarm_camera_offline.svg"
 }

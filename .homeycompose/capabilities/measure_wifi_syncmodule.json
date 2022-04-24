@@ -2,7 +2,8 @@
     "type": "number",
     "title": {
         "en": "WiFi signal SyncModule",
-        "de": "WiFi-Signal SyncModul"
+        "de": "WiFi-Signal SyncModul",
+        "nl": "WiFi-signaal SyncModule"
     },
     "uiComponent": "sensor",
     "insights": true,

@@ -2,7 +2,8 @@
     "highlight": true,
     "title": {
         "en": "When the SyncModule storage is full.",
-        "de": "Wenn der SyncModul-Speicher komplett belegt ist."
+        "de": "Wenn der SyncModul-Speicher komplett belegt ist.",
+        "nl": "Wanneer de SyncModule-opslag vol is."
     },
     "args": [
         {

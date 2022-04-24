@@ -2,5 +2,10 @@
   "0.0.1": {
     "en": "Initial release",
     "de": "Initiales Release"
+  },
+  "0.0.2": {
+    "en": "Added dutch translation (Google translator). Please report translation suggestions via forum thread (coming soon).",
+    "de": "Niederländische Übersetzung ergänzt (Google-Übersetzer)"
   }
+
 }

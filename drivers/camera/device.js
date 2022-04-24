@@ -152,6 +152,11 @@ class cameraDevice extends Homey.Device {
             }
             if (camera_offline != this.getCapabilityValue('alarm_camera_offline')){
                 this.log("updateDevice() Camera "+this.getData().id+' status:'+cameraData.status);
+                if (camera_offline == true){
+                    if(this.getParent()){
+                        this.parent.triggerAlarmCameraOffline(this);
+                    }
+                }
             }
             this.setCapabilityValue("alarm_camera_offline", camera_offline).catch(error => this.error(error));
 
@@ -194,6 +199,9 @@ class cameraDevice extends Homey.Device {
             this.log("new motion detected on camera: "+this.getName()+" ID: "+ this.getData().id);
             this.setCapabilityValue("video_timestamp", timestamp).catch(this.error);
             this.setCapabilityValue('alarm_motion', true).catch(this.error);
+            if(this.getParent()){
+                this.parent.triggerAlarmMotion(this, timestamp);
+            }
         }
         
     }

@@ -1,11 +1,13 @@
 {
     "title": {
         "en": "Local storage of the SyncModule !{{is|isn't}} full",
-        "de": "Lokaler Speicher des SyncModuls !{{ist|ist nicht}} belegt"
+        "de": "Lokaler Speicher des SyncModuls !{{ist|ist nicht}} belegt",
+        "nl": "Lokale opslag van de SyncModule !{{is|is niet}} vol"
     },
     "hint": {
         "en": "This Flow will continue if the local storage of the SyncModule is/isn't full.",
-        "de": "Dieser Flow wird fortgeführt, wenn der lokale Speicher des SyncModuls belegt/nicht belegt ist."
+        "de": "Dieser Flow wird fortgeführt, wenn der lokale Speicher des SyncModuls belegt/nicht belegt ist.",
+        "nl": "Deze Flow gaat door als de lokale opslag van de SyncModule is/in niet vol."
     },
     "args": [
         {

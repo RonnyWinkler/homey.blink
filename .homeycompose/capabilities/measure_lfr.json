@@ -2,7 +2,8 @@
     "type": "number",
     "title": {
         "en": "SyncModule signal",
-        "de": "SyncModule-Signal"
+        "de": "SyncModule-Signal",
+        "nl": "SyncModule signaal"
     },
     "uiComponent": "sensor",
     "insights": true,

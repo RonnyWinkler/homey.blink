@@ -1,0 +1,36 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "When a camera is offline.",
+        "de": "Wenn eine Kamera offline ist.",
+        "nl": "Wanneer een camera offline is."
+    },
+    "titleFormatted":{
+        "en": "When a camera is offline.",
+        "de": "Wenn eine Kamera offline ist.",
+        "nl": "Wanneer een camera offline is."
+    },
+    "hint": {
+        "en": "Triggers when a camera is offline. The camara name is provided by a token.",
+        "de": "Wird ausgelöst, Wenn eine Kamera offline ist. Der Kameraname wird über einen Token bereitgestellt.",
+        "nl": "Wordt geactiveerd wanneer een camera offline is. De cameranaam wordt geleverd door een token."
+    },
+    "tokens": [
+        {
+            "name": "device_name",
+            "type": "string",
+            "title": {
+                "en": "Camera name",
+                "de": "Kamera-Name",
+                "nl": "Cameranaam"
+            }
+        }
+    ],
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account"
+        }
+    ]
+}

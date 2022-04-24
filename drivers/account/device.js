@@ -33,6 +33,8 @@ class accountDevice extends Homey.Device {
         // register flow trigger
         this.apiStateErrorTrigger = this.homey.flow.getDeviceTriggerCard('api_state_error');
         this.apiStateOkTrigger = this.homey.flow.getDeviceTriggerCard('api_state_ok');
+        this.alarmMotionTrigger = this.homey.flow.getDeviceTriggerCard('alarm_motion_general');
+        this.alarmCameraOfflineTrigger = this.homey.flow.getDeviceTriggerCard('alarm_camera_offline_general');
 
         this.blinkApi = new blinkApi();
 
@@ -401,14 +403,22 @@ class accountDevice extends Homey.Device {
                     // get cameraID for video
                     let cameraId = null;
                     for(let j=0; j < this.deviceData.homescreen.cameras.length; j++ ){
-                        if (this.deviceData.homescreen.cameras[j].name == media[i].camera_name){
+                        // Replace all non-CHAR/NUN characters because camera name in SyncModule video list condensed
+                        let cameraName = this.deviceData.homescreen.cameras[j].name.replace(/[^a-zA-Z0-9]/g, '');
+                        let mediaCameraName = media[i].camera_name.replace(/[^a-zA-Z0-9]/g, '');
+                        // if (this.deviceData.homescreen.cameras[j].name == media[i].camera_name){
+                        if ( cameraName === mediaCameraName ){
                             cameraId = this.deviceData.homescreen.cameras[j].id;
                         }
                     }
                     // 2nd step. Search for MiniKameras
                     if (!cameraId){
                         for(let j=0; j < this.deviceData.homescreen.owls.length; j++ ){
-                            if (this.deviceData.homescreen.owls[j].name == media[i].camera_name){
+                            // Replace all non-CHAR/NUN characters because camera name in SyncModule video list condensed
+                            let cameraName = this.deviceData.homescreen.owls[j].name.replace(/[^a-zA-Z0-9]/g, '');
+                            let mediaCameraName = media[i].camera_name.replace(/[^a-zA-Z0-9]/g, '');
+                            // if (this.deviceData.homescreen.owls[j].name == media[i].camera_name){
+                            if ( cameraName === mediaCameraName ){
                                 cameraId = this.deviceData.homescreen.owls[j].id;
                             }
                         }
@@ -447,7 +457,8 @@ class accountDevice extends Homey.Device {
         let videoList = [];
         for (var i = 0; i < this.deviceData.homescreen.sync_modules.length; i++) {
             let syncmoduleId = this.deviceData.homescreen.sync_modules[i].id;
-            let systemId = this.deviceData.homescreen.sync_modules[i].network_id; 
+            let systemId = this.deviceData.homescreen.sync_modules[i].network_id;
+            console.log("getNewVideosLocal() SyncModule "+syncmoduleId);
             let result = {};
             try{
                 result = await this.blinkApi.getSyncModuleStorage(systemId, syncmoduleId);
@@ -456,14 +467,14 @@ class accountDevice extends Homey.Device {
                 throw error;
                 // return(videoList);
             }
-            for (var i = 0; i < result.clips.length; i++) {
-                let createdAt = result.clips[i].created_at
+            for (var j = 0; j < result.clips.length; j++) {
+                let createdAt = result.clips[j].created_at
                     .replace(/T/, ' ')       // replace T with a space
                     .replace(/\+.+/, '');     // delete the + and everything after
                 let createdAtTimestamp = Date.parse(createdAt);
                 let lastRequestTimestamp = Date.parse(this.lastVideoRequest);
                 if ( createdAtTimestamp > lastRequestTimestamp ){
-                    videoList.push( result.clips[i] );
+                    videoList.push( result.clips[j] );
                 }
             }
         }
@@ -601,6 +612,33 @@ class accountDevice extends Homey.Device {
         catch (error){
             throw error;
         }
+    }
+
+    async triggerAlarmMotion(device, timestamp){
+        let tz  = this.homey.clock.getTimezone();
+        let timeString = new Date(timestamp).toLocaleString(this.homey.i18n.getLanguage(), 
+        { 
+            hour12: false, 
+            timeZone: tz,
+            hour: "2-digit",
+            minute: "2-digit",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        });
+
+        let tokens = { 
+            "device_name": device.getName(),
+            "date_time": timeString
+        };
+        this.alarmMotionTrigger.trigger( this,  tokens );
+    }
+
+    async triggerAlarmCameraOffline(device){
+        let tokens = { 
+            "device_name": device.getName()
+        };
+        this.alarmCameraOfflineTrigger.trigger( this,  tokens );
     }
 
     // App events =========================================================================

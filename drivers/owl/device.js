@@ -59,6 +59,11 @@ class owlDevice extends cameraDevice {
             }
             if (camera_offline != this.getCapabilityValue('alarm_camera_offline')){
                 this.log("updateDevice() Camera "+this.getData().id+' status:'+cameraData.status);
+                if (camera_offline == true){
+                    if(this.getParent()){
+                        this.parent.triggerAlarmCameraOffline(this);
+                    }
+                }
             }
             this.setCapabilityValue("alarm_camera_offline", camera_offline).catch(error => this.error(error));
 

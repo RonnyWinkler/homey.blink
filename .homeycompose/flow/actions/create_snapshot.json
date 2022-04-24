@@ -1,15 +1,18 @@
 {
     "title": {
         "en": "Create a camera snapshot.",
-        "de": "Kamera-Foto aufnehmen."
+        "de": "Kamera-Foto aufnehmen.",
+        "nl": "Maak een cameramomentopname."
     },
     "titleFormatted": {
         "en": "Requests a new camera snapshot.",
-        "de": "Fordert ein neues Kamera-Foto an."
+        "de": "Fordert ein neues Kamera-Foto an.",
+        "nl": "Vraagt om een nieuwe momentopname van de camera."
     },
     "hint": {
         "en": "Use this action to request a new camera snapshot. After retrieving the new image, a second flow is triggered where you can use the image as flow token.",
-        "de": "Verwende diese Aktion, um ein neues Kamera-Foto anzufordern. Nach Erstellung des Fotos wird ein weiterer Flow gestartet, in dem du das Bild als Flow-Token verwenden kannst."
+        "de": "Verwende diese Aktion, um ein neues Kamera-Foto anzufordern. Nach Erstellung des Fotos wird ein weiterer Flow gestartet, in dem du das Bild als Flow-Token verwenden kannst.",
+        "nl": "Gebruik deze actie om een nieuwe momentopname van de camera aan te vragen. Na het ophalen van de nieuwe afbeelding wordt een tweede stroom getriggerd waarin u de afbeelding als stroomtoken kunt gebruiken."
     },
     "args": [
         {

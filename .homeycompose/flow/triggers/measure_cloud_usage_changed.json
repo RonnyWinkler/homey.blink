@@ -1,8 +1,9 @@
 {
     "highlight": true,
     "title": {
-        "en": "When the cloud video usage has changed",
-        "de": "Wenn sich die Cloud Video-Speichernutzung geändert hat"
+        "en": "When the cloud video usage has changed.",
+        "de": "Wenn sich die Cloud Video-Speichernutzung geändert hat.",
+        "nl": "Wanneer het videogebruik in de cloud is gewijzigd."
     },
     "args": [
         {
@@ -17,7 +18,8 @@
             "type": "number",
             "title": {
                 "en": "Cloud video usage (%)",
-                "de": "Cloud Video-Speichernutzung (%)"
+                "de": "Cloud Video-Speichernutzung (%)",
+                "nl": "Gebruik van cloudvideo (%)"
             },
             "example": "15"
         }

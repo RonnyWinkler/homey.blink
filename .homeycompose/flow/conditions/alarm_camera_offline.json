@@ -1,11 +1,13 @@
 {
     "title": {
         "en": "Camera !{{is|isn't}} offline",
-        "de": "Kamera !{{ist|ist nicht}} offline"
+        "de": "Kamera !{{ist|ist nicht}} offline",
+        "nl": "Camera !{{is|is niet}} offline"
     },
     "hint": {
-        "en": "This Flow will continue if the camera is/isn't currently offline/online.",
-        "de": "Dieser Flow wird fortgeführt, wenn die Kamera derzeit offline/online ist."
+        "en": "This Flow will continue if the camera is currently offline/online.",
+        "de": "Dieser Flow wird fortgeführt, wenn die Kamera derzeit offline/online ist.",
+        "nl": "Deze Flow gaat door als de camera momenteel offline/online is."
     },
     "args": [
         {

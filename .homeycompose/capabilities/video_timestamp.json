@@ -2,7 +2,8 @@
     "type": "number",
     "title": {
         "en": "Video timestamp",
-        "de": "Video Zeitpunkt"
+        "de": "Video Zeitpunkt",
+        "nl": "Videotijdstempel"
     },
     "uiComponent": null,
     "insights": false,

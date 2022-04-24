@@ -2,7 +2,8 @@
     "type": "boolean",
     "title": {
         "en": "SyncModule storage full",
-        "de": "SyncModul-Speicher belegt"
+        "de": "SyncModul-Speicher belegt",
+        "nl": "SyncModule-opslag vol"
     },
     "getable": true,
     "setable": false,
@@ -10,11 +11,13 @@
     "insights": true,
     "insightsTitleTrue": { 
         "en": "SyncModule storage full",
-        "de": "SyncModul-Speicher belegt"
+        "de": "SyncModul-Speicher belegt",
+        "nl": "SyncModule-opslag vol"
     },
     "insightsTitleFalse": { 
         "en": "SyncModule storage available",
-        "de": "SyncModul-Speicher verfügbar"
+        "de": "SyncModul-Speicher verfügbar",
+        "nl": "SyncModule-opslag beschikbaar"
     },
     "icon": "/assets/alarm_local_storage_full.svg"
 }

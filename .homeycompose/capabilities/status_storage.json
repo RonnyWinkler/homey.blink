@@ -2,7 +2,8 @@
     "type": "enum",
     "title": {
         "en": "Storage",
-        "de": "Speicherung"
+        "de": "Speicherung",
+        "nl": "Opslag"
     },
     "uiComponent": "sensor",
     "insights": false,
@@ -14,14 +15,16 @@
             "id": "local",
             "title": {
                 "en": "local",
-                "de": "lokal"
+                "de": "lokal",
+                "nl": "lokaal"
             }
         },
         {
             "id": "cloud",
             "title": {
                 "en": "cloud",
-                "de": "Cloud"
+                "de": "Cloud",
+                "nl": "Cloud"
             }
         }
     ]

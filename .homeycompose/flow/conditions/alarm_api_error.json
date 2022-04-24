@@ -1,11 +1,13 @@
 {
     "title": {
         "en": "API error !{{is|isn't}} present",
-        "de": "API-Fehler !{{ist|ist nicht}} vorhanden"
+        "de": "API-Fehler !{{ist|ist nicht}} vorhanden",
+        "nl": "API-fout !{{is|is niet}} aanwezig"
     },
     "hint": {
         "en": "This Flow will continue if API error is/isn't currently present.",
-        "de": "Dieser Flow wird fortgeführt, wenn API-Fehler derzeit vorhanden/nicht vorhanden sind."
+        "de": "Dieser Flow wird fortgeführt, wenn API-Fehler derzeit vorhanden/nicht vorhanden sind.",
+        "nl": "Deze stroom wordt voortgezet als de API-fout op dit moment is/is niet aanwezig."
     },
     "args": [
         {

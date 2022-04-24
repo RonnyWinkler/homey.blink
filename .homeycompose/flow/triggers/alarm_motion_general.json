@@ -1,0 +1,45 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "When a motion was detected.",
+        "de": "Wenn eine Bewegung erkannt wurde.",
+        "nl": "Wanneer een beweging werd gedetecteerd."
+    },
+    "titleFormatted":{
+        "en": "When a motion was detected.",
+        "de": "Wenn eine Bewegung erkannt wurde.",
+        "nl": "Wanneer een beweging werd gedetecteerd."
+    },
+    "hint": {
+        "en": "Triggers when a motion was detected by a camera. The camara name is provided by a token.",
+        "de": "Wird ausgelöst, Wenn eine Bewegung durch eine Kamera erkannt wurde. Der Kameraname wird über einen Token bereitgestellt.",
+        "nl": "Wordt geactiveerd wanneer een beweging is gedetecteerd door een camera. De cameranaam wordt geleverd door een token."
+    },
+    "tokens": [
+        {
+            "name": "device_name",
+            "type": "string",
+            "title": {
+                "en": "Camera name",
+                "de": "Kamera-Name",
+                "nl": "Cameranaam"
+            }
+        },
+        {
+            "name": "date_time",
+            "type": "string",
+            "title": {
+                "en": "Date/time",
+                "de": "Datum/Zeit",
+                "nl": "Datum/Tijd"
+            }
+        }
+    ],
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account"
+        }
+    ]
+}

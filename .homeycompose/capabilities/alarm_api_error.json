@@ -2,7 +2,8 @@
     "type": "boolean",
     "title": {
         "en": "API error",
-        "de": "API-Fehler"
+        "de": "API-Fehler",
+        "nl": "API-fout"
     },
     "getable": true,
     "setable": false,
@@ -10,11 +11,13 @@
     "insights": true,
     "insightsTitleTrue": { 
         "en": "API state: ERROR",
-        "de": "API-Status: FEHLER"
+        "de": "API-Status: FEHLER",
+        "nl": "API-status: FOUT"
     },
     "insightsTitleFalse": { 
         "en": "API state: ok",
-        "de": "API-Status: ok"
+        "de": "API-Status: ok",
+        "nl": "API-status: ok"
     },
     "icon": "/assets/alarm_api_error.svg"
 }

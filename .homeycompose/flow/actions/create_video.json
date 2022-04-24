@@ -1,15 +1,18 @@
 {
     "title": {
-        "en": "Recors a camera video.",
-        "de": "Kamera-Video aufnehmen."
+        "en": "Record a camera video.",
+        "de": "Kamera-Video aufnehmen.",
+        "nl": "Neem een cameravideo op."
     },
     "titleFormatted": {
         "en": "Starts recording a new camera video.",
-        "de": "Startet die Aufnahme eines neues Kamera-Videos."
+        "de": "Startet die Aufnahme eines neues Kamera-Videos.",
+        "nl": "Begint met het opnemen van een nieuwe cameravideo."
     },
     "hint": {
         "en": "Use this action to request the recording of a new camera video.",
-        "de": "Verwende diese Aktion, um die Aufnahme eines neues Kamera-Videos zu starten."
+        "de": "Verwende diese Aktion, um die Aufnahme eines neues Kamera-Videos zu starten.",
+        "nl": "Gebruik deze actie om de opname van een nieuwe cameravideo aan te vragen."
     },
     "args": [
         {

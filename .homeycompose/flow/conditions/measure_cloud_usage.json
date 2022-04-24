@@ -1,15 +1,18 @@
 {
     "title": {
         "en": "Cloud video usage !{{is|isn't}} higher than",
-        "de": "Cloud Video-Speichernutzung !{{ist|ist nicht}} größer als"
+        "de": "Cloud Video-Speichernutzung !{{ist|ist nicht}} größer als",
+        "nl": "Gebruik van cloudvideo's !{{is|is niet}} hoger dan"
     },
     "titleFormatted": {
         "en": "Cloud video usage !{{is|isn't}} higher than [[value]]",
-        "de": "Cloud Video-Speichernutzung !{{ist|ist nicht}} größer als [[value]]"
+        "de": "Cloud Video-Speichernutzung !{{ist|ist nicht}} größer als [[value]]",
+        "nl": "Cloud videogebruik !{{is|is niet}} hoger dan [[value]]"
     },
     "hint": {
         "en": "Cloud video usage (%)",
-        "de": "Cloud Video-Speichernutzung (%)"
+        "de": "Cloud Video-Speichernutzung (%)",
+        "nl": "Gebruik van cloudvideo (%)"
     },
     "args": [{
             "name": "device",

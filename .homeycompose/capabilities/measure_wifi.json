@@ -2,7 +2,8 @@
     "type": "number",
     "title": {
         "en": "WiFi signal",
-        "de": "WiFi-Signal"
+        "de": "WiFi-Signal",
+        "nl": "WiFi-signaal"
     },
     "uiComponent": "sensor",
     "insights": true,

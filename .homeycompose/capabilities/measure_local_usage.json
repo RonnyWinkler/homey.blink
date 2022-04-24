@@ -2,7 +2,8 @@
     "type": "number",
     "title": {
         "en": "SyncModule video usage",
-        "de": "SyncModule Video-Speicher"
+        "de": "SyncModule Video-Speicher",
+        "nl": "SyncModule videogebruik"
     },
     "uiComponent": "sensor",
     "insights": true,
