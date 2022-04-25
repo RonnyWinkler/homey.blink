@@ -1,6 +1,6 @@
 {
   "id": "com.blinkforhome",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -37,7 +37,7 @@
     "large": "/assets/images/large.png"
   },
   "source": "https://github.com/RonnyWinkler/homey.blink",
-  "homeyCommunityTopicId": 0,
+  "homeyCommunityTopicId": 63027,
   "permissions": [],
   "contributing": {
       "donate": {
