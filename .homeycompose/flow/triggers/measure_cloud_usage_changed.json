@@ -1,9 +1,9 @@
 {
     "highlight": true,
     "title": {
-        "en": "When the cloud video usage has changed.",
-        "de": "Wenn sich die Cloud Video-Speichernutzung geändert hat.",
-        "nl": "Wanneer het videogebruik in de cloud is gewijzigd."
+        "en": "The cloud video usage has changed.",
+        "de": "Die Cloud Video-Speichernutzung hat sich geändert.",
+        "nl": "Het gebruik van cloudvideo's is gewijzigd."
     },
     "args": [
         {

@@ -1,14 +1,14 @@
 {
     "highlight": true,
     "title": {
-        "en": "When a camera is offline.",
-        "de": "Wenn eine Kamera offline ist.",
-        "nl": "Wanneer een camera offline is."
+        "en": "A camera is offline.",
+        "de": "Eine Kamera ist offline.",
+        "nl": "Een camera is offline."
     },
     "titleFormatted":{
-        "en": "When a camera is offline.",
-        "de": "Wenn eine Kamera offline ist.",
-        "nl": "Wanneer een camera offline is."
+        "en": "A camera is offline.",
+        "de": "Eine Kamera ist offline.",
+        "nl": "Een camera is offline."
     },
     "hint": {
         "en": "Triggers when a camera is offline. The camara name is provided by a token.",

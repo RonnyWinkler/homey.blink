@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.blinkforhome",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -52,9 +52,9 @@
       {
         "highlight": true,
         "title": {
-          "en": "When the camera is online.",
-          "de": "Wenn die Kamera online ist.",
-          "nl": "Wanneer de camera online is."
+          "en": "The camera is online.",
+          "de": "Die Kamera ist online.",
+          "nl": "De camera is online."
         },
         "args": [
           {
@@ -68,14 +68,14 @@
       {
         "highlight": true,
         "title": {
-          "en": "When a camera is offline.",
-          "de": "Wenn eine Kamera offline ist.",
-          "nl": "Wanneer een camera offline is."
+          "en": "A camera is offline.",
+          "de": "Eine Kamera ist offline.",
+          "nl": "Een camera is offline."
         },
         "titleFormatted": {
-          "en": "When a camera is offline.",
-          "de": "Wenn eine Kamera offline ist.",
-          "nl": "Wanneer een camera offline is."
+          "en": "A camera is offline.",
+          "de": "Eine Kamera ist offline.",
+          "nl": "Een camera is offline."
         },
         "hint": {
           "en": "Triggers when a camera is offline. The camara name is provided by a token.",
@@ -105,9 +105,9 @@
       {
         "highlight": true,
         "title": {
-          "en": "When the camera is offline.",
-          "de": "Wenn die Kamera offline ist.",
-          "nl": "Wanneer de camera offline is."
+          "en": "The camera is offline.",
+          "de": "Die Kamera ist offlinet.",
+          "nl": "De camera is offline."
         },
         "args": [
           {
@@ -121,9 +121,9 @@
       {
         "highlight": true,
         "title": {
-          "en": "When the SyncModule storage is free again.",
-          "de": "Wenn der SyncModul-Speicher wieder frei ist.",
-          "nl": "Wanneer de SyncModule-opslag weer vrij is."
+          "en": "The SyncModule storage is free again.",
+          "de": "Der SyncModul-Speicher ist wieder frei.",
+          "nl": "De SyncModule-opslag is weer vrij."
         },
         "args": [
           {
@@ -137,9 +137,9 @@
       {
         "highlight": true,
         "title": {
-          "en": "When the SyncModule storage is full.",
-          "de": "Wenn der SyncModul-Speicher komplett belegt ist.",
-          "nl": "Wanneer de SyncModule-opslag vol is."
+          "en": "The SyncModule storage is full.",
+          "de": "Der SyncModul-Speicher ist komplett belegt.",
+          "nl": "De SyncModule-opslag is vol."
         },
         "args": [
           {
@@ -153,14 +153,14 @@
       {
         "highlight": true,
         "title": {
-          "en": "When a motion was detected.",
-          "de": "Wenn eine Bewegung erkannt wurde.",
-          "nl": "Wanneer een beweging werd gedetecteerd."
+          "en": "A motion was detected.",
+          "de": "Eine Bewegung wurde erkannt.",
+          "nl": "Een beweging werd gedetecteerd."
         },
         "titleFormatted": {
-          "en": "When a motion was detected.",
-          "de": "Wenn eine Bewegung erkannt wurde.",
-          "nl": "Wanneer een beweging werd gedetecteerd."
+          "en": "A motion was detected.",
+          "de": "Eine Bewegung wurde erkannt.",
+          "nl": "Een beweging werd gedetecteerd."
         },
         "hint": {
           "en": "Triggers when a motion was detected by a camera. The camara name is provided by a token.",
@@ -199,9 +199,9 @@
       {
         "highlight": true,
         "title": {
-          "en": "When an API error occurs.",
-          "de": "Wenn ein API-Fehler auftritt.",
-          "nl": "Wanneer een API-fout optreedt."
+          "en": "An API error occurs.",
+          "de": "Ein API-Fehler tritt auf.",
+          "nl": "Een API-fout optreedt."
         },
         "args": [
           {
@@ -226,9 +226,9 @@
       {
         "highlight": true,
         "title": {
-          "en": "When the API access is flawless.",
-          "de": "Wenn der API-Zugriff fehlerfrei ist.",
-          "nl": "Wanneer de API-toegang vlekkeloos is."
+          "en": "The API access is flawless.",
+          "de": "Der API-Zugriff ist fehlerfrei.",
+          "nl": "De API-toegang is vlekkeloos."
         },
         "args": [
           {
@@ -242,9 +242,9 @@
       {
         "highlight": true,
         "title": {
-          "en": "When the cloud video usage has changed.",
-          "de": "Wenn sich die Cloud Video-Speichernutzung geändert hat.",
-          "nl": "Wanneer het videogebruik in de cloud is gewijzigd."
+          "en": "The cloud video usage has changed.",
+          "de": "Die Cloud Video-Speichernutzung hat sich geändert.",
+          "nl": "Het gebruik van cloudvideo's is gewijzigd."
         },
         "args": [
           {
@@ -270,9 +270,9 @@
       {
         "highlight": true,
         "title": {
-          "en": "When the SyncModule video usage has changed.",
-          "de": "Wenn sich die SyncModule Video-Speichernutzung geändert hat.",
-          "nl": "Wanneer het videogebruik van de SyncModule is gewijzigd."
+          "en": "The SyncModule video usage has changed.",
+          "de": "Die SyncModule Video-Speichernutzung hat sich geändert.",
+          "nl": "Het videogebruik van de synchronisatiemodule is gewijzigd."
         },
         "args": [
           {
@@ -298,14 +298,14 @@
       {
         "highlight": true,
         "title": {
-          "en": "When a camera snapshot was created.",
-          "de": "Wenn eine Kamera-Foto aufgenommen wurde.",
-          "nl": "Wanneer een cameramomentopname is gemaakt."
+          "en": "A camera snapshot was created.",
+          "de": "Ein Kamera-Foto wurde aufgenommen.",
+          "nl": "Een cameramomentopname is gemaakt."
         },
         "titleFormatted": {
-          "en": "When a camera snapshot was created.",
-          "de": "Wenn eine Kamera-Foto aufgenommen wurde.",
-          "nl": "Wanneer een cameramomentopname is gemaakt."
+          "en": "A camera snapshot was created.",
+          "de": "Ein Kamera-Foto wurde aufgenommen.",
+          "nl": "Een cameramomentopname is gemaakt."
         },
         "hint": {
           "en": "Triggers when a camera snapshot was created.",

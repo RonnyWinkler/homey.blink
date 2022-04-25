@@ -1,9 +1,9 @@
 {
     "highlight": true,
     "title": {
-        "en": "When the SyncModule video usage has changed.",
-        "de": "Wenn sich die SyncModule Video-Speichernutzung geändert hat.",
-        "nl": "Wanneer het videogebruik van de SyncModule is gewijzigd."
+        "en": "The SyncModule video usage has changed.",
+        "de": "Die SyncModule Video-Speichernutzung hat sich geändert.",
+        "nl": "Het videogebruik van de synchronisatiemodule is gewijzigd."
     },
     "args": [
         {

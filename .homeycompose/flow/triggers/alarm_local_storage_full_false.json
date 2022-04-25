@@ -1,9 +1,9 @@
 {
     "highlight": true,
     "title": {
-        "en": "When the SyncModule storage is free again.",
-        "de": "Wenn der SyncModul-Speicher wieder frei ist.",
-        "nl": "Wanneer de SyncModule-opslag weer vrij is."
+        "en": "The SyncModule storage is free again.",
+        "de": "Der SyncModul-Speicher ist wieder frei.",
+        "nl": "De SyncModule-opslag is weer vrij."
     },
     "args": [
         {

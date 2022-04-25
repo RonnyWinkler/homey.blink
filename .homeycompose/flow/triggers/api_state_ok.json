@@ -1,9 +1,9 @@
 {
     "highlight": true,
     "title": {
-        "en": "When the API access is flawless.",
-        "de": "Wenn der API-Zugriff fehlerfrei ist.",
-        "nl": "Wanneer de API-toegang vlekkeloos is."
+        "en": "The API access is flawless.",
+        "de": "Der API-Zugriff ist fehlerfrei.",
+        "nl": "De API-toegang is vlekkeloos."
     },
     "args": [
         {

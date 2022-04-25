@@ -1,9 +1,9 @@
 {
     "highlight": true,
     "title": {
-        "en": "When the camera is online.",
-        "de": "Wenn die Kamera online ist.",
-        "nl": "Wanneer de camera online is."
+        "en": "The camera is online.",
+        "de": "Die Kamera ist online.",
+        "nl": "De camera is online."
     },
     "args": [
         {

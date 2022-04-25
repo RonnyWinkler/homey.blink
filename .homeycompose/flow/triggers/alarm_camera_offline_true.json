@@ -1,9 +1,9 @@
 {
     "highlight": true,
     "title": {
-        "en": "When the camera is offline.",
-        "de": "Wenn die Kamera offline ist.",
-        "nl": "Wanneer de camera offline is."
+        "en": "The camera is offline.",
+        "de": "Die Kamera ist offlinet.",
+        "nl": "De camera is offline."
     },
     "args": [
         {

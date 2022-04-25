@@ -6,6 +6,14 @@
   "0.0.2": {
     "en": "Added dutch translation (Google translator). Please report translation suggestions via forum thread (coming soon).",
     "de": "Niederländische Übersetzung ergänzt (Google-Übersetzer)"
+  },
+  "0.0.3": {
+    "en": "Adapted trigger descriptions and account device image.",
+    "de": "Trigger-Bezeichnung und Konto-Bild angepasst."
+  },
+  "0.0.4": {
+    "en": "Updated app image.",
+    "de": "App-Bild aktualisiert."
   }
 
 }

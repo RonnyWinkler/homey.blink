@@ -1,14 +1,14 @@
 {
     "highlight": true,
     "title": {
-        "en": "When a camera snapshot was created.",
-        "de": "Wenn eine Kamera-Foto aufgenommen wurde.",
-        "nl": "Wanneer een cameramomentopname is gemaakt."
+        "en": "A camera snapshot was created.",
+        "de": "Ein Kamera-Foto wurde aufgenommen.",
+        "nl": "Een cameramomentopname is gemaakt."
     },
     "titleFormatted":{
-        "en": "When a camera snapshot was created.",
-        "de": "Wenn eine Kamera-Foto aufgenommen wurde.",
-        "nl": "Wanneer een cameramomentopname is gemaakt."
+        "en": "A camera snapshot was created.",
+        "de": "Ein Kamera-Foto wurde aufgenommen.",
+        "nl": "Een cameramomentopname is gemaakt."
     },
     "hint": {
         "en": "Triggers when a camera snapshot was created.",

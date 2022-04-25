@@ -1,9 +1,9 @@
 {
     "highlight": true,
     "title": {
-        "en": "When an API error occurs.",
-        "de": "Wenn ein API-Fehler auftritt.",
-        "nl": "Wanneer een API-fout optreedt."
+        "en": "An API error occurs.",
+        "de": "Ein API-Fehler tritt auf.",
+        "nl": "Een API-fout optreedt."
     },
     "args": [
         {

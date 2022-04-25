@@ -1,14 +1,14 @@
 {
     "highlight": true,
     "title": {
-        "en": "When a motion was detected.",
-        "de": "Wenn eine Bewegung erkannt wurde.",
-        "nl": "Wanneer een beweging werd gedetecteerd."
+        "en": "A motion was detected.",
+        "de": "Eine Bewegung wurde erkannt.",
+        "nl": "Een beweging werd gedetecteerd."
     },
     "titleFormatted":{
-        "en": "When a motion was detected.",
-        "de": "Wenn eine Bewegung erkannt wurde.",
-        "nl": "Wanneer een beweging werd gedetecteerd."
+        "en": "A motion was detected.",
+        "de": "Eine Bewegung wurde erkannt.",
+        "nl": "Een beweging werd gedetecteerd."
     },
     "hint": {
         "en": "Triggers when a motion was detected by a camera. The camara name is provided by a token.",
