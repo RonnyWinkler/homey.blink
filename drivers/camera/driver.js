@@ -71,7 +71,7 @@ class cameraDriver extends Driver {
         for (let i=0; i<accountList.length; i++){
             if (accountList[i].getData().id == this.selectedAccount.data.id){
                 // Read only Indoor/Outdoor cameras (paramerer type = 1)
-                let cameras = await accountList[i].getCameras(1);
+                let cameras = await accountList[i].getCameras(1, false);
                 this.log(cameras);
         
                 for (let j=0; j < cameras.length; j++){

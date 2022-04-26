@@ -587,9 +587,9 @@ class accountDevice extends Homey.Device {
         }
     }
 
-    async getCameras(type = 0){
+    async getCameras(type = 0, buffered = true){
         try{
-            let result = await this.blinkApi.getCameras(type);
+            let result = await this.blinkApi.getCameras(type, buffered);
             return result;
         }
         catch (error){

@@ -71,7 +71,7 @@ class cameraDriver extends Driver {
         for (let i=0; i<accountList.length; i++){
             if (accountList[i].getData().id == this.selectedAccount.data.id){
                 // Read only Mini cameras (paramerer type = 2)
-                let cameras = await accountList[i].getCameras(2);
+                let cameras = await accountList[i].getCameras(2, false);
                 this.log(cameras);
         
                 for (let j=0; j < cameras.length; j++){

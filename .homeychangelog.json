@@ -34,6 +34,14 @@
   "0.0.9": {
     "en": "Small bugfixes.",
     "de": "Kleinere Fehlerkorrekturen."
+  },
+  "0.0.10": {
+    "en": "Buffered reading from cameras to reduce API calls.",
+    "de": "Gepuffertes Lesen von Kameras zur Reduzierung von API-Aufrufen."
+  },
+  "0.0.11": {
+    "en": "Buffered reading from cameras to reduce API calls.",
+    "de": "Gepuffertes Lesen von Kameras zur Reduzierung von API-Aufrufen."
   }
 
 }
