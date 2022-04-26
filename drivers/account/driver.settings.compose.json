@@ -41,8 +41,8 @@
                     "de": "Bewegungsalarm-Intervall Cloud (sec)"
                 },
                 "hint": {
-                    "en": "Retrieval interval of motion alerts from Blink Cloud in seconds (>10 sec to avoid blocking).",
-                    "de": "Abruf-Intervall von Bewegungsalarmen von der Blink-Cound in Sekunden (>10 sec zur Vermeidung von Sperrungen)."
+                    "en": "Retrieval interval of motion alerts from Blink Cloud in seconds (>5 sec to avoid blocking).",
+                    "de": "Abruf-Intervall von Bewegungsalarmen von der Blink-Cound in Sekunden (>5 sec zur Vermeidung von Sperrungen)."
                 }
             },
             {

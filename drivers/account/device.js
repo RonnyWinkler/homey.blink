@@ -23,13 +23,16 @@ class accountDevice extends Homey.Device {
         };
         await this.updateCapabilities();
 
-        this.setSettings({
-                account_id : this.getData().id.toString()
-            });
-        this.setSettings({
-            api_state : "OK"
-        });
-        
+        try{
+            await this.setSettings({
+                    account_id : this.getData().id.toString(),
+                    api_state : "OK"
+                });
+        }
+        catch(error){
+            this.error(error.message+" Account onInit()");
+        }
+            
         // register flow trigger
         this.apiStateErrorTrigger = this.homey.flow.getDeviceTriggerCard('api_state_error');
         this.apiStateOkTrigger = this.homey.flow.getDeviceTriggerCard('api_state_ok');
@@ -75,9 +78,14 @@ class accountDevice extends Homey.Device {
     }
 
     async apiStateError(reason){
-        this.setSettings({
-            api_state : reason
-        });
+        try{
+            await this.setSettings({
+                api_state : reason
+            });
+        }
+        catch(error){
+            this.error(error.message+" api_state:"+reason);
+        }
         let state = this.getCapabilityValue('alarm_api_error');
         if (state == null || state == false){
             let now = Date.parse(new Date());
@@ -96,9 +104,14 @@ class accountDevice extends Homey.Device {
 
     async apiStateOk(){
         this.deviceData.apiErrorTimestamp = null;
-        this.setSettings({
-            api_state : "OK"
-        });
+        try{
+            await this.setSettings({
+                api_state : 'OK'
+            });
+        }
+        catch(error){
+            this.error(error.message + "api_state : 'OK'");
+        }
         let state = this.getCapabilityValue('alarm_api_error');
         if (state == null || state == true){
             this.setCapabilityValue('alarm_api_error', false);
@@ -125,9 +138,13 @@ class accountDevice extends Homey.Device {
         catch(error){
             this.loggedIn = false;
             let code = /code: \d*/.exec(error.message);
-            this.setDeviceUnavailable(this.homey.__('devices.account.login_error') +": "+ code[0]);
+            let codeStr = '';
+            if (code && code[0]){
+                codeStr = code[0];
+            }
+            this.setDeviceUnavailable(this.homey.__('devices.account.login_error') +": "+ codeStr);
             this.error("Login error: "+error.message);
-            this.apiStateError(this.homey.__('devices.account.login_error') +": "+ code[0]);
+            this.apiStateError(this.homey.__('devices.account.login_error') +": "+ codeStr);
             return false;
         }
     }
@@ -225,12 +242,16 @@ class accountDevice extends Homey.Device {
             else{
                 this.deviceData.statusStorage = 'local';
             }
-            this.setCapabilityValue('status_storage', this.deviceData.statusStorage );
+            this.setCapabilityValue('status_storage', this.deviceData.statusStorage ).catch(this.error);;
         }
         catch (error){
             this.error(error.message);
             let code = /code: \d*/.exec(error.message);
-            this.apiStateError(this.homey.__('devices.account.api_error_device') +": "+code[0]);
+            let codeStr = '';
+            if (code && code[0]){
+                codeStr = code[0];
+            }
+            this.apiStateError(this.homey.__('devices.account.api_error_device') +": "+codeStr);
             return;
         }
 
@@ -244,7 +265,11 @@ class accountDevice extends Homey.Device {
         catch (error){
             this.error(error.message);
             let code = /code: \d*/.exec(error.message);
-            this.apiStateError(this.homey.__('devices.account.api_error_device') +": "+code[0]);
+            let codeStr = '';
+            if (code && code[0]){
+                codeStr = code[0];
+            }
+            this.apiStateError(this.homey.__('devices.account.api_error_device') +": "+codeStr);
             return;
         }
         // Account
@@ -289,7 +314,11 @@ class accountDevice extends Homey.Device {
         catch (error){
             this.error(error.message);
             let code = /code: \d*/.exec(error.message);
-            this.apiStateError(this.homey.__('devices.account.api_error_device') +": "+code[0]);
+            let codeStr = '';
+            if (code && code[0]){
+                codeStr = code[0];
+            }
+            this.apiStateError(this.homey.__('devices.account.api_error_device') +": "+codeStr);
             return;
         }
         this.apiStateOk();
@@ -367,7 +396,11 @@ class accountDevice extends Homey.Device {
         catch(error){
             this.error(error.message);
             let code = /code: \d*/.exec(error.message);
-            this.apiStateError(this.homey.__('devices.account.api_error_motion_cloud') +": "+code[0]);
+            let codeStr = '';
+            if (code && code[0]){
+                codeStr = code[0];
+            }
+            this.apiStateError(this.homey.__('devices.account.api_error_motion_cloud') +": "+codeStr);
             return;
         }
     }
@@ -445,7 +478,11 @@ class accountDevice extends Homey.Device {
         catch(error){
             this.error(error.message);
             let code = /code: \d*/.exec(error.message);
-            this.apiStateError(this.homey.__('devices.account.api_error_motion_local') +": "+code[0]);
+            let codeStr = '';
+            if (code && code[0]){
+                codeStr = code[0];
+            }
+            this.apiStateError(this.homey.__('devices.account.api_error_motion_local') +": "+codeStr);
             return;
         }
     }
@@ -651,16 +688,16 @@ class accountDevice extends Homey.Device {
     onDeleted() {
         let id = this.getData().id;
         this.log('device deleted:', id);
-        if (!this.intervalAuthToken){
+        if (this.intervalAuthToken){
             clearInterval(this.intervalAuthToken);
         }
-        if (!this.intervalMotionLoopSyncModule){
+        if (this.intervalMotionLoopSyncModule){
             clearInterval(this.intervalMotionLoopSyncModule);
         }
-        if (!this.intervalMotionLoopCloud){
+        if (this.intervalMotionLoopCloud){
             clearInterval(this.intervalMotionLoopCloud);
         }
-        if (!this.intervalUpdateLoop){
+        if (this.intervalUpdateLoop){
             clearInterval(this.intervalUpdateLoop);
         }
 

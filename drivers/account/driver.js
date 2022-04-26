@@ -138,7 +138,9 @@ class accountDriver extends Homey.Driver {
               motion_interval_cloud: 10,
               motion_interval_local: 15,
               motion_check_enabled: true,
-              alarm_api_wait: 10
+              alarm_api_wait: 10,
+              api_state: 'OK',
+              account_id: this.settingsData.accountId.toString()
             }
           }
         devices.push(device);

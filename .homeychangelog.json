@@ -18,6 +18,22 @@
   "0.0.5": {
     "en": "Added community forum topic.",
     "de": "Community-Forum-Topic ergänzt."
+  },
+  "0.0.6": {
+    "en": "Fixed account settings error.",
+    "de": "Konto-Einstellunge-Fehler korrigiert."
+  },
+  "0.0.7": {
+    "en": "Fixed account settings error. Fix for existing account devices.",
+    "de": "Konto-Einstellunge-Fehler korrigiert. Korrektur für vorhandene Konto-Geräte."
+  },
+  "0.0.8": {
+    "en": "Fixed account settings error. Fix for existing account devices.",
+    "de": "Konto-Einstellunge-Fehler korrigiert. Korrektur für vorhandene Konto-Geräte."
+  },
+  "0.0.9": {
+    "en": "Small bugfixes.",
+    "de": "Kleinere Fehlerkorrekturen."
   }
 
 }

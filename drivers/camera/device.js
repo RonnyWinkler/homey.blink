@@ -177,13 +177,13 @@ class cameraDevice extends Homey.Device {
 
     enableCameraMotion(){
         if(this.getParent()){
-            this.parent.enableCameraMotion(this.getData().id).catch(error => this.error(error));
+            this.parent.enableCameraMotion(this.getData().id).catch(error => this.error(error.message));
         }
     }
 
     disableCameraMotion(){
         if(this.getParent()){
-            this.parent.disableCameraMotion(this.getData().id).catch(error => this.error(error));
+            this.parent.disableCameraMotion(this.getData().id).catch(error => this.error(error.message));
         }
     }
 
