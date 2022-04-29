@@ -26,6 +26,9 @@ class systemDevice extends Homey.Device {
         if (!this.hasCapability('alarm_local_storage_full')){
             await this.addCapability('alarm_local_storage_full');
         }
+        if (!this.hasCapability('status_usb')){
+            await this.addCapability('status_usb');
+        }
     }
 
     getParent(){
@@ -80,9 +83,25 @@ class systemDevice extends Homey.Device {
             }
             this.setCapabilityValue("measure_wifi_syncmodule", Math.round(systemData.sync_module_data.wifi_strength*20 )).catch(error => this.error(error));
             // SyncModule 
-            this.setCapabilityValue("measure_local_usage", systemData.sync_module_storage.usb_storage_used ).catch(error => this.error(error));
-            this.setCapabilityValue("alarm_local_storage_full", systemData.sync_module_storage.usb_storage_full ).catch(error => this.error(error));
-
+            if (systemData.sync_module_storage && systemData.sync_module_storage.usb_state == 'active'
+                || systemData.sync_module_storage && systemData.sync_module_storage.usb_state == 'unmounted' ){
+                this.setCapabilityValue("status_usb", systemData.sync_module_storage.usb_state ).catch(error => this.error(error));
+            }
+            else{
+                this.setCapabilityValue("status_usb", 'unavailable' ).catch(error => this.error(error));
+            }
+            if (systemData.sync_module_storage && systemData.sync_module_storage.usb_storage_used != undefined){
+                this.setCapabilityValue("measure_local_usage", systemData.sync_module_storage.usb_storage_used ).catch(error => this.error(error));
+            }
+            else{
+                this.setCapabilityValue("measure_local_usage", 0 ).catch(error => this.error(error));
+            }
+            if (systemData.sync_module_storage && systemData.sync_module_storage.usb_storage_full != undefined){
+                this.setCapabilityValue("alarm_local_storage_full", systemData.sync_module_storage.usb_storage_full ).catch(error => this.error(error));
+            }
+            else{
+                this.setCapabilityValue("alarm_local_storage_full", false ).catch(error => this.error(error));
+            }
         }
     }
 

@@ -42,6 +42,10 @@
   "0.0.11": {
     "en": "Buffered reading from cameras to reduce API calls.",
     "de": "Gepuffertes Lesen von Kameras zur Reduzierung von API-Aufrufen."
+  },
+  "0.0.12": {
+    "en": "Added SyncModule USB state and error handling for missing USB on video request.",
+    "de": "SyncModul USB-Status ergänzt und Fehlerbehandlung für nicht vorh. USB bei Video-Abruf."
   }
 
 }

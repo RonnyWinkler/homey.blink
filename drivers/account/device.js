@@ -242,7 +242,7 @@ class accountDevice extends Homey.Device {
             else{
                 this.deviceData.statusStorage = 'local';
             }
-            this.setCapabilityValue('status_storage', this.deviceData.statusStorage ).catch(this.error);;
+            this.setCapabilityValue('status_storage', this.deviceData.statusStorage ).catch(error => {this.error(error)});
         }
         catch (error){
             this.error(error.message);
@@ -286,7 +286,12 @@ class accountDevice extends Homey.Device {
                     if (device){
                         let network = this.deviceData.homescreen.networks[i];
                         network["sync_module_data"] = this.deviceData.homescreen.sync_modules.find(sm => sm.network_id === network.id);
-                        let syncmoduleStorage = await this.blinkApi.getSyncmoduleStorage(network.id, network["sync_module_data"].id);
+                        let syncmoduleStorage = {};
+                        try{
+                            syncmoduleStorage = await this.blinkApi.getSyncmoduleStorage(network.id, network["sync_module_data"].id);
+                        }
+                        catch(error){
+                        }
                         network["sync_module_storage"] = syncmoduleStorage; 
                         device.updateDevice(network);
                     }
@@ -504,14 +509,16 @@ class accountDevice extends Homey.Device {
                 throw error;
                 // return(videoList);
             }
-            for (var j = 0; j < result.clips.length; j++) {
-                let createdAt = result.clips[j].created_at
-                    .replace(/T/, ' ')       // replace T with a space
-                    .replace(/\+.+/, '');     // delete the + and everything after
-                let createdAtTimestamp = Date.parse(createdAt);
-                let lastRequestTimestamp = Date.parse(this.lastVideoRequest);
-                if ( createdAtTimestamp > lastRequestTimestamp ){
-                    videoList.push( result.clips[j] );
+            if (result && result.clips){
+                for (var j = 0; j < result.clips.length; j++) {
+                    let createdAt = result.clips[j].created_at
+                        .replace(/T/, ' ')       // replace T with a space
+                        .replace(/\+.+/, '');     // delete the + and everything after
+                    let createdAtTimestamp = Date.parse(createdAt);
+                    let lastRequestTimestamp = Date.parse(this.lastVideoRequest);
+                    if ( createdAtTimestamp > lastRequestTimestamp ){
+                        videoList.push( result.clips[j] );
+                    }
                 }
             }
         }

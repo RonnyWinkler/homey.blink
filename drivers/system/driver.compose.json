@@ -13,6 +13,7 @@
     "capabilities": [
         "onoff",
         "measure_wifi_syncmodule",
+        "status_usb",
         "measure_local_usage",
         "alarm_local_storage_full"
     ],

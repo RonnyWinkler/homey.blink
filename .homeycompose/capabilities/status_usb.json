@@ -1,0 +1,39 @@
+{
+    "type": "enum",
+    "title": {
+        "en": "USB state",
+        "de": "USB-Status",
+        "nl": "USB-status"
+    },
+    "uiComponent": "sensor",
+    "insights": false,
+    "getable": true,
+    "setable": false,
+    "icon": "/assets/status_usb.svg",
+    "values": [
+        {
+            "id": "active",
+            "title": {
+                "en": "active",
+                "de": "aktiv",
+                "nl": "actief"
+            }
+        },
+        {
+            "id": "unmounted",
+            "title": {
+                "en": "unmounted",
+                "de": "ausgeworfen",
+                "nl": "niet gemonteerd"
+            }
+        },
+        {
+            "id": "unavailable",
+            "title": {
+                "en": "unavailable",
+                "de": "nicht verfügbar",
+                "nl": "niet beschikbaar"
+            }
+        }
+    ]
+}
