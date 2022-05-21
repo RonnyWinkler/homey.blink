@@ -46,6 +46,10 @@
   "0.0.12": {
     "en": "Added SyncModule USB state and error handling for missing USB on video request.",
     "de": "SyncModul USB-Status ergänzt und Fehlerbehandlung für nicht vorh. USB bei Video-Abruf."
+  },
+  "0.0.13": {
+    "en": "Added repair function. Change the account device password via the device settings/repair function.",
+    "de": "Reparieren-Funktion hinzugefügt. Ändere das Passwort des Konto-Gerätes über die Geräte-Einstellung/Reparieren-Funktion."
   }
 
 }

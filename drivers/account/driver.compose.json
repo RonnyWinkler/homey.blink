@@ -66,10 +66,57 @@
                 "prev": "account"
             },
             "options": { "singular": true }
-          },
-          {
-              "id": "add_devices",
-              "template": "add_devices"
-          }
+        },
+        {
+            "id": "add_devices",
+            "template": "add_devices"
+        }
+    ],
+    "repair": [
+        {
+            "id": "account",
+            "navigation": {
+                "next": "check_account"
+            }
+        },
+        {
+            "id": "check_account",
+            "template": "loading",
+            "navigation": {
+                "prev": "account",
+                "next": "list_devices"
+            }
+        },
+        {
+            "id": "check_pin",
+            "template": "loading",
+            "navigation": {
+                "prev": "account",
+                "next": "update_device"
+            }
+        },
+        {
+            "id": "pin",
+            "navigation": {
+                "prev": "account",
+                "next": "check_pin"
+            }
+        },
+        {
+            "id": "account_error",
+            "navigation": {
+                "prev": "account"
+            }
+        },
+        {
+            "id": "pin_error",
+            "navigation": {
+                "prev": "pin"
+            }
+        },
+        {
+            "id": "update_device",
+            "template": "loading"
+        }
     ]
 }

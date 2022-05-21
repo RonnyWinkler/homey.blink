@@ -96,8 +96,8 @@
                     "de": "API-Status"
                 },
                 "hint": {
-                    "en": "API status including http error code: \n403: Forbidden, rate limit exceeded; \n409: Conflict, parallel request running, device busy.",
-                    "de": "API-Status incl. http-Fehlercode: \n403: Forbidden, Zugriffslimit überschritten; \n409: Conflict, Parallele Anfrage läuft, Gerät belegt."
+                    "en": "API status including http error code: \n401: Unauthorized, Login not possible; \n403: Forbidden, rate limit exceeded; \n409: Conflict, parallel request running, device busy.",
+                    "de": "API-Status incl. http-Fehlercode: \n401: Unauthorized, Anmeldung nich möglich; \n403: Forbidden, Zugriffslimit überschritten; \n409: Conflict, Parallele Anfrage läuft, Gerät belegt."
                 }
             }
         ]

@@ -39,7 +39,9 @@ class accountDevice extends Homey.Device {
         this.alarmMotionTrigger = this.homey.flow.getDeviceTriggerCard('alarm_motion_general');
         this.alarmCameraOfflineTrigger = this.homey.flow.getDeviceTriggerCard('alarm_camera_offline_general');
 
-        this.blinkApi = new blinkApi();
+        if (!this.blinkApi){
+            this.blinkApi = new blinkApi();
+        }
 
         this.log("Account Login...");
         await this.login();
@@ -133,6 +135,7 @@ class accountDevice extends Homey.Device {
             // this.regionCode = result.account.tier;
             this.deviceData.loggedIn = true;
             this.apiStateOk();
+            this.setDeviceAvailable();
             return true;
         }
         catch(error){
@@ -147,6 +150,36 @@ class accountDevice extends Homey.Device {
             this.apiStateError(this.homey.__('devices.account.login_error') +": "+ codeStr);
             return false;
         }
+    }
+
+    async reLogin(){
+        this.log('Blink account reLogin(): '+this.getName()+' ID: '+this.getData().id);
+        this.deviceData = {
+            email: this.getStoreValue('email'),
+            pw: this.getStoreValue('pw'),
+            blinkUid: this.getStoreValue('blinkUid'),
+            blinkNotificationKey: this.getStoreValue('blinkNotificationKey'),
+            accountId: this.getData().id,
+            // authtoken: null,
+            // regionCode: null,
+            loggedIn: false,
+            statusStorage: null,
+            lastVideoRequest: null,
+            homescreen: null,
+            apiErrorTimestamp: null
+        };
+
+        try{
+            await this.setSettings({
+                    account_id : this.getData().id.toString(),
+                    api_state : "OK"
+                });
+        }
+        catch(error){
+            this.error(error.message+" Account reLogin()");
+        }
+
+        return this.login();
     }
 
     refreshAuthTokenInterval() {

@@ -5,7 +5,9 @@ const blinkApi = require('../../lib/blinkApi');
 class accountDriver extends Homey.Driver {
     onPair(session) {
         this.log("onPair()");
-        this.blinkApi = new blinkApi();
+        if (!this.blinkApi){
+            this.blinkApi = new blinkApi();
+        }
         this.settingsData = { 
             "email": "",
             "pw": "",
@@ -21,7 +23,9 @@ class accountDriver extends Homey.Driver {
 
         session.setHandler("getSettings", async () => {
             this.log("getSettings:");
-            this.log(this.settingsData);
+            if (process.env.DEBUG === '1'){
+                this.log(this.settingsData);
+            }
             return this.settingsData;
         });
 
@@ -35,9 +39,49 @@ class accountDriver extends Homey.Driver {
 
     } // end onPair
 
+    async onRepair(session, device) {
+        this.log("onRepair()");
+
+        if (!this.blinkApi){
+            this.blinkApi = new blinkApi();
+        }
+        // Uid and NotificationKey must be set with new values. Re-Auth seems to need new IDs. Old ID seem to get revoked on PW change. 
+        this.settingsData = { 
+            email: device.getStoreValue('email'),
+            pw: '',
+            blinkUid: this.blinkApi.generate_uid(16), //device.getStoreValue('blinkUid'),
+            blinkNotificationKey: this.blinkApi.generate_uid(152), //device.getStoreValue('blinkNotificationKey'),
+            accountId: device.getData().id,
+            pin: ''
+        };
+
+        session.setHandler("settingsChanged", async (data) => {
+            return await this.onSettingsChanged(data);
+        });
+
+        session.setHandler("getSettings", async () => {
+            this.log("getSettings:");
+            if (process.env.DEBUG === '1'){
+                this.log(this.settingsData);
+            }
+            return this.settingsData;
+        });
+
+        session.setHandler('showView', async (view) => {
+            return await this.onShowViewRepair(session, view, device);
+        });
+
+        // session.setHandler("update_device", async () => { 
+        //     return await this.updateDevice(device, session)
+        // });
+      
+    } // end onRepair
+
     async onSettingsChanged(data){
         this.log("onSettingsChanged()");
-        this.log(data);
+        if (process.env.DEBUG === '1'){
+            this.log(data);
+        }
         if (data.email){
             this.settingsData.email = data.email;
         }
@@ -82,8 +126,52 @@ class accountDriver extends Homey.Driver {
                 await session.showView("pin_error");
             }
         }
-      }
-    
+    }
+
+    async onShowViewRepair(session, view, device){
+    if (view === 'check_account') {
+        this.log("onShowView(check_account)");
+        try{
+            let result = await this.checkAccount();
+            if ( result.account.client_verification_required ){
+                await session.showView("pin");
+            }
+            else{
+                await session.nextView();
+            }
+        }
+        catch(error){
+            await session.showView("account_error");
+        }
+    }
+    if (view === 'check_pin') {
+        this.log("onShowView(check_pin)");
+        try{
+            let result = await this.checkPin();
+            if (result.valid){
+                await session.nextView();
+
+            }
+            else{
+                await session.showView("pin_error");
+            }
+        }
+        catch(error){
+            await session.showView("pin_error");
+        }
+    }
+    if (view === 'update_device') {
+        this.log("onShowView(update_device)");
+        try{
+            await this.updateDevice(device);
+            await session.nextView();
+        }
+        catch(error){
+            await session.showView("account_error");
+        }
+    }
+    }
+
     async checkAccount(){
         this.log("checkAccount()");
         try{
@@ -149,5 +237,17 @@ class accountDriver extends Homey.Driver {
         return devices;
     }
 
+    async updateDevice(device) {
+        this.log("updateDevice()" );
+        if (this.settingsData.accountId != device.getData().id){
+            throw new Error();
+        }
+        await device.setStoreValue('email', this.settingsData.email);
+        await device.setStoreValue('pw', this.settingsData.pw);
+        await device.setStoreValue('blinkUid', this.settingsData.blinkUid);
+        await device.setStoreValue('blinkNotificationKey', this.settingsData.blinkNotificationKey);   
+        this.log("updateDevice(): device store data set. Start re-login..." );    
+        await device.reLogin(); 
+    }
 }
 module.exports = accountDriver;
