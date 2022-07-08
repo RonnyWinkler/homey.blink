@@ -20,5 +20,25 @@
             "type": "device",
             "filter": "driver_id=camera|owl"
         }
+    ],
+    "tokens": [
+        {
+            "name": "device_name",
+            "type": "string",
+            "title": {
+                "en": "Camera name",
+                "de": "Kamera-Name",
+                "nl": "Cameranaam"
+            }
+        },
+        {
+            "name": "image",
+            "type": "image",
+            "title": {
+                "en": "Snapshot image",
+                "de": "Kamera-Foto",
+                "nl": "Momentopname"
+            }
+          }
     ]
 }

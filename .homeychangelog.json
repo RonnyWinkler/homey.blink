@@ -50,6 +50,10 @@
   "0.0.13": {
     "en": "Added repair function. Change the account device password via the device settings/repair function.",
     "de": "Reparieren-Funktion hinzugefügt. Ändere das Passwort des Konto-Gerätes über die Geräte-Einstellung/Reparieren-Funktion."
+  },
+  "0.0.14": {
+    "en": "Extended snapshot action card for Advanced Flows. Added flow action for saving snapshots to an SMB share.",
+    "de": "Snaphot-Aktionskarte erweitert für Advanced Flows Flow Aktion zum Speichern von Snapshots auf eine SMB-Freigabe ergänzt."
   }
 
 }

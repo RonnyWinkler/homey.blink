@@ -1,6 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
+const Duplex = require('stream').Duplex;
 
 class cameraDevice extends Homey.Device {
 
@@ -99,20 +100,68 @@ class cameraDevice extends Homey.Device {
     }
 
     
+    // async createSnapshot(args){
+    //     // Trigger "snapshot_created" flow using the image. This will trigger the image recording.
+    //     this.log("createSnapshot(): Trigger Flow: snapshot_created. "+this.getName()+' ID: '+this.getData().id);
+    //     //await this.snapshotImage.update();
+    //     // Trigger flow
+    //     let tokens = {
+    //         device_name: this.getName(),
+    //         image: this.snapshotImage
+    //     };
+    //     let state = {};
+    //     this._flowTriggerSnapshotCreated.trigger(this, tokens, state)
+    //         .catch(this.error);
+    // }
+
     async createSnapshot(args){
         // Trigger "snapshot_created" flow using the image. This will trigger the image recording.
         this.log("createSnapshot(): Trigger Flow: snapshot_created. "+this.getName()+' ID: '+this.getData().id);
-        //await this.snapshotImage.update();
-        // Trigger flow
-        let tokens = {
-            device_name: this.getName(),
-            image: this.snapshotImage
-        };
-        let state = {};
-        this._flowTriggerSnapshotCreated.trigger(this, tokens, state)
-            .catch(this.error);
+        // await this.snapshotImage.update();
+        try{
+            let localImage = await this.homey.images.createImage();
+            let sourceStream = await this.snapshotImage.getStream();
+            let snapshotBuffer = await this.stream2buffer(sourceStream);
+            await localImage.setStream(async stream => {
+                if (snapshotBuffer){
+                    let sourceStream = this.buffer2stream(snapshotBuffer);
+                    return await sourceStream.pipe(stream);
+                }
+            });
+
+            // Trigger flow
+            let tokens = {
+                device_name: this.getName(),
+                image: localImage
+            };
+            let state = {};
+            this._flowTriggerSnapshotCreated.trigger(this, tokens, state)
+                .catch(error => {
+                    this.error(error.message);
+                });
+            return tokens;
+        }
+        catch(error){
+            this.error(error.message);
+            throw new Error(error.message);
+        }
     }
 
+    stream2buffer(stream) {
+        return new Promise((resolve, reject) => {
+            const _buf = [];
+            stream.on("data", (chunk) => _buf.push(chunk));
+            stream.on("end", () => resolve(Buffer.concat(_buf)));
+            stream.on("error", (err) => reject(err));
+        });
+    } 
+
+    buffer2stream(buffer) {  
+        let stream = new (require('stream').Duplex)();
+        stream.push(buffer);
+        stream.push(null);
+        return stream;
+    }
 
     async createVideo(args){
         // Request recording of a camera video
