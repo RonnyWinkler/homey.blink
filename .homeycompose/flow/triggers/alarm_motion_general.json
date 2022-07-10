@@ -33,13 +33,22 @@
                 "de": "Datum/Zeit",
                 "nl": "Datum/Tijd"
             }
+        },
+        {
+            "name": "image",
+            "type": "image",
+            "title": {
+                "en": "Snapshot image (Only available with cloud storage)",
+                "de": "Kamera-Foto (Nur verfügbar bei Cloud-Speicher)",
+                "nl": "Momentopname (Alleen beschikbaar met cloudopslag)"
+            }
         }
     ],
     "args": [
         {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=account"
+            "filter": "driver_id=account|camera|owl"
         }
     ]
 }

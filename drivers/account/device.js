@@ -413,7 +413,14 @@ class accountDevice extends Homey.Device {
                     if (media[i].source == 'pir'){
                         this.log("New video for camera "+media[i].device_id+":");
                         this.log(media[i]);
-                        await this.triggerMotionAlert(media[i].device_id, Date.parse(media[i].created_at));
+                        let snapshot = null;
+                        try{
+                            snapshot = await this.blinkApi.getNewCameraSnapshotImageStream(media[i].thumbnail);
+                        }
+                        catch(error){
+                            // keep snapshot = null
+                        }
+                        await this.triggerMotionAlert(media[i].device_id, Date.parse(media[i].created_at), snapshot);
                     }
                     // get newest timestamp
                     if ( Date.parse(media[i].created_at) > newestTimestamp ){
@@ -573,16 +580,16 @@ class accountDevice extends Homey.Device {
         }
     }
 
-    async triggerMotionAlert(cameraId, timestamp){
+    async triggerMotionAlert(cameraId, timestamp, snapshot = null){
         let device = null;
         device = this.getCameraDevice(cameraId);
         if (device){
-            device.triggerMotionAlert(timestamp);
+            device.triggerMotionAlert(timestamp, snapshot);
         }
         device = null;
         device = this.getOwlDevice(cameraId);
         if (device){
-            device.triggerMotionAlert(timestamp);
+            device.triggerMotionAlert(timestamp, snapshot);
         }
     }
 
@@ -691,7 +698,7 @@ class accountDevice extends Homey.Device {
         }
     }
 
-    async triggerAlarmMotion(device, timestamp){
+    async triggerAlarmMotion(device, timestamp, snapshot){
         let tz  = this.homey.clock.getTimezone();
         let timeString = new Date(timestamp).toLocaleString(this.homey.i18n.getLanguage(), 
         { 
@@ -704,11 +711,35 @@ class accountDevice extends Homey.Device {
             year: "numeric"
         });
 
+        // create snapshot token if provided
+        let localImage = await this.homey.images.createImage();
+        if (snapshot){
+            try{
+                let sourceStream = snapshot;
+                let snapshotBuffer = await this.stream2buffer(sourceStream);
+                await localImage.setStream(async stream => {
+                    if (snapshotBuffer){
+                        let sourceStream = this.buffer2stream(snapshotBuffer);
+                        return await sourceStream.pipe(stream);
+                    }
+                    else{
+                        throw new Error("No snapshot available. Blink subscription is needed.")
+                    }
+                });
+            }
+            catch(error){ 
+                this.error(error.message);
+            }
+        }
         let tokens = { 
             "device_name": device.getName(),
-            "date_time": timeString
+            "date_time": timeString,
+            "image": localImage
         };
+        // Trigger flow event for account (general trigger for all cameras)
         this.alarmMotionTrigger.trigger( this,  tokens );
+        // Trigger flow event for camera devices (single camera)
+        this.alarmMotionTrigger.trigger( device,  tokens );
     }
 
     async triggerAlarmCameraOffline(device){
@@ -769,6 +800,23 @@ class accountDevice extends Homey.Device {
             );
         }
     }
+
+    // Service methods =========================================================================
+    buffer2stream(buffer) {  
+        let stream = new (require('stream').Duplex)();
+        stream.push(buffer);
+        stream.push(null);
+        return stream;
+    }
+
+    stream2buffer(stream) {
+        return new Promise((resolve, reject) => {
+            const _buf = [];
+            stream.on("data", (chunk) => _buf.push(chunk));
+            stream.on("end", () => resolve(Buffer.concat(_buf)));
+            stream.on("error", (err) => reject(err));
+        });
+    } 
 
 }
 module.exports = accountDevice;

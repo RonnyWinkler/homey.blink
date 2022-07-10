@@ -54,6 +54,14 @@
   "0.0.14": {
     "en": "Extended snapshot action card for Advanced Flows. Added flow action for saving snapshots to an SMB share.",
     "de": "Snaphot-Aktionskarte erweitert für Advanced Flows Flow Aktion zum Speichern von Snapshots auf eine SMB-Freigabe ergänzt."
+  },
+  "0.0.15": {
+    "en": "Added snapshot image to motion alert trigger - only available with cloud storage. Added motion alert trigger to camera devices.",
+    "de": "Kamera-Foto zum Bewegungsalarm-Trigger hinzugefügt – nur mit Cloud-Speicher verfügbar. Bewegungsalarm-Trigger bei Kameras ergänzt."
+  },
+  "0.0.16": {
+    "en": "Added snapshot image to motion alert trigger - only available with cloud storage. Added motion alert trigger to camera devices.",
+    "de": "Kamera-Foto zum Bewegungsalarm-Trigger hinzugefügt – nur mit Cloud-Speicher verfügbar. Bewegungsalarm-Trigger bei Kameras ergänzt."
   }
 
 }

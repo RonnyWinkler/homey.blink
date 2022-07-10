@@ -242,14 +242,14 @@ class cameraDevice extends Homey.Device {
         }
     }
 
-    triggerMotionAlert(timestamp){
+    triggerMotionAlert(timestamp, snapshot){
         //Check if the event date is newer
         if (timestamp > this.getCapabilityValue("video_timestamp")) {
             this.log("new motion detected on camera: "+this.getName()+" ID: "+ this.getData().id);
             this.setCapabilityValue("video_timestamp", timestamp).catch(this.error);
             this.setCapabilityValue('alarm_motion', true).catch(this.error);
             if(this.getParent()){
-                this.parent.triggerAlarmMotion(this, timestamp);
+                this.parent.triggerAlarmMotion(this, timestamp, snapshot);
             }
         }
         
