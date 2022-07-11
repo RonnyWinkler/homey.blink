@@ -62,6 +62,10 @@
   "0.0.16": {
     "en": "Added snapshot image to motion alert trigger - only available with cloud storage. Added motion alert trigger to camera devices.",
     "de": "Kamera-Foto zum Bewegungsalarm-Trigger hinzugefügt – nur mit Cloud-Speicher verfügbar. Bewegungsalarm-Trigger bei Kameras ergänzt."
+  },
+  "1.0.0": {
+    "en": "Technical version update: stable version.",
+    "de": "Technisches Versions-Update: Stabile Version."
   }
 
 }
