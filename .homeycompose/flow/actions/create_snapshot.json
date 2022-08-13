@@ -1,18 +1,18 @@
 {
     "title": {
-        "en": "Create a camera snapshot.",
-        "de": "Kamera-Foto aufnehmen.",
-        "nl": "Maak een cameramomentopname."
+        "en": "Create a camera snapshot in AdvancedFlows.",
+        "de": "Kamera-Foto aufnehmen in AdvancedFlows.",
+        "nl": "Maak een cameramomentopname in AdvancedFlows."
     },
     "titleFormatted": {
-        "en": "Requests a new camera snapshot.",
-        "de": "Fordert ein neues Kamera-Foto an.",
-        "nl": "Vraagt om een nieuwe momentopname van de camera."
+        "en": "Requests a new camera snapshot in AdvancedFlows.",
+        "de": "Fordert ein neues Kamera-Foto an in AdvancedFlows.",
+        "nl": "Vraagt om een nieuwe momentopname van de camera in AdvancedFlows."
     },
     "hint": {
-        "en": "Use this action to request a new camera snapshot. After retrieving the new image, a second flow is triggered where you can use the image as flow token.",
-        "de": "Verwende diese Aktion, um ein neues Kamera-Foto anzufordern. Nach Erstellung des Fotos wird ein weiterer Flow gestartet, in dem du das Bild als Flow-Token verwenden kannst.",
-        "nl": "Gebruik deze actie om een nieuwe momentopname van de camera aan te vragen. Na het ophalen van de nieuwe afbeelding wordt een tweede stroom getriggerd waarin u de afbeelding als stroomtoken kunt gebruiken."
+        "en": "Use this action in AdvancedFlows to request a new camera snapshot and get the image as flow token. After retrieving the new image, a second flow is triggered where you can use the image as flow token.",
+        "de": "Verwende diese Aktion in AdvancedFlows, um ein neues Kamera-Foto anzufordern und dieses Bild als Flow-Token zu erhalten. Nach Erstellung des Fotos wird ein weiterer Flow gestartet, in dem du das Bild als Flow-Token verwenden kannst.",
+        "nl": "Gebruik deze actie in AdvancedFlows om een nieuwe camera-snapshot aan te vragen en de afbeelding als flowtoken op te halen. Na het ophalen van de nieuwe afbeelding wordt een tweede stroom getriggerd waarin u de afbeelding als stroomtoken kunt gebruiken."
     },
     "args": [
         {

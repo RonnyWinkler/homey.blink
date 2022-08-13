@@ -66,6 +66,10 @@
   "1.0.0": {
     "en": "Technical version update: stable version.",
     "de": "Technisches Versions-Update: Stabile Version."
+  },
+  "1.0.1": {
+    "en": "Addes second flow action for 'create snapshot' for standard flows.",
+    "de": "Zweite Flow-Aktion für 'Kamera-Foto aufnehmen' für Standard flows."
   }
 
 }

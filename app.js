@@ -19,6 +19,11 @@ class blinkApp extends Homey.App {
     this._flowActionCreateSnapshot.registerRunListener(async (args, state) => {
             return await args.device.createSnapshot(args);
     });
+    this._flowActionCreateSnapshotStd = this.homey.flow.getActionCard('create_snapshot_std');
+    this._flowActionCreateSnapshotStd.registerRunListener(async (args, state) => {
+            await args.device.createSnapshot(args);
+            return true;
+    });
     this._flowActionCreateVideo = this.homey.flow.getActionCard('create_video');
     this._flowActionCreateVideo.registerRunListener(async (args, state) => {
             return args.device.createVideo(args);
