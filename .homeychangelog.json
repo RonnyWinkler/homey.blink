@@ -70,6 +70,10 @@
   "1.0.1": {
     "en": "Addes second flow action for 'create snapshot' for standard flows.",
     "de": "Zweite Flow-Aktion für 'Kamera-Foto aufnehmen' für Standard flows."
+  },
+  "1.0.2": {
+    "en": "Addes second flow action for 'create snapshot' for standard flows. Fix for hints/descriptions",
+    "de": "Zweite Flow-Aktion für 'Kamera-Foto aufnehmen' für Standard flows. Korrektur der Bezeichnung"
   }
 
 }

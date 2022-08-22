@@ -12,7 +12,7 @@
     "hint": {
         "en": "Use this action to request a new camera snapshot. After retrieving the new image, a second flow is triggered where you can use the image as flow token.",
         "de": "Verwende diese Aktion, um ein neues Kamera-Foto anzufordern. Nach Erstellung des Fotos wird ein weiterer Flow gestartet, in dem du das Bild als Flow-Token verwenden kannst.",
-        "nl": "Gebruik deze actie om een nieuwe momentopname van de camera aan te vragen. Na het ophalen van de nieuwe afbeelding wordt een tweede stroom getriggerd waarin u de afbeelding als stroomtoken kunt gebruiken."
+        "nl": "Gebruik deze actie om een nieuwe momentopname van de camera aan te vragen. Na het ophalen van de nieuwe afbeelding wordt een tweede Flow getriggerd waarin u de afbeelding als Flow token kunt gebruiken."
     },
     "args": [
         {
