@@ -74,6 +74,18 @@
   "1.0.2": {
     "en": "Addes second flow action for 'create snapshot' for standard flows. Fix for hints/descriptions",
     "de": "Zweite Flow-Aktion für 'Kamera-Foto aufnehmen' für Standard flows. Korrektur der Bezeichnung"
+  },
+  "1.0.3": {
+    "en": "Added flow action for saving motion alert videos to an SMB share using the Video-ID from motion alert trigger.",
+    "de": "Flow-Aktion zum Speichern von Bewegungsalarm-Videos auf eine SMB-Freigabe ergänzt unter Verwendung der Video-ID des Bewegungsalarm-Trigger."
+  },
+  "1.0.4": {
+    "en": "Added flow trigger for liveview videos (only possible with cloud subscription). This trigger allows the usage of flow action to store the video on a SMB share. This trigger is not avtivating the motion alert.",
+    "de": "Flow-Trigger für Liveview-Videos ergänzt. Dieser Trigger erlaubt die Verwendung der Flow-Aktion zum Speichern des Liveview-Videos auf eine SMB-Freigabe. Der Bewegungsalarm wird dabei nicht ausgelöst."
+  },
+  "1.0.5": {
+    "en": "Added flow trigger for liveview videos (only possible with cloud subscription): small fixes.",
+    "de": "Flow-Trigger für Liveview-Videos ergänzt: kleine Korrekturen."
   }
 
 }

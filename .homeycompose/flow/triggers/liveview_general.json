@@ -1,19 +1,19 @@
 {
     "highlight": true,
     "title": {
-        "en": "A motion was detected.",
-        "de": "Eine Bewegung wurde erkannt.",
-        "nl": "Een beweging werd gedetecteerd."
+        "en": "A liveview was recorded.",
+        "de": "Eine Liveübertragung wurde aufgenommen.",
+        "nl": "Er werd een livebeeld opgenomen."
     },
     "titleFormatted":{
-        "en": "A motion was detected.",
-        "de": "Eine Bewegung wurde erkannt.",
-        "nl": "Een beweging werd gedetecteerd."
+        "en": "A liveview was recorded.",
+        "de": "Eine Liveübertragung wurde aufgenommen.",
+        "nl": "Er werd een livebeeld opgenomen."
     },
     "hint": {
-        "en": "Triggers when a motion was detected by a camera. The camara name is provided by a token.",
-        "de": "Wird ausgelöst, wenn eine Bewegung durch eine Kamera erkannt wurde. Der Kameraname wird über einen Token bereitgestellt.",
-        "nl": "Wordt geactiveerd wanneer een beweging is gedetecteerd door een camera. De cameranaam wordt geleverd door een token."
+        "en": "Triggers when a liveview was recorded by a camera. The camara name is provided by a token.",
+        "de": "Wird ausgelöst, wenn eine Liveübertragung durch eine Kamera aufgenommen wurde. Der Kameraname wird über einen Token bereitgestellt.",
+        "nl": "Wordt geactiveerd wanneer een liveweergave is opgenomen door een camera. De cameranaam wordt geleverd door een token."
     },
     "tokens": [
         {

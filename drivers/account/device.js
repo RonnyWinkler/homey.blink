@@ -37,6 +37,7 @@ class accountDevice extends Homey.Device {
         this.apiStateErrorTrigger = this.homey.flow.getDeviceTriggerCard('api_state_error');
         this.apiStateOkTrigger = this.homey.flow.getDeviceTriggerCard('api_state_ok');
         this.alarmMotionTrigger = this.homey.flow.getDeviceTriggerCard('alarm_motion_general');
+        this.liveviewTrigger = this.homey.flow.getDeviceTriggerCard('liveview_general');
         this.alarmCameraOfflineTrigger = this.homey.flow.getDeviceTriggerCard('alarm_camera_offline_general');
 
         if (!this.blinkApi){
@@ -249,6 +250,13 @@ class accountDevice extends Homey.Device {
         return devices.find(device => device.getData().id === id);
     }
 
+    getSyncModule(networkId){
+        if (!this.deviceData.homescreen){
+            return;
+        }
+        return this.deviceData.homescreen.sync_modules.find(syncmodule => syncmodule.network_id === networkId);
+    }
+
     // Devices handling =========================================================================
     deviceUpdateInterval(){
         if (!this.intervalUpdateLoop){
@@ -410,9 +418,12 @@ class accountDevice extends Homey.Device {
             let newestTimestamp = 0;
             if (media && media.length > 0) {
                 for(let i=0; i < media.length; i++ ){
-                    if (media[i].source == 'pir'){
+                    // process eventhandler for "pir" and "liveview" videos.
+                    // the corresponding trigger is started in accound device depending on video source 
+                    // if (media[i].source == 'pir'){
                         this.log("New video for camera "+media[i].device_id+":");
                         this.log(media[i]);
+
                         let snapshot = null;
                         try{
                             snapshot = await this.blinkApi.getNewCameraSnapshotImageStream(media[i].thumbnail);
@@ -420,8 +431,18 @@ class accountDevice extends Homey.Device {
                         catch(error){
                             // keep snapshot = null
                         }
-                        await this.triggerMotionAlert(media[i].device_id, Date.parse(media[i].created_at), snapshot);
-                    }
+                        let syncmoduleId = this.getSyncModule(media[i].network_id).id;
+                        let videoId = {
+                            'id': media[i].id,
+                            'storage': 'cloud',
+                            'url': media[i].media,
+                            'cameraId': media[i].device_id,
+                            'networkId': media[i].network_id,
+                            'syncmoduleId': syncmoduleId,
+                            'source': media[i].source
+                        }
+                        await this.triggerMotionAlert(media[i].device_id, Date.parse(media[i].created_at), snapshot, videoId);
+                    // }
                     // get newest timestamp
                     if ( Date.parse(media[i].created_at) > newestTimestamp ){
                         newestTimestamp = Date.parse(media[i].created_at);
@@ -480,6 +501,7 @@ class accountDevice extends Homey.Device {
                 for(let i=0; i < media.length; i++ ){
                     // get cameraID for video
                     let cameraId = null;
+                    let networkId = null;
                     for(let j=0; j < this.deviceData.homescreen.cameras.length; j++ ){
                         // Replace all non-CHAR/NUN characters because camera name in SyncModule video list condensed
                         let cameraName = this.deviceData.homescreen.cameras[j].name.replace(/[^a-zA-Z0-9]/g, '');
@@ -487,6 +509,7 @@ class accountDevice extends Homey.Device {
                         // if (this.deviceData.homescreen.cameras[j].name == media[i].camera_name){
                         if ( cameraName === mediaCameraName ){
                             cameraId = this.deviceData.homescreen.cameras[j].id;
+                            networkId = this.deviceData.homescreen.cameras[j].network_id;
                         }
                     }
                     // 2nd step. Search for MiniKameras
@@ -498,6 +521,7 @@ class accountDevice extends Homey.Device {
                             // if (this.deviceData.homescreen.owls[j].name == media[i].camera_name){
                             if ( cameraName === mediaCameraName ){
                                 cameraId = this.deviceData.homescreen.owls[j].id;
+                                networkId = this.deviceData.homescreen.owls[j].network_id;
                             }
                         }
                     }
@@ -513,7 +537,17 @@ class accountDevice extends Homey.Device {
                             .replace(/\..+/, '');     // delete the + and everything after
                         this.log("New video for camera "+cameraId+":");
                         this.log(media[i]);
-                        await this.triggerMotionAlert(cameraId, Date.parse(media[i].created_at));
+                        let syncmoduleId = this.getSyncModule(networkId).id;
+                        let videoId = {
+                            'id': media[i].id,
+                            'storage': 'local',
+                            'url': null,
+                            'cameraId': cameraId,
+                            'networkId': networkId,
+                            'syncmoduleId': syncmoduleId,
+                            'source': 'pir'
+                        }
+                        await this.triggerMotionAlert(cameraId, Date.parse(media[i].created_at), null, videoId );
                     }
                 }
             }
@@ -580,16 +614,16 @@ class accountDevice extends Homey.Device {
         }
     }
 
-    async triggerMotionAlert(cameraId, timestamp, snapshot = null){
+    async triggerMotionAlert(cameraId, timestamp, snapshot = null, video_id = null){
         let device = null;
         device = this.getCameraDevice(cameraId);
         if (device){
-            device.triggerMotionAlert(timestamp, snapshot);
+            device.triggerMotionAlert(timestamp, snapshot, video_id);
         }
         device = null;
         device = this.getOwlDevice(cameraId);
         if (device){
-            device.triggerMotionAlert(timestamp, snapshot);
+            device.triggerMotionAlert(timestamp, snapshot, video_id);
         }
     }
 
@@ -698,7 +732,18 @@ class accountDevice extends Homey.Device {
         }
     }
 
-    async triggerAlarmMotion(device, timestamp, snapshot){
+    // async getCameraVideoStream(id, video_id){
+    //     try{
+    //         this.log("getCameraVideoStream()");
+    //         //let camera = await this.getCamera(id);
+    //         return await this.blinkApi.getCameraVideoStream(id, video_id);
+    //     }
+    //     catch (error){
+    //         throw error;
+    //     }
+    // }
+
+    async triggerAlarmMotion(device, timestamp, snapshot, video_id){
         let tz  = this.homey.clock.getTimezone();
         let timeString = new Date(timestamp).toLocaleString(this.homey.i18n.getLanguage(), 
         { 
@@ -731,22 +776,158 @@ class accountDevice extends Homey.Device {
                 this.error(error.message);
             }
         }
+        // let localVideo = await this.homey.images.createImage();
+        // if (video){
+        //     try{
+        //         let sourceStream = video;
+        //         let videoBuffer = await this.stream2buffer(sourceStream);
+        //         await localVideo.setStream(async stream => {
+        //             if (videoBuffer){
+        //                 let sourceStream = this.buffer2stream(videoBuffer);
+        //                 return await sourceStream.pipe(stream);
+        //             }
+        //             else{
+        //                 throw new Error("No video available. Blink subscription is needed.")
+        //             }
+        //         });
+        //     }
+        //     catch(error){ 
+        //         this.error(error.message);
+        //     }
+        // }
+        let video_id_string = '';
+        if (video_id != null){
+            video_id_string = JSON.stringify(video_id);
+        }
         let tokens = { 
             "device_name": device.getName(),
             "date_time": timeString,
-            "image": localImage
+            "image": localImage,
+            "video_id": video_id_string
         };
-        // Trigger flow event for account (general trigger for all cameras)
-        this.alarmMotionTrigger.trigger( this,  tokens );
-        // Trigger flow event for camera devices (single camera)
-        this.alarmMotionTrigger.trigger( device,  tokens );
+        // Motion alerts:
+        if (video_id == null || video_id.source == 'pir'){
+            // Trigger flow event for account (general trigger for all cameras)
+            this.alarmMotionTrigger.trigger( this,  tokens );
+            // Trigger flow event for camera devices (single camera)
+            this.alarmMotionTrigger.trigger( device,  tokens );
+        }
+        // Liveview or other video events:
+        else{
+            if (video_id.source == 'liveview'){
+                // Trigger flow event for account (general trigger for all cameras)
+                this.liveviewTrigger.trigger( this,  tokens );
+                // Trigger flow event for camera devices (single camera)
+                this.liveviewTrigger.trigger( device,  tokens );
+            }
+        }
     }
-
     async triggerAlarmCameraOffline(device){
         let tokens = { 
             "device_name": device.getName()
         };
         this.alarmCameraOfflineTrigger.trigger( this,  tokens );
+    }
+
+    async exportVideoSmb(args){
+        // SMB Export of an video url
+        let tz  = this.homey.clock.getTimezone();
+        let now = new Date().toLocaleString('en-US', 
+        { 
+            hour12: false, 
+            hourCycle: 'h23',
+            timeZone: tz,
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        });
+        let date = now.split(", ")[0];
+        date = date.split("/")[2] + "-" + date.split("/")[0] + "-" + date.split("/")[1]; 
+        let time = now.split(", ")[1];    
+        time = time.split(":")[0] + "-" + time.split(":")[1] + "-" + time.split(":")[2]; 
+        
+        let filename = date + "_" + time;
+        if (args.camera_name){
+          filename = filename + "_" + args.camera_name;
+        }
+        filename = filename + ".mp4";
+    
+        this.log("Export Video to SMB: "+args.smb_share+"\\"+filename);
+    
+        // create an SMB2 instance
+        try{
+            // let smb2Client = new smb2({
+                let smb2Client = new (require('@marsaud/smb2'))({
+                share: args.smb_share,
+                domain: '',
+                username: args.smb_user,
+                password: args.smb_pw,
+                autoCloseTimeout : 30
+            });
+            let stream = await this.blinkApi.getCameraVideoStream(JSON.parse(args.video_id));
+        
+            /* 
+            **********************************************************
+            Buffer
+            ********************************************************** 
+            */
+            let buffer = await this.stream2buffer(stream);
+            await smb2Client.writeFile(filename, buffer );
+            await smb2Client.disconnect();
+        
+            /* 
+            **********************************************************
+            Stream
+            ********************************************************** 
+            */
+            
+            // let writeStream = await smb2Client.createWriteStream(filename);
+            // writeStream
+            //   .on("close", async () => {
+            //     this.log("SMB-Stream closed");
+            //     await smb2Client.disconnect();
+            //     // writeStream = null;
+            //     // smb2Client = null;
+            //   })
+            //   .on("error", async (error) => {
+            //     this.log("SMB-Stream error: "+ error.message);
+            //   });
+            // stream.pipe(writeStream);
+        
+            // let writeStream = await smb2Client.createWriteStream(filename);
+            // stream.pipe(writeStream)
+            //   .on("finish", async () => {
+            //     this.log("Stream ended");
+            //   })
+            //   .on("close", async () => {
+            //     this.log("SMB-Stream closed");
+            //     // writeStream.end();
+            //     // writeStream.destroy();
+            //     await smb2Client.disconnect();
+            //     // await smb2Client.close();
+            //     // writeStream = null;
+            //     // smb2Client = null;
+            //   })
+            //   .on("error", async (error) => {
+            //     this.log("SMB-Stream error: "+ error.message);
+            //   });
+                
+        }
+        catch (error){
+            let msg;
+            if (error.message != undefined){
+                msg = error.message;
+            }
+            else{
+                msg = error;
+            }
+            this.error("Error writing file " + filename + ": " + msg);
+            throw new Error("Error writing file " + filename + ": " + msg);
+        }
+    
     }
 
     // App events =========================================================================

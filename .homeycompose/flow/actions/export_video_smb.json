@@ -1,21 +1,29 @@
 {
     "title": {
-        "en": "Export a camera snapshot to SMB share.",
-        "de": "Exportiere ein Kamera-Foto auf eine SMB-Freigabe.",
-        "nl": "Een cameramomentopname exporteren naar SMB-share."
+        "en": "Export a camera video to SMB share.",
+        "de": "Exportiere ein Kamera-Video auf eine SMB-Freigabe.",
+        "nl": "Een camera video exporteren naar SMB-share."
     },
     "titleFormatted": {
-        "en": "Export a camera snapshot [[droptoken]] of the camera [[camera_name]] to the SMB share [[smb_share]] with user [[smb_user]] and password [[smb_pw]].",
-        "de": "Exportiere ein Kamera-Foto [[droptoken]] der Kamera [[camera_name]] auf die SMB-Freigabe [[smb_share]] mit Benutzer [[smb_user]] und Passwort [[smb_pw]].",
-        "nl": "Een cameramomentopname [[droptoken]] van de camera [[camera_name]] exporteren naar SMB-share [[smb_share]] met gebruiker [[smb_user]] en wachtwoord [[smb_pw]]."
+        "en": "Export a camera video with Video ID [[video_id]] of the camera [[camera_name]] to the SMB share [[smb_share]] with user [[smb_user]] and password [[smb_pw]].",
+        "de": "Exportiere ein Kamera-Video mit Video-ID [[video_id]] der Kamera [[camera_name]] auf die SMB-Freigabe [[smb_share]] mit Benutzer [[smb_user]] und Passwort [[smb_pw]].",
+        "nl": "Een camera video met video-ID [[video_id]] van de camera [[camera_name]] exporteren naar SMB-share [[smb_share]] met gebruiker [[smb_user]] en wachtwoord [[smb_pw]]."
     },
     "hint": {
-        "en": "Use this action to export an image token from a snapshot to a SMB share.",
-        "de": "Verwende diese Aktion, um einen Bild-Token eines Snapshots auf eine SMB-Freigabe zu exportieren.",
-        "nl": "Gebruik deze actie om een ​​afbeeldingstoken van een momentopname naar een SMB-share te exporteren."
+        "en": "Use this action to export a camera video to an SMB share. Use the motion alert card's video ID tag.",
+        "de": "Verwende diese Aktion, um ein Kamera-Video auf eine SMB-Freigabe zu exportieren. Verwende das Video-ID Tag der Bewegungsalarm-Karte.",
+        "nl": "Gebruik deze actie om een ​​cameravideo te exporteren naar een SMB-share. Gebruik de video-ID-tag van de bewegingswaarschuwingskaart."
     },
-    "droptoken": ["image"],
     "args": [
+        {
+            "name": "video_id",
+            "type": "text",
+            "title": {
+                "en": "Video ID from motion alert",
+                "de": "Video-ID von Bewegungsalarm",
+                "nl": "Video-ID voor bewegingswaarschuwing"
+            }
+        },
         {
             "name": "smb_share",
             "type": "text",
@@ -71,6 +79,11 @@
                 "de": "Kamera-Name",
                 "nl": "Cameranaam"
             }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera|owl|account"
         }
     ]
 

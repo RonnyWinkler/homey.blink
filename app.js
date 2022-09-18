@@ -26,11 +26,21 @@ class blinkApp extends Homey.App {
     });
     this._flowActionCreateVideo = this.homey.flow.getActionCard('create_video');
     this._flowActionCreateVideo.registerRunListener(async (args, state) => {
-            return args.device.createVideo(args);
+            await args.device.createVideo(args);
+            return true;
     });
     this._flowActionExportSnapshotSmb = this.homey.flow.getActionCard('export_snapshot_smb');
     this._flowActionExportSnapshotSmb.registerRunListener(async (args, state) => {
             return await this.exportSnapshotSmb(args);
+    });
+    this._flowActionExportVideoSmb = this.homey.flow.getActionCard('export_video_smb');
+    this._flowActionExportVideoSmb.registerRunListener(async (args, state) => {
+            try{ 
+              await args.device.exportVideoSmb(args);
+            }
+            catch(error){
+              throw error;
+            }
     });
     
     // Register Flow-Condition-Listener
@@ -163,6 +173,7 @@ class blinkApp extends Homey.App {
     }
     catch (error){
       this.error("Error writing file " + filename + ": " + error.message);
+      throw error;
     }
 
   }

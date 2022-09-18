@@ -242,14 +242,16 @@ class cameraDevice extends Homey.Device {
         }
     }
 
-    triggerMotionAlert(timestamp, snapshot){
+    triggerMotionAlert(timestamp, snapshot, video_id){
         //Check if the event date is newer
         if (timestamp > this.getCapabilityValue("video_timestamp")) {
             this.log("new motion detected on camera: "+this.getName()+" ID: "+ this.getData().id);
             this.setCapabilityValue("video_timestamp", timestamp).catch(this.error);
-            this.setCapabilityValue('alarm_motion', true).catch(this.error);
+            if (video_id == null || video_id.source == 'pir'){
+                this.setCapabilityValue('alarm_motion', true).catch(this.error);
+            }
             if(this.getParent()){
-                this.parent.triggerAlarmMotion(this, timestamp, snapshot);
+                this.parent.triggerAlarmMotion(this, timestamp, snapshot, video_id);
             }
         }
         
@@ -273,6 +275,17 @@ class cameraDevice extends Homey.Device {
             }
             catch(error){
                 return null;
+            }
+        }
+    }
+
+    async exportVideoSmb(args){
+        if(this.getParent()){
+            try{
+                return await this.parent.exportVideoSmb(args);
+            }
+            catch(error){
+                throw error;
             }
         }
     }
