@@ -1,0 +1,56 @@
+{
+    "id": "doorbell",
+    "name": {
+        "en": "Doorbell",
+        "de": "Türklingel"
+    },
+    "images": {
+        "large": "/drivers/doorbell/assets/images/large.png",
+        "small": "/drivers/doorbell/assets/images/small.png"
+    },
+    "class": "sensor",
+    "connectivity": [ "cloud" ],
+    "capabilities": [
+        "onoff",
+
+        "alarm_motion",
+        "alarm_camera_offline",
+        
+        "measure_wifi",
+        "measure_lfr",
+
+        "measure_battery",
+        "alarm_battery",
+
+        "video_timestamp"
+    ],
+    "energy": {
+        "batteries": ["AA"]
+    },
+    "pair": [
+        {
+            "id": "list_devices",
+            "template": "list_devices",
+            "navigation": {
+                "next": "list_devices2"
+            },
+            "options": { "singular": true }
+        },
+        {
+            "id": "account_error"
+        },
+        {
+            "id": "list_devices2",
+            "template": "list_devices",
+            "navigation": {
+                "prev": "list_devices",
+                "next": "add_devices"
+            },
+            "options": { "singular": false }
+        },
+        {
+              "id": "add_devices",
+              "template": "add_devices"
+        }
+    ]
+}

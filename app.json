@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.blinkforhome",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -60,7 +60,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=camera|owl"
+            "filter": "driver_id=camera|owl|doorbell"
           }
         ],
         "id": "alarm_camera_offline_false"
@@ -113,7 +113,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=camera|owl"
+            "filter": "driver_id=camera|owl|doorbell"
           }
         ],
         "id": "alarm_camera_offline_true"
@@ -209,7 +209,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=account|camera|owl"
+            "filter": "driver_id=account|camera|owl|doorbell"
           }
         ],
         "id": "alarm_motion_general"
@@ -316,7 +316,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=account|camera|owl"
+            "filter": "driver_id=account|camera|owl|doorbell"
           }
         ],
         "id": "liveview_general"
@@ -418,7 +418,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=camera|owl"
+            "filter": "driver_id=camera|owl|doorbell"
           }
         ],
         "id": "snapshot_created"
@@ -460,7 +460,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=camera|owl"
+            "filter": "driver_id=camera|owl|doorbell"
           }
         ],
         "id": "alarm_camera_offline"
@@ -565,7 +565,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=camera|owl"
+            "filter": "driver_id=camera|owl|doorbell"
           }
         ],
         "tokens": [
@@ -610,7 +610,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=camera|owl"
+            "filter": "driver_id=camera|owl|doorbell"
           }
         ],
         "id": "create_snapshot_std"
@@ -635,7 +635,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=camera|owl"
+            "filter": "driver_id=camera|owl|doorbell"
           }
         ],
         "id": "create_video"
@@ -804,7 +804,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=camera|owl|account"
+            "filter": "driver_id=camera|owl|account|doorbell"
           }
         ],
         "id": "export_video_smb"
@@ -1064,6 +1064,105 @@
         "measure_wifi",
         "measure_lfr",
         "measure_temperature",
+        "measure_battery",
+        "alarm_battery",
+        "video_timestamp"
+      ],
+      "energy": {
+        "batteries": [
+          "AA"
+        ]
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "list_devices2"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "account_error"
+        },
+        {
+          "id": "list_devices2",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "list_devices",
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information",
+            "de": "Geräte-Information"
+          },
+          "children": [
+            {
+              "id": "account_device",
+              "type": "label",
+              "label": {
+                "en": "Account",
+                "de": "Konto"
+              },
+              "hint": {
+                "en": "The account device (parent device) this device is assigned to.",
+                "de": "Konto (Homey-Gerät), dem dieses Gerät zugeordnet ist."
+              }
+            },
+            {
+              "id": "account_id",
+              "type": "label",
+              "label": {
+                "en": "Account ID",
+                "de": "Konto-ID"
+              }
+            },
+            {
+              "id": "camera_id",
+              "type": "label",
+              "label": {
+                "en": "Camera ID",
+                "de": "Kamera-ID"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "doorbell",
+      "name": {
+        "en": "Doorbell",
+        "de": "Türklingel"
+      },
+      "images": {
+        "large": "/drivers/doorbell/assets/images/large.png",
+        "small": "/drivers/doorbell/assets/images/small.png"
+      },
+      "class": "sensor",
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "onoff",
+        "alarm_motion",
+        "alarm_camera_offline",
+        "measure_wifi",
+        "measure_lfr",
         "measure_battery",
         "alarm_battery",
         "video_timestamp"

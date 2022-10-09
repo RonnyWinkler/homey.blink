@@ -250,6 +250,22 @@ class accountDevice extends Homey.Device {
         return devices.find(device => device.getData().id === id);
     }
 
+    getDoorbellDevices(){
+        let devices = this.homey.drivers.getDriver('doorbell').getDevices();
+        let result = [];
+        for (let i=0; i<devices.length; i++){
+            if (devices[i].getData().accountId == this.getData().id){
+                result.push(devices[i]);
+            }
+        }
+        return result;
+    }
+
+    getDoorbellDevice(id){
+        let devices = this.getDoorbellDevices();
+        return devices.find(device => device.getData().id === id);
+    }
+
     getSyncModule(networkId){
         if (!this.deviceData.homescreen){
             return;
@@ -353,6 +369,15 @@ class accountDevice extends Homey.Device {
                     let device = this.getOwlDevice(this.deviceData.homescreen.owls[i].id);
                     if (device){
                         device.updateDevice(this.deviceData.homescreen.owls[i]);
+                    }
+                }
+            }
+            // Doorbells
+            if (this.deviceData.homescreen && this.deviceData.homescreen.doorbells){
+                for(let i=0; i < this.deviceData.homescreen.doorbells.length; i++ ){
+                    let device = this.getDoorbellDevice(this.deviceData.homescreen.doorbells[i].id);
+                    if (device){
+                        device.updateDevice(this.deviceData.homescreen.doorbells[i]);
                     }
                 }
             }
@@ -525,6 +550,19 @@ class accountDevice extends Homey.Device {
                             }
                         }
                     }
+                    // 3th step. Search for Doorbells
+                    if (!cameraId){
+                        for(let j=0; j < this.deviceData.homescreen.doorbells.length; j++ ){
+                            // Replace all non-CHAR/NUN characters because camera name in SyncModule video list condensed
+                            let cameraName = this.deviceData.homescreen.doorbells[j].name.replace(/[^a-zA-Z0-9]/g, '');
+                            let mediaCameraName = media[i].camera_name.replace(/[^a-zA-Z0-9]/g, '');
+                            // if (this.deviceData.homescreen.owls[j].name == media[i].camera_name){
+                            if ( cameraName === mediaCameraName ){
+                                cameraId = this.deviceData.homescreen.doorbells[j].id;
+                                networkId = this.deviceData.homescreen.doorbells[j].network_id;
+                            }
+                        }
+                    }
                     // Camera found by name?
                     if (cameraId){
                         // get newest timestamp
@@ -612,6 +650,11 @@ class accountDevice extends Homey.Device {
         for (let i=0; i<devices.length; i++){
             devices[i].clearMotionAlert();
         }
+        devices = [];
+        devices = this.getDoorbellDevices();
+        for (let i=0; i<devices.length; i++){
+            devices[i].clearMotionAlert();
+        }
     }
 
     async triggerMotionAlert(cameraId, timestamp, snapshot = null, video_id = null){
@@ -622,6 +665,11 @@ class accountDevice extends Homey.Device {
         }
         device = null;
         device = this.getOwlDevice(cameraId);
+        if (device){
+            device.triggerMotionAlert(timestamp, snapshot, video_id);
+        }
+        device = null;
+        device = this.getDoorbellDevice(cameraId);
         if (device){
             device.triggerMotionAlert(timestamp, snapshot, video_id);
         }

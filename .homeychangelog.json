@@ -86,6 +86,10 @@
   "1.0.5": {
     "en": "Added flow trigger for liveview videos (only possible with cloud subscription): small fixes.",
     "de": "Flow-Trigger für Liveview-Videos ergänzt: kleine Korrekturen."
+  },
+  "1.1.0": {
+    "en": "Added Blink Video Doorbell.",
+    "de": "Blink Video-Türklingel ergänzt."
   }
 
 }

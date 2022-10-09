@@ -39,7 +39,7 @@
         {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=camera|owl"
+            "filter": "driver_id=camera|owl|doorbell"
         }
     ]
 }
