@@ -38,6 +38,7 @@ class accountDevice extends Homey.Device {
         this.apiStateOkTrigger = this.homey.flow.getDeviceTriggerCard('api_state_ok');
         this.alarmMotionTrigger = this.homey.flow.getDeviceTriggerCard('alarm_motion_general');
         this.liveviewTrigger = this.homey.flow.getDeviceTriggerCard('liveview_general');
+        this.buttonpressTrigger = this.homey.flow.getDeviceTriggerCard('buttonpress_general');
         this.alarmCameraOfflineTrigger = this.homey.flow.getDeviceTriggerCard('alarm_camera_offline_general');
 
         if (!this.blinkApi){
@@ -867,6 +868,12 @@ class accountDevice extends Homey.Device {
                 this.liveviewTrigger.trigger( this,  tokens );
                 // Trigger flow event for camera devices (single camera)
                 this.liveviewTrigger.trigger( device,  tokens );
+            }
+            if (video_id.source == 'button_press'){
+                // Trigger flow event for account (general trigger for all cameras)
+                this.buttonpressTrigger.trigger( this,  tokens );
+                // Trigger flow event for camera devices (single camera)
+                this.buttonpressTrigger.trigger( device,  tokens );
             }
         }
     }

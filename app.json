@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.blinkforhome",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -256,6 +256,70 @@
           }
         ],
         "id": "api_state_ok"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Doorbell button was pressed.",
+          "de": "Klingelknopf wurde gedrückt.",
+          "nl": "Er is op de deurbelknop gedrukt."
+        },
+        "titleFormatted": {
+          "en": "Doorbell button was pressed.",
+          "de": "Klingelknopf wurde gedrücke.",
+          "nl": "Er is op de deurbelknop gedrukt."
+        },
+        "hint": {
+          "en": "Triggers when a doorbell button was pressed. The camara name is provided by a token.",
+          "de": "Wird ausgelöst, wenn ein Klingelknopf gedrückt wurde. Der Kameraname wird über einen Token bereitgestellt.",
+          "nl": "Wordt geactiveerd wanneer er op een deurbelknop wordt gedrukt. De cameranaam wordt geleverd door een token."
+        },
+        "tokens": [
+          {
+            "name": "device_name",
+            "type": "string",
+            "title": {
+              "en": "Camera name",
+              "de": "Kamera-Name",
+              "nl": "Cameranaam"
+            }
+          },
+          {
+            "name": "date_time",
+            "type": "string",
+            "title": {
+              "en": "Date/time",
+              "de": "Datum/Zeit",
+              "nl": "Datum/Tijd"
+            }
+          },
+          {
+            "name": "image",
+            "type": "image",
+            "title": {
+              "en": "Snapshot image (Only available with cloud storage)",
+              "de": "Kamera-Foto (Nur verfügbar bei Cloud-Speicher)",
+              "nl": "Momentopname (Alleen beschikbaar met cloudopslag)"
+            }
+          },
+          {
+            "name": "video_id",
+            "type": "string",
+            "title": {
+              "en": "Video ID for SMB storage",
+              "de": "Video-ID für SMB-Speicherung",
+              "nl": "Video ID voor SMB-opslag"
+            }
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=account|doorbell"
+          }
+        ],
+        "id": "buttonpress_general"
       },
       {
         "highlight": true,

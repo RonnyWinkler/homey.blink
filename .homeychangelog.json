@@ -90,6 +90,10 @@
   "1.1.0": {
     "en": "Added Blink Video Doorbell.",
     "de": "Blink Video-Türklingel ergänzt."
+  },
+  "1.1.1": {
+    "en": "Added Blink Video Doorbell. Added doorbell button pressed trigger.",
+    "de": "Blink Video-Türklingel ergänzt. Klingelknopt-Ereignis ergänzt."
   }
 
 }
