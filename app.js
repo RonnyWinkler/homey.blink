@@ -33,10 +33,23 @@ class blinkApp extends Homey.App {
     this._flowActionExportSnapshotSmb.registerRunListener(async (args, state) => {
             return await this.exportSnapshotSmb(args);
     });
+    this._flowActionExportSnapshotFtp = this.homey.flow.getActionCard('export_snapshot_ftp');
+    this._flowActionExportSnapshotFtp.registerRunListener(async (args, state) => {
+            return await this.exportSnapshotFtp(args);
+    });
     this._flowActionExportVideoSmb = this.homey.flow.getActionCard('export_video_smb');
     this._flowActionExportVideoSmb.registerRunListener(async (args, state) => {
             try{ 
               await args.device.exportVideoSmb(args);
+            }
+            catch(error){
+              throw error;
+            }
+    });
+    this._flowActionExportVideoFtp = this.homey.flow.getActionCard('export_video_ftp');
+    this._flowActionExportVideoFtp.registerRunListener(async (args, state) => {
+            try{ 
+              await args.device.exportVideoFtp(args);
             }
             catch(error){
               throw error;
@@ -176,6 +189,95 @@ class blinkApp extends Homey.App {
       throw error;
     }
 
+  }
+
+  async exportSnapshotFtp(args){
+    // FTP Export of an image token
+    let tz  = this.homey.clock.getTimezone();
+    let now = new Date().toLocaleString('en-US', 
+    { 
+        hour12: false, 
+        hourCycle: 'h23',
+        timeZone: tz,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    });
+    let date = now.split(", ")[0];
+    date = date.split("/")[2] + "-" + date.split("/")[0] + "-" + date.split("/")[1]; 
+    let time = now.split(", ")[1];    
+    time = time.split(":")[0] + "-" + time.split(":")[1] + "-" + time.split(":")[2]; 
+    
+    let filename = date + "_" + time;
+    if (args.camera_name){
+      filename = filename + "_" + args.camera_name;
+    }
+    filename = filename + ".jpg";
+
+    this.log("Export Image to FTP: "+args.ftp_host+":"+args.ftp_port+"\\"+filename);
+
+    // create an FTP instance
+    try{
+      let stream = await args.droptoken.getStream();
+      /* 
+      **********************************************************
+       Buffer
+      ********************************************************** 
+      */
+      let buffer = await this.stream2buffer(stream);
+
+      await this.exportFtp(args, filename, buffer);
+      // let ftpClient = new (require('ftp'));
+      // ftpClient.on('ready', function() {
+      //   ftpClient.put(buffer, filename, function(err) {
+      //     if (err) throw err;
+      //     ftpClient.end();
+      //   });
+      // });
+      // // connect to localhost:21 as anonymous
+      // ftpClient.connect(
+      //   {
+      //     host: args.ftp_host,
+      //     port: args.ftp_port,
+      //     user: args.ftp_user,
+      //     password: args.ftp_pw
+      //   }
+      // );
+        
+    }
+    catch (error){
+      this.error("Error writing file " + filename + ": " + error.message);
+      throw error;
+    }
+  }
+
+  exportFtp(args, filename, buffer){
+    return new Promise((resolve, reject) => {
+
+        let ftpClient = new (require('ftp'));
+        ftpClient.on('ready', function() {
+            ftpClient.put(buffer, filename, function(err) {
+                if (err) throw err;
+                ftpClient.end();
+                resolve(true);
+            });
+        });
+        ftpClient.on('error', (error) => {
+            reject(error);
+        });
+        // connect to localhost:21 as anonymous
+        ftpClient.connect(
+            {
+                host: args.ftp_host,
+                port: args.ftp_port,
+                user: args.ftp_user,
+                password: args.ftp_pw
+            }
+        );        
+    });
   }
 
   stream2buffer(stream) {

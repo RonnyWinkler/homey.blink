@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.blinkforhome",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -199,9 +199,9 @@
             "name": "video_id",
             "type": "string",
             "title": {
-              "en": "Video ID for SMB storage",
-              "de": "Video-ID für SMB-Speicherung",
-              "nl": "Video ID voor SMB-opslag"
+              "en": "Video ID for SMB/FTP storage",
+              "de": "Video-ID für SMB/FTP-Speicherung",
+              "nl": "Video ID voor SMB/FTP-opslag"
             }
           }
         ],
@@ -306,9 +306,9 @@
             "name": "video_id",
             "type": "string",
             "title": {
-              "en": "Video ID for SMB storage",
-              "de": "Video-ID für SMB-Speicherung",
-              "nl": "Video ID voor SMB-opslag"
+              "en": "Video ID for SMB/FTP storage",
+              "de": "Video-ID für SMB/FTP-Speicherung",
+              "nl": "Video ID voor SMB/FTP-opslag"
             }
           }
         ],
@@ -370,9 +370,9 @@
             "name": "video_id",
             "type": "string",
             "title": {
-              "en": "Video ID for SMB storage",
-              "de": "Video-ID für SMB-Speicherung",
-              "nl": "Video ID voor SMB-opslag"
+              "en": "Video ID for SMB/FTP storage",
+              "de": "Video-ID für SMB/FTP-Speicherung",
+              "nl": "Video ID voor SMB/FTP-opslag"
             }
           }
         ],
@@ -706,6 +706,99 @@
       },
       {
         "title": {
+          "en": "Export a camera snapshot to FTP.",
+          "de": "Exportiere ein Kamera-Foto über FTP.",
+          "nl": "Een cameramomentopname exporteren naar FTP."
+        },
+        "titleFormatted": {
+          "en": "Export a camera snapshot [[droptoken]] of the camera [[camera_name]] to FTP server [[ftp_host]] using port [[ftp_port]] with user [[ftp_user]] and password [[ftp_pw]].",
+          "de": "Exportiere ein Kamera-Foto [[droptoken]] der Kamera [[camera_name]] auf den FTP-Server [[ftp_host]] auf Port [[ftp_port]] mit Benutzer [[ftp_user]] und Passwort [[ftp_pw]].",
+          "nl": "Exporteer een camera-snapshot [[droptoken]] van de camera [[camera_name]] naar FTP-server [[ftp_host]] via poort [[ftp_port]] met gebruiker [[ftp_user]] en wachtwoord [[ftp_pw]]."
+        },
+        "hint": {
+          "en": "Use this action to export an image token from a snapshot to a FTP server.",
+          "de": "Verwende diese Aktion, um einen Bild-Token eines Snapshots auf einen FTP-Server zu exportieren.",
+          "nl": "Gebruik deze actie om een ​​afbeeldingstoken van een momentopname naar een FTP-server te exporteren."
+        },
+        "droptoken": [
+          "image"
+        ],
+        "args": [
+          {
+            "name": "ftp_host",
+            "type": "text",
+            "placeholder": {
+              "en": "192.168.xxx.xxx",
+              "de": "192.168.xxx.xxx",
+              "nl": "192.168.xxx.xxx"
+            },
+            "title": {
+              "en": "FTP server",
+              "de": "FTP-Server",
+              "nl": "FTP-server"
+            }
+          },
+          {
+            "name": "ftp_port",
+            "type": "text",
+            "placeholder": {
+              "en": "21",
+              "de": "21",
+              "nl": "21"
+            },
+            "title": {
+              "en": "FTP port",
+              "de": "FTP-Port",
+              "nl": "FTP-port"
+            }
+          },
+          {
+            "name": "ftp_user",
+            "type": "text",
+            "placeholder": {
+              "en": "User",
+              "de": "Benutzer",
+              "nl": "Gebruiker"
+            },
+            "title": {
+              "en": "User",
+              "de": "Benutzer",
+              "nl": "Gebruiker"
+            }
+          },
+          {
+            "name": "ftp_pw",
+            "type": "text",
+            "placeholder": {
+              "en": "Password",
+              "de": "Passwort",
+              "nl": "Wachtwoord"
+            },
+            "title": {
+              "en": "Password",
+              "de": "Passwort",
+              "nl": "Wachtwoord"
+            }
+          },
+          {
+            "name": "camera_name",
+            "type": "text",
+            "placeholder": {
+              "en": "Camera name",
+              "de": "Kamera-Name",
+              "nl": "Cameranaam"
+            },
+            "title": {
+              "en": "Camera name",
+              "de": "Kamera-Name",
+              "nl": "Cameranaam"
+            }
+          }
+        ],
+        "id": "export_snapshot_ftp"
+      },
+      {
+        "title": {
           "en": "Export a camera snapshot to SMB share.",
           "de": "Exportiere ein Kamera-Foto auf eine SMB-Freigabe.",
           "nl": "Een cameramomentopname exporteren naar SMB-share."
@@ -782,6 +875,110 @@
           }
         ],
         "id": "export_snapshot_smb"
+      },
+      {
+        "title": {
+          "en": "Export a camera video to FTP.",
+          "de": "Exportiere ein Kamera-Video über FTP.",
+          "nl": "Een camera video exporteren naar FTP."
+        },
+        "titleFormatted": {
+          "en": "Export a camera video with Video ID [[video_id]] of the camera [[camera_name]] to FTP server [[ftp_host]] using port [[ftp_port]] with user [[ftp_user]] and password [[ftp_pw]].",
+          "de": "Exportiere ein Kamera-Video mit Video-ID [[video_id]] der Kamera [[camera_name]] auf den FTP-Server [[ftp_host]] auf Port [[ftp_port]] mit Benutzer [[ftp_user]] und Passwort [[ftp_pw]].",
+          "nl": "Exporteer een camera-video met video-ID [[video_id]] van de camera [[camera_name]] naar FTP-server [[ftp_host]] via poort [[ftp_port]] met gebruiker [[ftp_user]] en wachtwoord [[ftp_pw]]."
+        },
+        "hint": {
+          "en": "Use this action to export a camera video to an SMB share. Use the motion alert card's video ID tag.",
+          "de": "Verwende diese Aktion, um ein Kamera-Video auf eine SMB-Freigabe zu exportieren. Verwende das Video-ID Tag der Bewegungsalarm-Karte.",
+          "nl": "Gebruik deze actie om een ​​cameravideo te exporteren naar een SMB-share. Gebruik de video-ID-tag van de bewegingswaarschuwingskaart."
+        },
+        "args": [
+          {
+            "name": "video_id",
+            "type": "text",
+            "title": {
+              "en": "Video ID from motion alert",
+              "de": "Video-ID von Bewegungsalarm",
+              "nl": "Video-ID voor bewegingswaarschuwing"
+            }
+          },
+          {
+            "name": "ftp_host",
+            "type": "text",
+            "placeholder": {
+              "en": "192.168.xxx.xxx",
+              "de": "192.168.xxx.xxx",
+              "nl": "192.168.xxx.xxx"
+            },
+            "title": {
+              "en": "FTP server",
+              "de": "FTP-Server",
+              "nl": "FTP-server"
+            }
+          },
+          {
+            "name": "ftp_port",
+            "type": "text",
+            "placeholder": {
+              "en": "21",
+              "de": "21",
+              "nl": "21"
+            },
+            "title": {
+              "en": "FTP port",
+              "de": "FTP-Port",
+              "nl": "FTP-port"
+            }
+          },
+          {
+            "name": "ftp_user",
+            "type": "text",
+            "placeholder": {
+              "en": "User",
+              "de": "Benutzer",
+              "nl": "Gebruiker"
+            },
+            "title": {
+              "en": "User",
+              "de": "Benutzer",
+              "nl": "Gebruiker"
+            }
+          },
+          {
+            "name": "ftp_pw",
+            "type": "text",
+            "placeholder": {
+              "en": "Password",
+              "de": "Passwort",
+              "nl": "Wachtwoord"
+            },
+            "title": {
+              "en": "Password",
+              "de": "Passwort",
+              "nl": "Wachtwoord"
+            }
+          },
+          {
+            "name": "camera_name",
+            "type": "text",
+            "placeholder": {
+              "en": "Camera name",
+              "de": "Kamera-Name",
+              "nl": "Cameranaam"
+            },
+            "title": {
+              "en": "Camera name",
+              "de": "Kamera-Name",
+              "nl": "Cameranaam"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera|owl|account|doorbell"
+          }
+        ],
+        "id": "export_video_ftp"
       },
       {
         "title": {

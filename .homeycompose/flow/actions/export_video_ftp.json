@@ -1,0 +1,104 @@
+{
+    "title": {
+        "en": "Export a camera video to FTP.",
+        "de": "Exportiere ein Kamera-Video über FTP.",
+        "nl": "Een camera video exporteren naar FTP."
+    },
+    "titleFormatted": {
+        "en": "Export a camera video with Video ID [[video_id]] of the camera [[camera_name]] to FTP server [[ftp_host]] using port [[ftp_port]] with user [[ftp_user]] and password [[ftp_pw]].",
+        "de": "Exportiere ein Kamera-Video mit Video-ID [[video_id]] der Kamera [[camera_name]] auf den FTP-Server [[ftp_host]] auf Port [[ftp_port]] mit Benutzer [[ftp_user]] und Passwort [[ftp_pw]].",
+        "nl": "Exporteer een camera-video met video-ID [[video_id]] van de camera [[camera_name]] naar FTP-server [[ftp_host]] via poort [[ftp_port]] met gebruiker [[ftp_user]] en wachtwoord [[ftp_pw]]."
+    },
+    "hint": {
+        "en": "Use this action to export a camera video to an SMB share. Use the motion alert card's video ID tag.",
+        "de": "Verwende diese Aktion, um ein Kamera-Video auf eine SMB-Freigabe zu exportieren. Verwende das Video-ID Tag der Bewegungsalarm-Karte.",
+        "nl": "Gebruik deze actie om een ​​cameravideo te exporteren naar een SMB-share. Gebruik de video-ID-tag van de bewegingswaarschuwingskaart."
+    },
+    "args": [
+        {
+            "name": "video_id",
+            "type": "text",
+            "title": {
+                "en": "Video ID from motion alert",
+                "de": "Video-ID von Bewegungsalarm",
+                "nl": "Video-ID voor bewegingswaarschuwing"
+            }
+        },
+        {
+            "name": "ftp_host",
+            "type": "text",
+            "placeholder": {
+                "en": "192.168.xxx.xxx",
+                "de": "192.168.xxx.xxx",
+                "nl": "192.168.xxx.xxx"
+            },
+            "title": {
+                "en": "FTP server",
+                "de": "FTP-Server",
+                "nl": "FTP-server"
+            }
+        },
+        {
+            "name": "ftp_port",
+            "type": "text",
+            "placeholder": {
+                "en": "21",
+                "de": "21",
+                "nl": "21"
+            },
+            "title": {
+                "en": "FTP port",
+                "de": "FTP-Port",
+                "nl": "FTP-port"
+            }
+        },
+        {
+            "name": "ftp_user",
+            "type": "text",
+            "placeholder": {
+                "en": "User",
+                "de": "Benutzer",
+                "nl": "Gebruiker"
+            },
+            "title": {
+                "en": "User",
+                "de": "Benutzer",
+                "nl": "Gebruiker"
+            }
+        },
+        {
+            "name": "ftp_pw",
+            "type": "text",
+            "placeholder": {
+                "en": "Password",
+                "de": "Passwort",
+                "nl": "Wachtwoord"
+            },
+            "title": {
+                "en": "Password",
+                "de": "Passwort",
+                "nl": "Wachtwoord"
+            }
+        },
+        {
+            "name": "camera_name",
+            "type": "text",
+            "placeholder": {
+                "en": "Camera name",
+                "de": "Kamera-Name",
+                "nl": "Cameranaam"
+            },
+            "title": {
+                "en": "Camera name",
+                "de": "Kamera-Name",
+                "nl": "Cameranaam"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera|owl|account|doorbell"
+        }
+    ]
+
+}

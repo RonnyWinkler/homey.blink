@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+
+<head>
+    <!--
+    <link rel="stylesheet" type="text/css" href="lwsa.css">
+    -->
+    <!-- The '/homey.js' script must be included in your settings view to work -->
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+</head>
+
+<body>
+    <!-- Tab links -->
+    <div class="tab">
+        <button class="tablinks" onclick="setPage(event, 'cloud')" id="defaultOpen"><span data-i18n="settings.cloud"></span></button>
+        <button class="tablinks" onclick="setPage(event, 'local')"><span data-i18n="settings.local"></span></button>
+    </div>
+
+    <!-- Cloud -->
+    <div id="cloud" class="tabcontent">
+        <fieldset>
+            <div class="field row">
+                <ul id="cloudvideolist"></ul>
+            </div>
+        </fieldset>
+    </div>
+
+    <!-- Local -->
+    <div id="local" class="tabcontent">
+        <fieldset>
+            <div class="field row">
+                <ul id="localvideolist"></ul>
+            </div>
+        </fieldset>
+    </div>
+
+    <script type="text/javascript">
+        // a method named 'onHomeyReady' must be present in your code
+        function onHomeyReady(Homey)
+        {
+            document.getElementById("defaultOpen").click();
+
+            // Tell Homey we're ready to be displayed
+            Homey.ready();
+        }
+
+        function setPage(evt, tabPage)
+        {
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++)
+            {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++)
+            {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabPage).style.display = "block";
+            evt.currentTarget.className += " active";
+
+            if (tabPage == 'cloud')
+            {
+                // Refresh data
+                refreshCloudList();
+            }
+            else if (tabPage == 'local')
+            {
+                refreshLocalList();    
+            }
+        }
+
+        function refreshCloudList(){
+            // document.getElementById('cloudvideolist').innerHTML = '';
+            // document.getElementById('cloudvideolist').innerHTML += '<li>' + 'Video 1' + '</li>';
+            // document.getElementById('cloudvideolist').innerHTML += '<li>' + 'Video 2' + '</li>';
+            // document.getElementById('cloudvideolist').innerHTML += '<li>' + 'Video 3' + '</li>';
+            // document.getElementById('cloudvideolist').innerHTML += '<li>' + 'Video 4' + '</li>';
+        }
+
+        function refreshLocalList(){
+            // document.getElementById('localvideolist').innerHTML = '';
+            // document.getElementById('localvideolist').innerHTML += '<li>' + 'Lokales Video 1' + '</li>';
+            // document.getElementById('localvideolist').innerHTML += '<li>' + 'Lokales Video 2' + '</li>';
+            // document.getElementById('localvideolist').innerHTML += '<li>' + 'Lokales Video 3' + '</li>';
+            // document.getElementById('localvideolist').innerHTML += '<li>' + 'Lokales Video 4' + '</li>';
+        }
+
+
+    </script>
+
+</body>
+
+</html>

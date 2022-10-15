@@ -47,9 +47,9 @@
             "name": "video_id",
             "type": "string",
             "title": {
-                "en": "Video ID for SMB storage",
-                "de": "Video-ID für SMB-Speicherung",
-                "nl": "Video ID voor SMB-opslag"
+                "en": "Video ID for SMB/FTP storage",
+                "de": "Video-ID für SMB/FTP-Speicherung",
+                "nl": "Video ID voor SMB/FTP-opslag"
             }
         }
     ],

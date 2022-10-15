@@ -30,5 +30,9 @@
             "snapshot": "Foto",
             "snapshot_error": "Kamera belegt oder offline."
         }
+    },
+    "settings": {
+        "cloud": "Cloud",
+        "local": "Lokal"
     }
 }

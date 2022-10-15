@@ -290,6 +290,17 @@ class cameraDevice extends Homey.Device {
         }
     }
 
+    async exportVideoFtp(args){
+        if(this.getParent()){
+            try{
+                return await this.parent.exportVideoFtp(args);
+            }
+            catch(error){
+                throw error;
+            }
+        }
+    }
+
     // App events =========================================================================
     onAdded() {
         let id = this.getData().id;

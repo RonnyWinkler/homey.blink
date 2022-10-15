@@ -94,6 +94,10 @@
   "1.1.1": {
     "en": "Added Blink Video Doorbell. Added doorbell button pressed trigger.",
     "de": "Blink Video-Türklingel ergänzt. Klingelknopt-Ereignis ergänzt."
+  },
+  "1.1.2": {
+    "en": "Added flow action for saving motion alert videos to an FTP server using the Video-ID from motion alert trigger.",
+    "de": "Flow-Aktion zum Speichern von Bewegungsalarm-Videos auf einen FTP-Server ergänzt unter Verwendung der Video-ID des Bewegungsalarm-Trigger."
   }
 
 }

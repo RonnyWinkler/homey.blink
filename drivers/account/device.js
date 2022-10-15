@@ -985,6 +985,106 @@ class accountDevice extends Homey.Device {
     
     }
 
+    async exportVideoFtp(args){
+        // FTP Export of an video url
+        let tz  = this.homey.clock.getTimezone();
+        let now = new Date().toLocaleString('en-US', 
+        { 
+            hour12: false, 
+            hourCycle: 'h23',
+            timeZone: tz,
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        });
+        let date = now.split(", ")[0];
+        date = date.split("/")[2] + "-" + date.split("/")[0] + "-" + date.split("/")[1]; 
+        let time = now.split(", ")[1];    
+        time = time.split(":")[0] + "-" + time.split(":")[1] + "-" + time.split(":")[2]; 
+        
+        let filename = date + "_" + time;
+        if (args.camera_name){
+          filename = filename + "_" + args.camera_name;
+        }
+        filename = filename + ".mp4";
+    
+        this.log("Export Video to FTP: "+args.ftp_host+":"+args.ftp_port+"\\"+filename);
+    
+        // create an SMB2 instance
+        try{
+            let stream = await this.blinkApi.getCameraVideoStream(JSON.parse(args.video_id));
+            /* 
+            **********************************************************
+            Buffer
+            ********************************************************** 
+            */
+            let buffer = await this.stream2buffer(stream);
+
+            await this.exportFtp(args, filename, buffer);
+            // let ftpClient = new (require('ftp'));
+            // ftpClient.on('ready', function() {
+            //   ftpClient.put(buffer, filename, function(err) {
+            //     if (err) throw err;
+            //     ftpClient.end();
+            //   });
+            // });
+            // ftpClient.on('error', (error) => {
+            //     throw error;
+            // });
+            //   // connect to localhost:21 as anonymous
+            // ftpClient.connect(
+            //   {
+            //     host: args.ftp_host,
+            //     port: args.ftp_port,
+            //     user: args.ftp_user,
+            //     password: args.ftp_pw
+            //   }
+            // );
+                      
+        }
+        catch (error){
+            let msg;
+            if (error.message != undefined){
+                msg = error.message;
+            }
+            else{
+                msg = error;
+            }
+            this.error("Error writing file " + filename + ": " + msg);
+            throw new Error("Error writing file " + filename + ": " + msg);
+        }
+    
+    }
+
+    exportFtp(args, filename, buffer){
+        return new Promise((resolve, reject) => {
+
+            let ftpClient = new (require('ftp'));
+            ftpClient.on('ready', function() {
+                ftpClient.put(buffer, filename, function(err) {
+                    if (err) throw err;
+                    ftpClient.end();
+                    resolve(true);
+                });
+            });
+            ftpClient.on('error', (error) => {
+                reject(error);
+            });
+            // connect to localhost:21 as anonymous
+            ftpClient.connect(
+                {
+                    host: args.ftp_host,
+                    port: args.ftp_port,
+                    user: args.ftp_user,
+                    password: args.ftp_pw
+                }
+            );        
+        });
+    }
+
     // App events =========================================================================
     onAdded() {
         let id = this.getData().id;
