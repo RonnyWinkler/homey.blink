@@ -98,6 +98,10 @@
   "1.1.2": {
     "en": "Added flow action for saving motion alert videos to an FTP server using the Video-ID from motion alert trigger.",
     "de": "Flow-Aktion zum Speichern von Bewegungsalarm-Videos auf einen FTP-Server ergänzt unter Verwendung der Video-ID des Bewegungsalarm-Trigger."
+  },
+  "1.1.3": {
+    "en": "Added FTP flow parameter options to select security (FTP over SSL/TLS or SFTP) and FTP path.",
+    "de": "Flow-Paramert zur Angabe der FTP-Sicherheit (FTP über SSL/TLS oder SFTP) sowie eines FTP-Pfades ergänzt."
   }
 
 }

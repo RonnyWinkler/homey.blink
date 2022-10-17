@@ -17,30 +17,59 @@ class blinkApp extends Homey.App {
     // Register Flow-Action-Listener
     this._flowActionCreateSnapshot = this.homey.flow.getActionCard('create_snapshot');
     this._flowActionCreateSnapshot.registerRunListener(async (args, state) => {
-            return await args.device.createSnapshot(args);
+            try{ 
+              await args.device.createSnapshot(args);
+            return true;
+          }
+          catch(error){
+            throw error;
+          }
     });
     this._flowActionCreateSnapshotStd = this.homey.flow.getActionCard('create_snapshot_std');
     this._flowActionCreateSnapshotStd.registerRunListener(async (args, state) => {
-            await args.device.createSnapshot(args);
+            try{ 
+              await args.device.createSnapshot(args);
             return true;
+          }
+          catch(error){
+            throw error;
+          }
     });
     this._flowActionCreateVideo = this.homey.flow.getActionCard('create_video');
     this._flowActionCreateVideo.registerRunListener(async (args, state) => {
-            await args.device.createVideo(args);
-            return true;
+            try{ 
+              await args.device.createVideo(args);
+              return true;
+            }
+            catch(error){
+              throw error;
+            }
     });
     this._flowActionExportSnapshotSmb = this.homey.flow.getActionCard('export_snapshot_smb');
     this._flowActionExportSnapshotSmb.registerRunListener(async (args, state) => {
-            return await this.exportSnapshotSmb(args);
-    });
+            try{ 
+              await this.exportSnapshotSmb(args);
+              return true;
+            }
+            catch(error){
+              throw error;
+            }
+  });
     this._flowActionExportSnapshotFtp = this.homey.flow.getActionCard('export_snapshot_ftp');
     this._flowActionExportSnapshotFtp.registerRunListener(async (args, state) => {
-            return await this.exportSnapshotFtp(args);
+            try{ 
+              return await this.exportSnapshotFtp(args);
+              return true;
+            }
+            catch(error){
+              throw error;
+            }
     });
     this._flowActionExportVideoSmb = this.homey.flow.getActionCard('export_video_smb');
     this._flowActionExportVideoSmb.registerRunListener(async (args, state) => {
             try{ 
               await args.device.exportVideoSmb(args);
+              return true;
             }
             catch(error){
               throw error;
@@ -50,6 +79,7 @@ class blinkApp extends Homey.App {
     this._flowActionExportVideoFtp.registerRunListener(async (args, state) => {
             try{ 
               await args.device.exportVideoFtp(args);
+              return true;
             }
             catch(error){
               throw error;
@@ -216,8 +246,7 @@ class blinkApp extends Homey.App {
       filename = filename + "_" + args.camera_name;
     }
     filename = filename + ".jpg";
-
-    this.log("Export Image to FTP: "+args.ftp_host+":"+args.ftp_port+"\\"+filename);
+    filename = args.ftp_path + filename;
 
     // create an FTP instance
     try{
@@ -230,22 +259,6 @@ class blinkApp extends Homey.App {
       let buffer = await this.stream2buffer(stream);
 
       await this.exportFtp(args, filename, buffer);
-      // let ftpClient = new (require('ftp'));
-      // ftpClient.on('ready', function() {
-      //   ftpClient.put(buffer, filename, function(err) {
-      //     if (err) throw err;
-      //     ftpClient.end();
-      //   });
-      // });
-      // // connect to localhost:21 as anonymous
-      // ftpClient.connect(
-      //   {
-      //     host: args.ftp_host,
-      //     port: args.ftp_port,
-      //     user: args.ftp_user,
-      //     password: args.ftp_pw
-      //   }
-      // );
         
     }
     catch (error){
@@ -254,30 +267,68 @@ class blinkApp extends Homey.App {
     }
   }
 
-  exportFtp(args, filename, buffer){
-    return new Promise((resolve, reject) => {
+  async exportFtp(args, filename, buffer){
+    this.log("Export Video to FTP: "+args.ftp_host+":"+args.ftp_port+"\\"+filename);
 
-        let ftpClient = new (require('ftp'));
-        ftpClient.on('ready', function() {
-            ftpClient.put(buffer, filename, function(err) {
-                if (err) throw err;
-                ftpClient.end();
-                resolve(true);
-            });
+    let secure = false;
+    let secureOptions = {};
+    switch (args.ftp_secure){
+      // FTP or FTP over SSL/TLS connection
+      case 'tls':
+        secure = true;
+        secureOptions = {
+          rejectUnauthorized: false
+        }
+      case 'ftp': // continue here for TLS
+        return new Promise((resolve, reject) => {
+          let ftpClient = new (require('ftp'));
+          ftpClient.on('ready', function() {
+              ftpClient.put(buffer, filename, function(err) {
+                  if (err) throw err;
+                  ftpClient.end();
+                  resolve(true);
+              });
+          });
+          ftpClient.on('error', (error) => {
+              reject(error);
+          });
+          ftpClient.connect(
+              {
+                  host: args.ftp_host,
+                  port: args.ftp_port,
+                  user: args.ftp_user,
+                  password: args.ftp_pw,
+                  secure: secure,
+                  secureOptions: secureOptions,
+                  connTimeout: 10000
+              }
+          ); 
         });
-        ftpClient.on('error', (error) => {
-            reject(error);
-        });
-        // connect to localhost:21 as anonymous
-        ftpClient.connect(
-            {
-                host: args.ftp_host,
-                port: args.ftp_port,
-                user: args.ftp_user,
-                password: args.ftp_pw
-            }
-        );        
-    });
+        // break;
+      // SFTP connection
+      case 'sftp':
+        let sftpClient = new (require('ssh2-sftp-client'));
+        try{
+          await sftpClient.connect({
+            host: args.ftp_host,
+            port: args.ftp_port,
+            username: args.ftp_user,
+            password: args.ftp_pw
+          });
+          await sftpClient.put(buffer, filename, );
+        }
+        catch(err) {
+          this.error(err, 'catch error');
+          throw err;
+        }
+        finally{
+          sftpClient.end();
+        }
+        break;
+      default:
+        break;
+
+    }
   }
 
   stream2buffer(stream) {

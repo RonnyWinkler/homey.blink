@@ -1010,9 +1010,8 @@ class accountDevice extends Homey.Device {
           filename = filename + "_" + args.camera_name;
         }
         filename = filename + ".mp4";
-    
-        this.log("Export Video to FTP: "+args.ftp_host+":"+args.ftp_port+"\\"+filename);
-    
+        filename = args.ftp_path + filename;
+        
         // create an SMB2 instance
         try{
             let stream = await this.blinkApi.getCameraVideoStream(JSON.parse(args.video_id));
@@ -1024,25 +1023,6 @@ class accountDevice extends Homey.Device {
             let buffer = await this.stream2buffer(stream);
 
             await this.exportFtp(args, filename, buffer);
-            // let ftpClient = new (require('ftp'));
-            // ftpClient.on('ready', function() {
-            //   ftpClient.put(buffer, filename, function(err) {
-            //     if (err) throw err;
-            //     ftpClient.end();
-            //   });
-            // });
-            // ftpClient.on('error', (error) => {
-            //     throw error;
-            // });
-            //   // connect to localhost:21 as anonymous
-            // ftpClient.connect(
-            //   {
-            //     host: args.ftp_host,
-            //     port: args.ftp_port,
-            //     user: args.ftp_user,
-            //     password: args.ftp_pw
-            //   }
-            // );
                       
         }
         catch (error){
@@ -1059,30 +1039,66 @@ class accountDevice extends Homey.Device {
     
     }
 
-    exportFtp(args, filename, buffer){
-        return new Promise((resolve, reject) => {
+    async exportFtp(args, filename, buffer){
+        this.log("Export Video to FTP: "+args.ftp_host+":"+args.ftp_port+"\\"+filename);
 
-            let ftpClient = new (require('ftp'));
-            ftpClient.on('ready', function() {
-                ftpClient.put(buffer, filename, function(err) {
-                    if (err) throw err;
-                    ftpClient.end();
-                    resolve(true);
-                });
+        let secure = false;
+        let secureOptions = {};
+        switch (args.ftp_secure){
+          // FTP or FTP over SSL/TLS connection
+          case 'tls':
+            secure = true;
+            secureOptions = {
+              rejectUnauthorized: false
+            }
+          case 'ftp': // continue here for TLS
+            return new Promise((resolve, reject) => {
+              let ftpClient = new (require('ftp'));
+              ftpClient.on('ready', function() {
+                  ftpClient.put(buffer, filename, function(err) {
+                      if (err) throw err;
+                      ftpClient.end();
+                      resolve(true);
+                  });
+              });
+              ftpClient.on('error', (error) => {
+                  reject(error);
+              });
+              ftpClient.connect(
+                  {
+                      host: args.ftp_host,
+                      port: args.ftp_port,
+                      user: args.ftp_user,
+                      password: args.ftp_pw,
+                      secure: secure,
+                      secureOptions: secureOptions,
+                      connTimeout: 10000
+                  }
+              ); 
             });
-            ftpClient.on('error', (error) => {
-                reject(error);
-            });
-            // connect to localhost:21 as anonymous
-            ftpClient.connect(
-                {
-                    host: args.ftp_host,
-                    port: args.ftp_port,
-                    user: args.ftp_user,
-                    password: args.ftp_pw
-                }
-            );        
-        });
+            // break;
+          // TLS connection
+          case 'sftp':
+            let sftpClient = new (require('ssh2-sftp-client'));
+            try{
+              await sftpClient.connect({
+                host: args.ftp_host,
+                port: args.ftp_port,
+                username: args.ftp_user,
+                password: args.ftp_pw
+              });
+              await sftpClient.put(buffer, filename, );
+            }
+            catch(err) {
+              throw err;
+            }
+            finally{
+              sftpClient.end();
+            }
+            break;
+          default:
+            break;
+        }
     }
 
     // App events =========================================================================

@@ -172,6 +172,7 @@ class cameraDevice extends Homey.Device {
         }
         catch(error){
             this.error("Error on video request: "+error.message);
+            throw error;
         }
     }
 
@@ -274,7 +275,7 @@ class cameraDevice extends Homey.Device {
                 return await this.parent.requestCameraVideo(this.getData().id);
             }
             catch(error){
-                return null;
+                throw error;
             }
         }
     }
