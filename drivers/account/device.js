@@ -269,7 +269,7 @@ class accountDevice extends Homey.Device {
 
     getSyncModule(networkId){
         if (!this.deviceData.homescreen){
-            return;
+            return null;
         }
         return this.deviceData.homescreen.sync_modules.find(syncmodule => syncmodule.network_id === networkId);
     }
@@ -457,7 +457,13 @@ class accountDevice extends Homey.Device {
                         catch(error){
                             // keep snapshot = null
                         }
-                        let syncmoduleId = this.getSyncModule(media[i].network_id).id;
+                        let syncmoduleId = null;
+                        if (media[i].network_id != undefined){
+                            let syncModule = this.getSyncModule(media[i].network_id);
+                            if (syncModule != undefined && syncModule != null){
+                                syncmoduleId = this.getSyncModule(media[i].network_id).id;
+                            }
+                        }
                         let videoId = {
                             'id': media[i].id,
                             'storage': 'cloud',
@@ -486,7 +492,7 @@ class accountDevice extends Homey.Device {
             this.apiStateOk();
         }
         catch(error){
-            this.error(error.message);
+            this.error("checkMotionCloud(): " + error.message);
             let code = /code: \d*/.exec(error.message);
             let codeStr = '';
             if (code && code[0]){
@@ -576,7 +582,13 @@ class accountDevice extends Homey.Device {
                             .replace(/\..+/, '');     // delete the + and everything after
                         this.log("New video for camera "+cameraId+":");
                         this.log(media[i]);
-                        let syncmoduleId = this.getSyncModule(networkId).id;
+                        let syncmoduleId = null;
+                        if (media[i].network_id != undefined){
+                            let syncModule = this.getSyncModule(media[i].network_id);
+                            if (syncModule != undefined && syncModule != null){
+                                syncmoduleId = this.getSyncModule(media[i].network_id).id;
+                            }
+                        }
                         let videoId = {
                             'id': media[i].id,
                             'storage': 'local',
@@ -594,7 +606,7 @@ class accountDevice extends Homey.Device {
             this.apiStateOk();
         }
         catch(error){
-            this.error(error.message);
+            this.error("checkMotionLocal(): " + error.message);
             let code = /code: \d*/.exec(error.message);
             let codeStr = '';
             if (code && code[0]){
@@ -979,8 +991,8 @@ class accountDevice extends Homey.Device {
             else{
                 msg = error;
             }
-            this.error("Error writing file " + filename + ": " + msg);
-            throw new Error("Error writing file " + filename + ": " + msg);
+            this.error("exportVideoSmb(): Error writing file " + filename + ": " + msg);
+            throw new Error("exportVideoSmb(): Error writing file " + filename + ": " + msg);
         }
     
     }
@@ -1033,8 +1045,8 @@ class accountDevice extends Homey.Device {
             else{
                 msg = error;
             }
-            this.error("Error writing file " + filename + ": " + msg);
-            throw new Error("Error writing file " + filename + ": " + msg);
+            this.error("exportVideoFtp(): Error writing file " + filename + ": " + msg);
+            throw new Error("exportVideoFtp(): Error writing file " + filename + ": " + msg);
         }
     
     }

@@ -102,6 +102,10 @@
   "1.1.3": {
     "en": "Added FTP flow parameter options to select security (FTP over SSL/TLS or SFTP) and FTP path.",
     "de": "Flow-Paramert zur Angabe der FTP-Sicherheit (FTP über SSL/TLS oder SFTP) sowie eines FTP-Pfades ergänzt."
+  },
+  "1.1.4": {
+    "en": "Fix for missing Motion alert in case of MiniCamera without SyncModule.",
+    "de": "Korrektur für fehlenden Bewegungsalarm bei MiniCamera ohne SyncModul."
   }
 
 }
