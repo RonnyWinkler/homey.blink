@@ -53,7 +53,7 @@ class cameraDevice extends Homey.Device {
                     account_id : this.parent.getData().id.toString(),
                     camera_id : this.getData().id.toString()
                 }
-            );
+            ).catch(error => {this.error("getParent().setSettings(): ", error.message)});
             this.setDeviceAvailable();
         }
         else{
@@ -137,7 +137,7 @@ class cameraDevice extends Homey.Device {
             let state = {};
             this._flowTriggerSnapshotCreated.trigger(this, tokens, state)
                 .catch(error => {
-                    this.error(error.message);
+                    this.error("createSnapshot() => _flowTriggerSnapshotCreated.trigger(): ", error.message);
                 });
             return tokens;
         }
@@ -171,7 +171,7 @@ class cameraDevice extends Homey.Device {
             await this.requestCameraVideo();
         }
         catch(error){
-            this.error("Error on video request: "+error.message);
+            this.error("createVideo(): Error on video request: "+error.message);
             throw error;
         }
     }
@@ -227,13 +227,13 @@ class cameraDevice extends Homey.Device {
 
     enableCameraMotion(){
         if(this.getParent()){
-            this.parent.enableCameraMotion(this.getData().id).catch(error => this.error(error.message));
+            this.parent.enableCameraMotion(this.getData().id).catch(error => this.error("enableCameraMotion(): ",error.message));
         }
     }
 
     disableCameraMotion(){
         if(this.getParent()){
-            this.parent.disableCameraMotion(this.getData().id).catch(error => this.error(error.message));
+            this.parent.disableCameraMotion(this.getData().id).catch(error => this.error("disableCameraMotion(): ",error.message));
         }
     }
 
@@ -312,6 +312,9 @@ class cameraDevice extends Homey.Device {
     onDeleted() {
         let id = this.getData().id;
         this.log('device deleted:', id);
+        if (this.snapshotImage){
+            this.snapshotImage.unregister();
+        }
     } // end onDeleted
 
     /**

@@ -88,7 +88,7 @@ class accountDevice extends Homey.Device {
             });
         }
         catch(error){
-            this.error(error.message+" api_state:"+reason);
+            this.error("apiStateError(): "+error.message+" api_state:"+reason);
         }
         let state = this.getCapabilityValue('alarm_api_error');
         if (state == null || state == false){
@@ -114,7 +114,7 @@ class accountDevice extends Homey.Device {
             });
         }
         catch(error){
-            this.error(error.message + "api_state : 'OK'");
+            this.error("apiStateOk():"+error.message + "api_state : 'OK'");
         }
         let state = this.getCapabilityValue('alarm_api_error');
         if (state == null || state == true){
@@ -303,7 +303,7 @@ class accountDevice extends Homey.Device {
             this.setCapabilityValue('status_storage', this.deviceData.statusStorage ).catch(error => {this.error(error)});
         }
         catch (error){
-            this.error(error.message);
+            this.error("updateDvices()=>Subscriptions ",error.message);
             let code = /code: \d*/.exec(error.message);
             let codeStr = '';
             if (code && code[0]){
@@ -321,7 +321,7 @@ class accountDevice extends Homey.Device {
             }
         }
         catch (error){
-            this.error(error.message);
+            this.error("updateDvices()=>Homescreen ", error.message);
             let code = /code: \d*/.exec(error.message);
             let codeStr = '';
             if (code && code[0]){
@@ -384,7 +384,7 @@ class accountDevice extends Homey.Device {
             }
         }
         catch (error){
-            this.error(error.message);
+            this.error("updateDvices()=>Systems ", error.message);
             let code = /code: \d*/.exec(error.message);
             let codeStr = '';
             if (code && code[0]){
@@ -414,7 +414,7 @@ class accountDevice extends Homey.Device {
             if (this.deviceData.statusStorage && this.deviceData.statusStorage == 'local'){
                 // Clear all motion alerrts for all devices
                 await this.clearMotionAlert(null, Date.parse(this.deviceData.lastVideoRequest));
-                await this.checkMotionLocal().catch(error => this.error(error));
+                await this.checkMotionLocal().catch(error => this.error("motionAlertInterval(): ",error));
             }
             }, 
             1000 * this.getSetting('motion_interval_local') // every x sec
@@ -424,7 +424,7 @@ class accountDevice extends Homey.Device {
             if (this.deviceData.statusStorage && this.deviceData.statusStorage == 'cloud'){
                 // Clear all motion alerrts for all devices
                 await this.clearMotionAlert(null, Date.parse(this.deviceData.lastVideoRequest));
-                await this.checkMotionCloud().catch(error => this.error(error));
+                await this.checkMotionCloud().catch(error => this.error("motionAlertInterval(): ",error));
             }
             }, 
             1000 * this.getSetting('motion_interval_cloud') // every x sec
@@ -834,7 +834,7 @@ class accountDevice extends Homey.Device {
                 });
             }
             catch(error){ 
-                this.error(error.message);
+                this.error("triggerAlarmMotion(): ",error.message);
             }
         }
         // let localVideo = await this.homey.images.createImage();

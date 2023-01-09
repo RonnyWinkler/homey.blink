@@ -106,6 +106,10 @@
   "1.1.4": {
     "en": "Fix for missing Motion alert in case of MiniCamera without SyncModule.",
     "de": "Korrektur für fehlenden Bewegungsalarm bei MiniCamera ohne SyncModul."
+  },
+  "1.1.5": {
+    "en": "Added error handling to prevent crash on device deletion.",
+    "de": "Fehlerbehandlung hinzugefügt, um Fehler beim Löschen einer Kamera zu verhindern."
   }
 
 }
