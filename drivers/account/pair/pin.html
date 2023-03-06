@@ -15,15 +15,13 @@
         Homey.emit("settingsChanged", value).then(function (result) {
         });
     }
+</script>
 
-  </script>
 
-<div id="accountSetup" class="tabcontent">
-    <fieldset>
-        <legend><span data-i18n="pair.pin.pin_settings"></span></legend>
-        <div class="field row">
-            <label for="pin"><span data-i18n="pair.pin.pin"></span></label>
-            <input id="pin" type="password" value="" oninput="settingsChanged()"/>
-        </div>
-    </fieldset>
-</div>
+<fieldset class="homey-form-fieldset">
+    <legend class="homey-form-legend"><span data-i18n="pair.pin.pin_settings"></span></legend>
+    <div class="homey-form-group">
+        <label for="pin" class="homey-form-label"><span data-i18n="pair.pin.pin"></span></label>
+        <input id="pin" class="homey-form-input" type="password" value="" oninput="settingsChanged()"/>
+    </div>
+</fieldset>

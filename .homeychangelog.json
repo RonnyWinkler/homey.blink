@@ -110,6 +110,10 @@
   "1.1.5": {
     "en": "Added error handling to prevent crash on device deletion.",
     "de": "Fehlerbehandlung hinzugefügt, um Fehler beim Löschen einer Kamera zu verhindern."
+  },
+  "1.1.6": {
+    "en": "Adjusted pair view style.",
+    "de": "Verbindungsdialog-Stil angepasst."
   }
 
 }

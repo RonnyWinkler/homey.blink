@@ -27,20 +27,19 @@
     //         Homey.alert(result);
     //     });
     // }
+</script>
 
-  </script>
-
-<div id="accountSetup" class="tabcontent">
-    <fieldset>
-        <legend><span data-i18n="pair.account.account_settings"></span></legend>
-        <div class="field row">
-            <label for="email"><span data-i18n="pair.account.email"></span></label>
-            <input id="email" type="text" value="" oninput="settingsChanged()"/>
-            <label for="pw"><span data-i18n="pair.account.pw"></span></label>
-            <input id="pw" type="password" value="" oninput="settingsChanged()"/>
-        </div>
-    </fieldset>
+<fieldset class="homey-form-fieldset">
+    <legend class="homey-form-legend"><span data-i18n="pair.account.account_settings"></span></legend>
+    <div class="homey-form-group">
+        <label for="email" class="homey-form-label"><span data-i18n="pair.account.email"></span></label>
+        <input id="email" class="homey-form-input" type="text" value="" oninput="settingsChanged()"/>
+    </div>
+    <div class="homey-form-group">
+            <label for="pw" class="homey-form-label"><span data-i18n="pair.account.pw"></span></label>
+        <input id="pw" class="homey-form-input" type="password" value="" oninput="settingsChanged()"/>
+    </div>
+</fieldset>
     <!-- <fieldset>
         <p><button id="check" class="left" onclick="check()"><span data-i18n="pair.db.check"></span></button></p>
     </fieldset> -->
-</div>
