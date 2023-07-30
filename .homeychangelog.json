@@ -114,6 +114,10 @@
   "1.1.6": {
     "en": "Adjusted pair view style.",
     "de": "Verbindungsdialog-Stil angepasst."
+  },
+  "1.1.7": {
+    "en": "Fixed subscription check: check for active state if subscription is present.",
+    "de": "Abo-Prüfung korrigiert: prüfe Abo-Status, wenn Abos vorhanden sind."
   }
 
 }
