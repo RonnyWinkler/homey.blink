@@ -17,9 +17,8 @@ class blinkApp extends Homey.App {
     // Register Flow-Action-Listener
     this._flowActionCreateSnapshot = this.homey.flow.getActionCard('create_snapshot');
     this._flowActionCreateSnapshot.registerRunListener(async (args, state) => {
-            try{ 
-              await args.device.createSnapshot(args);
-            return true;
+          try{ 
+            return await args.device.createSnapshot(args);
           }
           catch(error){
             throw error;
@@ -283,8 +282,8 @@ class blinkApp extends Homey.App {
         return new Promise((resolve, reject) => {
           let ftpClient = new (require('ftp'));
           ftpClient.on('ready', function() {
-              ftpClient.put(buffer, filename, function(err) {
-                  if (err) throw err;
+              ftpClient.put(buffer, filename, function(error) {
+                  if (error) reject(error);
                   ftpClient.end();
                   resolve(true);
               });

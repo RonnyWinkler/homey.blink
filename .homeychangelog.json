@@ -118,6 +118,10 @@
   "1.1.7": {
     "en": "Fixed subscription check: check for active state if subscription is present.",
     "de": "Abo-Prüfung korrigiert: prüfe Abo-Status, wenn Abos vorhanden sind."
+  },
+  "1.1.8": {
+    "en": "Fixed 'create snapshot' AdvamcedFlow card.",
+    "de": "Korrektur der 'Kamera-Foto' AdvancedFlow-Karte."
   }
 
 }
