@@ -583,10 +583,10 @@ class accountDevice extends Homey.Device {
                         this.log("New video for camera "+cameraId+":");
                         this.log(media[i]);
                         let syncmoduleId = null;
-                        if (media[i].network_id != undefined){
-                            let syncModule = this.getSyncModule(media[i].network_id);
+                        if (networkId != undefined && networkId != null){
+                            let syncModule = this.getSyncModule(networkId);
                             if (syncModule != undefined && syncModule != null){
-                                syncmoduleId = this.getSyncModule(media[i].network_id).id;
+                                syncmoduleId = syncModule.id;
                             }
                         }
                         let videoId = {

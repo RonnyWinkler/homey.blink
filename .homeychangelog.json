@@ -120,8 +120,12 @@
     "de": "Abo-Prüfung korrigiert: prüfe Abo-Status, wenn Abos vorhanden sind."
   },
   "1.1.8": {
-    "en": "Fixed 'create snapshot' AdvamcedFlow card.",
+    "en": "Fixed 'create snapshot' AdvancedFlow card.",
     "de": "Korrektur der 'Kamera-Foto' AdvancedFlow-Karte."
+  },
+  "1.1.9": {
+    "en": "Fixed missing SyncModule ID in 'motion detected' trigger card.",
+    "de": "Fehlende SyncModule-ID korrigiert in 'Bewegung erkannt'-Trigger-Karte."
   }
 
 }

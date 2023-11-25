@@ -10,7 +10,7 @@
         "restart": true,
         "name": "Attach Blink to Homey Dev",
         "address": "192.168.1.13",
-        "port": 9222,
+        "port": 9231,
         "localRoot": "${workspaceFolder}",
         "remoteRoot": "/"
     } ]
