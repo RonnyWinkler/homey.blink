@@ -126,6 +126,13 @@
   "1.1.9": {
     "en": "Fixed missing SyncModule ID in 'motion detected' trigger card.",
     "de": "Fehlende SyncModule-ID korrigiert in 'Bewegung erkannt'-Trigger-Karte."
+  },
+  "1.1.10": {
+    "en": "Fixed missing SyncModule ID in 'motion detected' trigger card.",
+    "de": "Fehlende SyncModule-ID korrigiert in 'Bewegung erkannt'-Trigger-Karte."
+  },
+  "1.1.11": {
+    "en": "Fixed FTP error handling (permission error).",
+    "de": "FTP-Fehlerbehandlung angepasst (Rechte-Fehler)."
   }
-
 }

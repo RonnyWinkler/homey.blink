@@ -533,7 +533,6 @@ class accountDevice extends Homey.Device {
                 for(let i=0; i < media.length; i++ ){
                     // get cameraID for video
                     let cameraId = null;
-                    let networkId = null;
                     for(let j=0; j < this.deviceData.homescreen.cameras.length; j++ ){
                         // Replace all non-CHAR/NUN characters because camera name in SyncModule video list condensed
                         let cameraName = this.deviceData.homescreen.cameras[j].name.replace(/[^a-zA-Z0-9]/g, '');
@@ -541,7 +540,6 @@ class accountDevice extends Homey.Device {
                         // if (this.deviceData.homescreen.cameras[j].name == media[i].camera_name){
                         if ( cameraName === mediaCameraName ){
                             cameraId = this.deviceData.homescreen.cameras[j].id;
-                            networkId = this.deviceData.homescreen.cameras[j].network_id;
                         }
                     }
                     // 2nd step. Search for MiniKameras
@@ -553,7 +551,6 @@ class accountDevice extends Homey.Device {
                             // if (this.deviceData.homescreen.owls[j].name == media[i].camera_name){
                             if ( cameraName === mediaCameraName ){
                                 cameraId = this.deviceData.homescreen.owls[j].id;
-                                networkId = this.deviceData.homescreen.owls[j].network_id;
                             }
                         }
                     }
@@ -566,7 +563,6 @@ class accountDevice extends Homey.Device {
                             // if (this.deviceData.homescreen.owls[j].name == media[i].camera_name){
                             if ( cameraName === mediaCameraName ){
                                 cameraId = this.deviceData.homescreen.doorbells[j].id;
-                                networkId = this.deviceData.homescreen.doorbells[j].network_id;
                             }
                         }
                     }
@@ -582,20 +578,13 @@ class accountDevice extends Homey.Device {
                             .replace(/\..+/, '');     // delete the + and everything after
                         this.log("New video for camera "+cameraId+":");
                         this.log(media[i]);
-                        let syncmoduleId = null;
-                        if (networkId != undefined && networkId != null){
-                            let syncModule = this.getSyncModule(networkId);
-                            if (syncModule != undefined && syncModule != null){
-                                syncmoduleId = syncModule.id;
-                            }
-                        }
                         let videoId = {
                             'id': media[i].id,
                             'storage': 'local',
                             'url': null,
                             'cameraId': cameraId,
-                            'networkId': networkId,
-                            'syncmoduleId': syncmoduleId,
+                            'networkId': media[i].networkId,
+                            'syncmoduleId': media[i].syncmoduleId,
                             'source': 'pir'
                         }
                         await this.triggerMotionAlert(cameraId, Date.parse(media[i].created_at), null, videoId );
@@ -642,6 +631,8 @@ class accountDevice extends Homey.Device {
                     let createdAtTimestamp = Date.parse(createdAt);
                     let lastRequestTimestamp = Date.parse(this.lastVideoRequest);
                     if ( createdAtTimestamp > lastRequestTimestamp ){
+                        result.clips[j]['networkId'] = systemId;
+                        result.clips[j]['syncmoduleId'] = syncmoduleId;
                         videoList.push( result.clips[j] );
                     }
                 }
@@ -1068,7 +1059,7 @@ class accountDevice extends Homey.Device {
               let ftpClient = new (require('ftp'));
               ftpClient.on('ready', function() {
                   ftpClient.put(buffer, filename, function(err) {
-                      if (err) throw err;
+                      if (err) reject(err);
                       ftpClient.end();
                       resolve(true);
                   });
