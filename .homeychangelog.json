@@ -134,5 +134,9 @@
   "1.1.11": {
     "en": "Fixed FTP error handling (permission error).",
     "de": "FTP-Fehlerbehandlung angepasst (Rechte-Fehler)."
+  },
+  "1.1.12": {
+    "en": "Fixed battery report for camera device.",
+    "de": "Batterie-Report für Kamrea korrigiert."
   }
 }

@@ -27,7 +27,7 @@
         "video_timestamp"
     ],
     "energy": {
-        "batteries": ["AA"]
+        "batteries": ["AA", "AA"]
     },
     "pair": [
         {
