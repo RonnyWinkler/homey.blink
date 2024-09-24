@@ -138,5 +138,9 @@
   "1.1.12": {
     "en": "Fixed battery report for camera device.",
     "de": "Batterie-Report für Kamrea korrigiert."
+  },
+  "1.1.13": {
+    "en": "Added motion alert for new V4 cameras with CV (computer vision) motion recognition.",
+    "de": "Bewegungsalarm für neue V4-Kameras mit CV (Computer-Bilderkennung) ergänzt."
   }
 }

@@ -858,7 +858,7 @@ class accountDevice extends Homey.Device {
             "video_id": video_id_string
         };
         // Motion alerts:
-        if (video_id == null || video_id.source == 'pir'){
+        if (video_id == null || video_id.source == 'pir' || video_id.source == 'cv_motion'){
             // Trigger flow event for account (general trigger for all cameras)
             this.alarmMotionTrigger.trigger( this,  tokens );
             // Trigger flow event for camera devices (single camera)

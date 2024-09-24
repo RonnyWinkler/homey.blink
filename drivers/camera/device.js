@@ -248,7 +248,7 @@ class cameraDevice extends Homey.Device {
         if (timestamp > this.getCapabilityValue("video_timestamp")) {
             this.log("new motion detected on camera: "+this.getName()+" ID: "+ this.getData().id);
             this.setCapabilityValue("video_timestamp", timestamp).catch(this.error);
-            if (video_id == null || video_id.source == 'pir'){
+            if (video_id == null || video_id.source == 'pir' || video_id.source == 'cv_motion'){
                 this.setCapabilityValue('alarm_motion', true).catch(this.error);
             }
             if(this.getParent()){
