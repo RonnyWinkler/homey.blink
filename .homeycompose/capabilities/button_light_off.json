@@ -1,0 +1,13 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Light off",
+        "de": "Licht aus",
+        "nl": "Licht uit"
+    },
+    "insights": false,
+    "getable": false,
+    "setable": true,
+    "uiComponent": "button",
+    "icon": "./assets/button_light_off.svg"
+  }

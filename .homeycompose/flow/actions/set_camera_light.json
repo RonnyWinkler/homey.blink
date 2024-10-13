@@ -1,0 +1,52 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Turn camera floodlight on or off.",
+        "de": "Schalte das Kamera-Floodlight ein oder aus.",
+        "nl": "Schakelt de camera floodlight aan of uit."
+    },
+    "titleFormatted": {
+        "en": "Turn camera floodlight [[state]]",
+        "de": "Schalte das Kamera-Floodlight [[state]]",
+        "nl": "Schakelt de camera floodlight [[state]]"
+    },
+    "hint": {
+        "en": "When turned on, the floodlight is turned off after 60 sec automatically.",
+        "de": "Wenn aktiviert, wird das Floodlight nach 60 Sekunden automatisch ausgeschaltet.",
+        "nl": "Als aangezet, zal de floodlight na 60 seconden automatisch uitgeschakeld worden."
+    },
+    "args": [
+        {
+            "name": "state",
+            "type": "dropdown",
+            "title": {
+                "en": "on/off",
+                "de": "ein/aus",
+                "nl": "aan/uit"
+            },
+            "values": [
+                { 
+                    "id": "on", 
+                    "label": { 
+                        "en": "on",
+                        "de": "ein",
+                        "nl": "aan"
+                    } 
+                },
+                { 
+                    "id": "off", 
+                    "label": { 
+                        "en": "off",
+                        "de": "aus",
+                        "nl": "uit"
+                    } 
+                }
+            ]
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera"
+        }
+    ]
+}

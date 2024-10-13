@@ -84,7 +84,17 @@ class blinkApp extends Homey.App {
               throw error;
             }
     });
-    
+    this._flowActionSetCameraLght = this.homey.flow.getActionCard('set_camera_light');
+    this._flowActionSetCameraLght.registerRunListener(async (args, state) => {
+            try{ 
+              await args.device.setCameraLight(args.state == 'on' ? true : false);
+              return true;
+            }
+            catch(error){
+              throw error;
+            }
+    });
+
     // Register Flow-Condition-Listener
     this._flowConditionLocalUsage = this.homey.flow.getConditionCard("measure_local_usage")
     .registerRunListener(async (args, state) => {

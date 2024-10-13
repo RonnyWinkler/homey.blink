@@ -142,5 +142,9 @@
   "1.1.13": {
     "en": "Added motion alert for new V4 cameras with CV (computer vision) motion recognition.",
     "de": "Bewegungsalarm für neue V4-Kameras mit CV (Computer-Bilderkennung) ergänzt."
+  },
+  "1.2.0": {
+    "en": "Added Floodlight support for Outdoor Cameras.",
+    "de": "Flutlicht-Option für Outdoor-Kameras hinzugefügt."
   }
 }

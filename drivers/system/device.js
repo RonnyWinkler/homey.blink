@@ -72,7 +72,7 @@ class systemDevice extends Homey.Device {
         this.setAvailable();
     }
 
-    updateDevice(systemData){
+    async updateDevice(systemData){
         // Check parent to set device available
         this.getParent();
         // current Homescreen data from Account device

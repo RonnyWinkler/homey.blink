@@ -300,7 +300,7 @@ class accountDevice extends Homey.Device {
             else{
                 this.deviceData.statusStorage = 'local';
             }
-            this.setCapabilityValue('status_storage', this.deviceData.statusStorage ).catch(error => {this.error(error)});
+            await this.setCapabilityValue('status_storage', this.deviceData.statusStorage ).catch(error => {this.error(error)});
         }
         catch (error){
             this.error("updateDvices()=>Subscriptions ",error.message);
@@ -351,7 +351,7 @@ class accountDevice extends Homey.Device {
                         catch(error){
                         }
                         network["sync_module_storage"] = syncmoduleStorage; 
-                        device.updateDevice(network);
+                        await device.updateDevice(network);
                     }
                 }
             }
@@ -360,7 +360,15 @@ class accountDevice extends Homey.Device {
                 for(let i=0; i < this.deviceData.homescreen.cameras.length; i++ ){
                     let device = this.getCameraDevice(this.deviceData.homescreen.cameras[i].id);
                     if (device){
-                        device.updateDevice(this.deviceData.homescreen.cameras[i]);
+                        let cameraData = this.deviceData.homescreen.cameras[i];
+                        for ( let j=0; j<this.deviceData.homescreen.accessories.storm.length; j++ ){
+                            if (    this.deviceData.homescreen.accessories.storm[j].target == 'camera' &&
+                                    this.deviceData.homescreen.accessories.storm[j].target_id == cameraData.id &&
+                                    this.deviceData.homescreen.accessories.storm[j].connected == true ){
+                                cameraData["storm"] = this.deviceData.homescreen.accessories.storm[j];    
+                            }
+                        }
+                        await device.updateDevice(cameraData);
                     }
                 }
             }
@@ -369,7 +377,7 @@ class accountDevice extends Homey.Device {
                 for(let i=0; i < this.deviceData.homescreen.owls.length; i++ ){
                     let device = this.getOwlDevice(this.deviceData.homescreen.owls[i].id);
                     if (device){
-                        device.updateDevice(this.deviceData.homescreen.owls[i]);
+                        await device.updateDevice(this.deviceData.homescreen.owls[i]);
                     }
                 }
             }
@@ -378,7 +386,7 @@ class accountDevice extends Homey.Device {
                 for(let i=0; i < this.deviceData.homescreen.doorbells.length; i++ ){
                     let device = this.getDoorbellDevice(this.deviceData.homescreen.doorbells[i].id);
                     if (device){
-                        device.updateDevice(this.deviceData.homescreen.doorbells[i]);
+                        await device.updateDevice(this.deviceData.homescreen.doorbells[i]);
                     }
                 }
             }
@@ -1101,6 +1109,16 @@ class accountDevice extends Homey.Device {
             break;
           default:
             break;
+        }
+    }
+
+    async setCameraLight(cameraId, floodlightId, on){
+        try{
+            let result = await this.blinkApi.setCameraLight(cameraId, floodlightId, on);
+            return result;
+        }
+        catch (error){
+            throw error;
         }
     }
 

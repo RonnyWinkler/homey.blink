@@ -33,6 +33,14 @@
                     "en": "Camera ID",
                     "de": "Kamera-ID"
                 }
+            },
+            {
+                "id": "floodlight_id",
+                "type": "label",
+                "label": {
+                    "en": "Floodlight ID",
+                    "de": "Flutlicht-ID"
+                }
             }
         ]
     }

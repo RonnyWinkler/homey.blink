@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.blinkforhome",
-  "version": "1.1.13",
+  "version": "1.2.0",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "name": {
@@ -1157,6 +1157,59 @@
           }
         ],
         "id": "export_video_smb"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Turn camera floodlight on or off.",
+          "de": "Schalte das Kamera-Floodlight ein oder aus.",
+          "nl": "Schakelt de camera floodlight aan of uit."
+        },
+        "titleFormatted": {
+          "en": "Turn camera floodlight [[state]]",
+          "de": "Schalte das Kamera-Floodlight [[state]]",
+          "nl": "Schakelt de camera floodlight [[state]]"
+        },
+        "hint": {
+          "en": "When turned on, the floodlight is turned off after 60 sec automatically.",
+          "de": "Wenn aktiviert, wird das Floodlight nach 60 Sekunden automatisch ausgeschaltet.",
+          "nl": "Als aangezet, zal de floodlight na 60 seconden automatisch uitgeschakeld worden."
+        },
+        "args": [
+          {
+            "name": "state",
+            "type": "dropdown",
+            "title": {
+              "en": "on/off",
+              "de": "ein/aus",
+              "nl": "aan/uit"
+            },
+            "values": [
+              {
+                "id": "on",
+                "label": {
+                  "en": "on",
+                  "de": "ein",
+                  "nl": "aan"
+                }
+              },
+              {
+                "id": "off",
+                "label": {
+                  "en": "off",
+                  "de": "aus",
+                  "nl": "uit"
+                }
+              }
+            ]
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=camera"
+          }
+        ],
+        "id": "set_camera_light"
       }
     ]
   },
@@ -1487,6 +1540,14 @@
               "label": {
                 "en": "Camera ID",
                 "de": "Kamera-ID"
+              }
+            },
+            {
+              "id": "floodlight_id",
+              "type": "label",
+              "label": {
+                "en": "Floodlight ID",
+                "de": "Flutlicht-ID"
               }
             }
           ]
@@ -1843,6 +1904,32 @@
         "nl": "SyncModule-opslag beschikbaar"
       },
       "icon": "/assets/alarm_local_storage_full.svg"
+    },
+    "button_light_off": {
+      "type": "boolean",
+      "title": {
+        "en": "Light off",
+        "de": "Licht aus",
+        "nl": "Licht uit"
+      },
+      "insights": false,
+      "getable": false,
+      "setable": true,
+      "uiComponent": "button",
+      "icon": "./assets/button_light_off.svg"
+    },
+    "button_light_on": {
+      "type": "boolean",
+      "title": {
+        "en": "Light on",
+        "de": "Licht ein",
+        "nl": "Licht aan"
+      },
+      "insights": false,
+      "getable": false,
+      "setable": true,
+      "uiComponent": "button",
+      "icon": "./assets/button_light_on.svg"
     },
     "measure_cloud_autodelete_days": {
       "type": "number",

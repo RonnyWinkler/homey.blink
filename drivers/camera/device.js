@@ -16,6 +16,12 @@ class cameraDevice extends Homey.Device {
         this.registerCapabilityListener("onoff", async (value) => {
             await this.onCapabilityOnoff(value);
         });
+        this.registerCapabilityListener("button_light_on", async (value) => {
+            await this.onCapabilityLight(true);
+        });
+        this.registerCapabilityListener("button_light_off", async (value) => {
+            await this.onCapabilityLight(false);
+        });
        
         // Init video timestamp, use current time to get alerts for motions in the future, not in the past
         let now = new Date()
@@ -63,9 +69,9 @@ class cameraDevice extends Homey.Device {
     }
 
     // Capability-/Flow-/Event handling =========================================================================
-    async onCapabilityOnoff(value) {
+    async onCapabilityOnoff(state) {
         //if value = true, it's on.. else off'
-        if (value) {
+        if (state) {
             this.log('Camera '+this.getData().id+' motion alarm enabled.');
             this.enableCameraMotion();
             this.setCapabilityValue("onoff", true);
@@ -74,6 +80,11 @@ class cameraDevice extends Homey.Device {
             this.disableCameraMotion();
             this.setCapabilityValue("onoff", false);
         }
+    }
+
+    async onCapabilityLight(on){
+        this.log('Camera '+this.getData().id+' light on: ', on);
+        this.setCameraLight(on);
     }
 
     async registerImage() {
@@ -186,11 +197,33 @@ class cameraDevice extends Homey.Device {
         this.setAvailable();
     }
 
-    updateDevice(cameraData){
+    async updateDevice(cameraData){
         // Check parent to set device available
         this.getParent();
         // current Homescreen data from Account device
         if (cameraData){
+            // enable/disable flood light control 
+            if (cameraData.storm != undefined){
+                if(!this.hasCapability('button_light_on')){
+                    this.addCapability('button_light_on');
+                }
+                if(!this.hasCapability('button_light_off')){
+                    this.addCapability('button_light_off');
+                }
+                await this.setSettings({floodlight_id: cameraData.storm.id.toString()});
+                await this.setStoreValue('floodlight_id', cameraData.storm.id );
+            }
+            else{
+                if(this.hasCapability('button_light_on')){
+                    this.removeCapability('button_light_on');
+                }
+                if(this.hasCapability('button_light_off')){
+                    this.removeCapability('button_light_off');
+                }
+                await this.setSettings({floodlight_id: ''});
+                await this.setStoreValue('floodlight_id', null );
+            }
+
             if (cameraData.enabled != this.getCapabilityValue('onoff')){
                 this.log("updateDevice() Camera "+this.getData().id+' motion alarm:'+cameraData.enabled);
                 this.setCapabilityValue("onoff", cameraData.enabled).catch(error => this.error(error));
@@ -295,6 +328,22 @@ class cameraDevice extends Homey.Device {
         if(this.getParent()){
             try{
                 return await this.parent.exportVideoFtp(args);
+            }
+            catch(error){
+                throw error;
+            }
+        }
+    }
+
+    async setCameraLight(on){
+        let cameraId = this.getData().id;
+        let floodlightId = this.getStoreValue('floodlight_id');
+        if (!floodlightId){
+            throw new Error('No Floodlight available');
+        }
+        if(this.getParent()){
+            try{
+                return await this.parent.setCameraLight(cameraId, floodlightId, on);
             }
             catch(error){
                 throw error;

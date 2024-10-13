@@ -44,7 +44,7 @@ class owlDevice extends cameraDevice {
         
     }
 
-    updateDevice(cameraData){
+    async updateDevice(cameraData){
         // Check parent to set device available
         this.getParent();
         // current Homescreen data from Account device
