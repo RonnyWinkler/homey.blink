@@ -146,5 +146,9 @@
   "1.2.0": {
     "en": "Added Floodlight support for Outdoor Cameras.",
     "de": "Flutlicht-Option für Outdoor-Kameras hinzugefügt."
+  },
+  "1.2.1": {
+    "en": "Improved http error handling.",
+    "de": "HTTP-Fehlerbehandlung verbessert."
   }
 }

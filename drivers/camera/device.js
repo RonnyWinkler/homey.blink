@@ -84,7 +84,7 @@ class cameraDevice extends Homey.Device {
 
     async onCapabilityLight(on){
         this.log('Camera '+this.getData().id+' light on: ', on);
-        this.setCameraLight(on);
+        await this.setCameraLight(on);
     }
 
     async registerImage() {
