@@ -150,5 +150,9 @@
   "1.2.1": {
     "en": "Improved http error handling.",
     "de": "HTTP-Fehlerbehandlung verbessert."
+  },
+  "1.2.2": {
+    "en": "Fixed update of account data in device settings",
+    "de": "Aktualisierung der Account-Daten in den Geräte-Einstellungen korrigiert."
   }
 }

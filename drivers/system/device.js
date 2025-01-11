@@ -36,9 +36,9 @@ class systemDevice extends Homey.Device {
         if (this.parent){
             this.setSettings(
                 {
-                    account_device : this.parent.getName(),
-                    account_id : this.parent.getData().id.toString(),
-                    system_id : this.getData().id.toString()
+                    account_device : this.parent.getName() || '',
+                    account_id : this.parent.getData().id.toString() || '',
+                    system_id : this.getData().id.toString() || ''
                 }
             );
             this.setDeviceAvailable();

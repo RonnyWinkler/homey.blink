@@ -55,9 +55,9 @@ class cameraDevice extends Homey.Device {
         if (this.parent){
             this.setSettings(
                 {
-                    account_device : this.parent.getName(),
-                    account_id : this.parent.getData().id.toString(),
-                    camera_id : this.getData().id.toString()
+                    account_device : this.parent.getName() || '',
+                    account_id : this.parent.getData().id.toString() || '',
+                    camera_id : this.getData().id.toString() || ''
                 }
             ).catch(error => {this.error("getParent().setSettings(): ", error.message)});
             this.setDeviceAvailable();
