@@ -920,19 +920,39 @@ class accountDevice extends Homey.Device {
           filename = filename + "_" + args.camera_name;
         }
         filename = filename + ".mp4";
+
+        // if (args.smb_directory != undefined){
+        //   filename = args.smb_directory + '/' + filename;       
+        // }
     
         this.log("Export Video to SMB: "+args.smb_share+"\\"+filename);
     
         // create an SMB2 instance
+        let smb2Client = null;
         try{
-            // let smb2Client = new smb2({
-                let smb2Client = new (require('@marsaud/smb2'))({
-                share: args.smb_share,
-                domain: '',
-                username: args.smb_user,
-                password: args.smb_pw,
-                autoCloseTimeout : 30
+            let string = args.smb_share.replace(/\\\\/g, '');
+            let shareArray = string.split('\\');
+            let host = shareArray[0];
+            let share = shareArray[1];
+            let directory = '';
+            for (let i = 2; i < shareArray.length; i++) {
+              directory += shareArray[i];
+              if (i < shareArray.length - 1) {
+                  directory += '/';
+              }
+            }
+            if (directory.length > 0){
+              filename = directory + '/' + filename;
+            }
+            smb2Client = new (require('@awo00/smb2')).Client( host );
+            const smb2Session = await smb2Client.authenticate({
+              domain: '',
+              username: args.smb_user,
+              password: args.smb_pw
             });
+            const smbTree = await smb2Session.connectTree(share);
+            // const smbEntries = await smbTree.readDirectory(smbDir);
+
             let stream = await this.blinkApi.getCameraVideoStream(JSON.parse(args.video_id));
         
             /* 
@@ -941,8 +961,10 @@ class accountDevice extends Homey.Device {
             ********************************************************** 
             */
             let buffer = await this.stream2buffer(stream);
-            await smb2Client.writeFile(filename, buffer );
-            await smb2Client.disconnect();
+            await smbTree.createFile(filename, buffer);
+            // await smb2Session.writeFile(filename, buffer );
+            // await smb2Client.disconnect();
+            // await smb2Client.close();
         
             /* 
             **********************************************************
@@ -993,7 +1015,11 @@ class accountDevice extends Homey.Device {
             this.error("exportVideoSmb(): Error writing file " + filename + ": " + msg);
             throw new Error("exportVideoSmb(): Error writing file " + filename + ": " + msg);
         }
-    
+        finally{
+          if (smb2Client && smb2Client.connected){
+            await smb2Client.close();
+          }
+        }    
     }
 
     async exportVideoFtp(args){

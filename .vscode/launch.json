@@ -8,9 +8,19 @@
             "type": "node",
             "request": "attach",
             "restart": true,
-            "name": "Attach Blink to Homey Pro 23 DEV",
+            "name": "Attach Blink to Homey Pro 23 DEV LAN",
             "address": "192.168.1.16",
-            "port": 9291,
+            "port": 9908,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app/"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "name": "Attach Blink to Homey Pro 23 DEV WiFi",
+            "address": "192.168.1.17",
+            "port": 9908,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/app/"
         },
@@ -20,7 +30,7 @@
             "restart": true,
             "name": "Attach Blink to Homey Pro 19 Dev",
             "address": "192.168.1.13",
-            "port": 9291,
+            "port": 9908,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/"
         } 

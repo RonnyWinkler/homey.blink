@@ -1,6 +1,6 @@
 if (process.env.DEBUG === '1')
 {
-    require('inspector').open(9291, '0.0.0.0', true);
+    require('inspector').open(9908, '0.0.0.0', true);
 }
 
 'use strict';
@@ -165,16 +165,32 @@ class blinkApp extends Homey.App {
     this.log("Export Image to SMB: "+args.smb_share+"\\"+filename);
 
     // create an SMB2 instance
+    let smb2Client = null;
     try{
-      // let smb2Client = new smb2({
-        let smb2Client = new (require('@marsaud/smb2'))({
-        share: args.smb_share,
-        domain: '',
-        username: args.smb_user,
-        password: args.smb_pw,
-        autoCloseTimeout : 30
-      });
-      let stream = await args.droptoken.getStream();
+        let string = args.smb_share.replace(/\\\\/g, '');
+        let shareArray = string.split('\\');
+        let host = shareArray[0];
+        let share = shareArray[1];
+        let directory = '';
+        for (let i = 2; i < shareArray.length; i++) {
+          directory += shareArray[i];
+          if (i < shareArray.length - 1) {
+              directory += '/';
+          }
+        }
+        if (directory.length > 0){
+          filename = directory + '/' + filename;
+        }
+        smb2Client = new (require('@awo00/smb2')).Client( host );
+        const smb2Session = await smb2Client.authenticate({
+          domain: '',
+          username: args.smb_user,
+          password: args.smb_pw
+        });
+        const smbTree = await smb2Session.connectTree(share);
+        // const smbEntries = await smbTree.readDirectory(smbDir);
+
+        let stream = await args.droptoken.getStream();
 
       /* 
       **********************************************************
@@ -182,8 +198,9 @@ class blinkApp extends Homey.App {
       ********************************************************** 
       */
       let buffer = await this.stream2buffer(stream);
-      await smb2Client.writeFile(filename, buffer );
-      await smb2Client.disconnect();
+      await smbTree.createFile(filename, buffer);
+      // await smb2Client.writeFile(filename, buffer );
+      // await smb2Client.disconnect();
 
       /* 
       **********************************************************
@@ -227,6 +244,11 @@ class blinkApp extends Homey.App {
       this.error("Error writing file " + filename + ": " + error.message);
       throw error;
     }
+    finally{
+      if (smb2Client && smb2Client.connected){
+        await smb2Client.close();
+      }
+    }    
 
   }
 
