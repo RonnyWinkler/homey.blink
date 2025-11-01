@@ -162,5 +162,9 @@
   "2.0.0": {
     "en": "Use new Blink oAuth authorization. Please repair the 'Homey Blink Account' device to re-authorize.",
     "de": "Verwende neue Blink oAuth-Authentifizierung. Bitte repariere das 'Homey Blink Account' Gerät, um dich erneut zu anzumelden."
+  },
+  "2.0.1": {
+    "en": "Fixed error when adding SyncModule.",
+    "de": "Fehler beim Hinzufügen des SyncModul korrigiert."
   }
 }
