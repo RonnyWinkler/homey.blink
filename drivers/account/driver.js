@@ -3,16 +3,17 @@ const Homey = require('homey');
 const blinkApi = require('../../lib/blinkApi');
 
 class accountDriver extends Homey.Driver {
-    onPair(session) {
+    async onPair(session) {
         this.log("onPair()");
-        if (!this.blinkApi){
+        // if (!this.blinkApi){
             this.blinkApi = new blinkApi();
-        }
+        // }
         this.settingsData = { 
             "email": "",
             "pw": "",
-            "blinkUid": this.blinkApi.generate_uid(16),
-            "blinkNotificationKey": this.blinkApi.generate_uid(152),
+            // "blinkUid": this.blinkApi.generate_uid(16),
+            "blinkUid": await this.homey.cloud.getHomeyId(),
+            // "blinkNotificationKey": this.blinkApi.generate_uid(152),
             "pin": "",
             "accountId": 0
         };
@@ -42,15 +43,15 @@ class accountDriver extends Homey.Driver {
     async onRepair(session, device) {
         this.log("onRepair()");
 
-        if (!this.blinkApi){
+        // if (!this.blinkApi){
             this.blinkApi = new blinkApi();
-        }
+        // }
         // Uid and NotificationKey must be set with new values. Re-Auth seems to need new IDs. Old ID seem to get revoked on PW change. 
         this.settingsData = { 
             email: device.getStoreValue('email'),
             pw: '',
             blinkUid: this.blinkApi.generate_uid(16), //device.getStoreValue('blinkUid'),
-            blinkNotificationKey: this.blinkApi.generate_uid(152), //device.getStoreValue('blinkNotificationKey'),
+            // blinkNotificationKey: this.blinkApi.generate_uid(152), //device.getStoreValue('blinkNotificationKey'),
             accountId: device.getData().id,
             pin: ''
         };
@@ -97,30 +98,62 @@ class accountDriver extends Homey.Driver {
     async onShowView(session, view){
         if (view === 'check_account') {
             this.log("onShowView(check_account)");
+            // try{
+            //     let result = await this.checkAccount();
+            //     if ( result.account.client_verification_required ){
+            //         await session.showView("pin");
+            //     }
+            //     else{
+            //         await session.nextView();
+            //     }
+            // }
+            // catch(error){
+            //     await session.showView("account_error");
+            // }
             try{
-                let result = await this.checkAccount();
-                if ( result.account.client_verification_required ){
+                await this.checkAccount();
+                await session.nextView();
+            }
+            catch(error){
+                if (error.code == 412){
+                    // 2FA required
                     await session.showView("pin");
                 }
                 else{
-                    await session.nextView();
+                    await session.showView("account_error");
                 }
-            }
-            catch(error){
-                await session.showView("account_error");
             }
         }
         if (view === 'check_pin') {
             this.log("onShowView(check_pin)");
-            try{
-                let result = await this.checkPin();
-                if (result.valid){
-                    await session.nextView();
+            // try{
+            //     let result = await this.checkPin();
+            //     if (result.valid){
+            //         await session.nextView();
 
-                }
-                else{
-                    await session.showView("pin_error");
-                }
+            //     }
+            //     else{
+            //         await session.showView("pin_error");
+            //     }
+            // }
+            // catch(error){
+            //     await session.showView("pin_error");
+            // }
+            try{
+                let loginData = await this.checkAccount();
+                this.settingsData.accountId = loginData.account;
+                this.settingsData.region = loginData.region;
+                this.settingsData.token = loginData.token;
+                
+                await session.nextView();
+                // let result = await this.checkPin();
+                // if (result.valid){
+                //     await session.nextView();
+
+                // }
+                // else{
+                //     await session.showView("pin_error");
+                // }
             }
             catch(error){
                 await session.showView("pin_error");
@@ -131,30 +164,49 @@ class accountDriver extends Homey.Driver {
     async onShowViewRepair(session, view, device){
     if (view === 'check_account') {
         this.log("onShowView(check_account)");
+        // try{
+        //     let result = await this.checkAccount();
+        //     if ( result.account.client_verification_required ){
+        //         await session.showView("pin");
+        //     }
+        //     else{
+        //         await session.nextView();
+        //     }
+        // }
+        // catch(error){
+        //     await session.showView("account_error");
+        // }
         try{
-            let result = await this.checkAccount();
-            if ( result.account.client_verification_required ){
+            await this.checkAccount();
+            await session.nextView();
+        }
+        catch(error){
+            if (error.code == 412){
+                // 2FA required
                 await session.showView("pin");
             }
             else{
-                await session.nextView();
+                await session.showView("account_error");
             }
-        }
-        catch(error){
-            await session.showView("account_error");
         }
     }
     if (view === 'check_pin') {
         this.log("onShowView(check_pin)");
         try{
-            let result = await this.checkPin();
-            if (result.valid){
-                await session.nextView();
+            let loginData = await this.checkAccount();
+            this.settingsData.accountId = loginData.account;
+            this.settingsData.region = loginData.region;
+            this.settingsData.token = loginData.token;
+            
+            await session.nextView();
+            // let result = await this.checkPin();
+            // if (result.valid){
+            //     await session.nextView();
 
-            }
-            else{
-                await session.showView("pin_error");
-            }
+            // }
+            // else{
+            //     await session.showView("pin_error");
+            // }
         }
         catch(error){
             await session.showView("pin_error");
@@ -175,14 +227,16 @@ class accountDriver extends Homey.Driver {
     async checkAccount(){
         this.log("checkAccount()");
         try{
-            let result = await this.blinkApi.login(
+            let result = await this.blinkApi.oAuthLogin(
                 this.settingsData.email,
                 this.settingsData.pw,
-                this.settingsData.blinkUid,
-                this.settingsData.blinkNotificationKey
-                );
+                this.settingsData.pin,
+                this.settingsData.blinkUid
+            );
             this.log(result);
-            this.settingsData.accountId = result.account.account_id;
+            // this.settingsData.accountId = result.account;
+            // this.settingsData.region = result.region;
+            // this.settingsData.token = result.token;
             return result;
         }
         catch(error){
@@ -191,20 +245,20 @@ class accountDriver extends Homey.Driver {
         }
     }
 
-    async checkPin(){
-        this.log("checkPin()");
-        try{
-            let result = await this.blinkApi.verifyPin(
-                this.settingsData.pin
-                );
-            this.log(result);
-            return result;
-        }
-        catch(error){
-            this.log(error.message);
-            throw error;
-        }
-    }
+    // async checkPin(){
+    //     this.log("checkPin()");
+    //     try{
+    //         let result = await this.blinkApi.verifyPin(
+    //             this.settingsData.pin
+    //             );
+    //         this.log(result);
+    //         return result;
+    //     }
+    //     catch(error){
+    //         this.log(error.message);
+    //         throw error;
+    //     }
+    // }
 
     async onPairListDevices(session) {
         this.log("onPairListDevices()" );
@@ -216,10 +270,12 @@ class accountDriver extends Homey.Driver {
             },
             store: {
               email: this.settingsData.email,
-              pw: this.settingsData.pw,
+            //   pw: this.settingsData.pw,
               blinkUid: this.settingsData.blinkUid,
-              blinkNotificationKey: this.settingsData.blinkNotificationKey,
+            //   blinkNotificationKey: this.settingsData.blinkNotificationKey,
               //accountId: this.settingsData.accountId
+              token: this.settingsData.token,
+              region: this.settingsData.region
             },
             settings:{
               status_interval: 1,
@@ -243,9 +299,11 @@ class accountDriver extends Homey.Driver {
             throw new Error();
         }
         await device.setStoreValue('email', this.settingsData.email);
-        await device.setStoreValue('pw', this.settingsData.pw);
+        await device.setStoreValue('pw', '');
         await device.setStoreValue('blinkUid', this.settingsData.blinkUid);
-        await device.setStoreValue('blinkNotificationKey', this.settingsData.blinkNotificationKey);   
+        await device.setStoreValue('token', this.settingsData.token);
+        await device.setStoreValue('region', this.settingsData.region);
+        // await device.setStoreValue('blinkNotificationKey', this.settingsData.blinkNotificationKey);   
         this.log("updateDevice(): device store data set. Start re-login..." );    
         await device.reLogin(); 
     }

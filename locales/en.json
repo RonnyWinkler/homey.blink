@@ -24,7 +24,8 @@
             "login_error": "Login error",
             "api_error_device": "Read account/device data",
             "api_error_motion_cloud": "Reading motion/video data (cloud)",
-            "api_error_motion_local": "Reading motion/video data (SyncModule)"
+            "api_error_motion_local": "Reading motion/video data (SyncModule)",
+            "update_info": "The Blink app has been updated. It uses the new Blink oAuth2 authorization. Please repair the 'Homey Blink Account' device to re-authorize in case of login error."
         },
         "camera": {
             "snapshot": "Snapshot",

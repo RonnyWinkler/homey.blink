@@ -7,14 +7,17 @@ class accountDevice extends Homey.Device {
 
     async onInit() {
         this.log('Blink account init: '+this.getName()+' ID: '+this.getData().id);
+
+        // Timeline information about new oAuth authorization
+        this.homey.notifications.createNotification({excerpt: this.homey.__('devices.account.update_info')}).catch(error => {this.error('Error sending notification: '+error.message)});
+
         this.deviceData = {
             email: this.getStoreValue('email'),
-            pw: this.getStoreValue('pw'),
+            // pw: this.getStoreValue('pw'),
             blinkUid: this.getStoreValue('blinkUid'),
-            blinkNotificationKey: this.getStoreValue('blinkNotificationKey'),
+            // blinkNotificationKey: this.getStoreValue('blinkNotificationKey'),
+            token: this.getStoreValue('token'),
             accountId: this.getData().id,
-            // authtoken: null,
-            // regionCode: null,
             loggedIn: false,
             statusStorage: null,
             lastVideoRequest: null,
@@ -50,7 +53,6 @@ class accountDevice extends Homey.Device {
 
         // start update intervals
         this.log("Start intervals...");
-        this.refreshAuthTokenInterval();
         this.motionAlertInterval();
         this.deviceUpdateInterval();
 
@@ -125,19 +127,20 @@ class accountDevice extends Homey.Device {
 
     // API handling =========================================================================
     async login(){
+        this.log('Init Blink API');
         try{
-            let result = await this.blinkApi.login(
+            let token = await this.blinkApi.init(
                 this.deviceData.email,
-                this.deviceData.pw,
                 this.deviceData.blinkUid,
-                this.deviceData.blinkNotificationKey
+                this.deviceData.token,
             );
-            // this.log(result);
-            // this.authtoken = result.auth.token;
-            // this.regionCode = result.account.tier;
+            this.log('Token:', token);
+            this.deviceData.token = token;
+            await this.setStoreValue('token', token);
             this.deviceData.loggedIn = true;
             this.apiStateOk();
             this.setDeviceAvailable();
+            this.refreshAuthTokenInterval();
             return true;
         }
         catch(error){
@@ -158,12 +161,9 @@ class accountDevice extends Homey.Device {
         this.log('Blink account reLogin(): '+this.getName()+' ID: '+this.getData().id);
         this.deviceData = {
             email: this.getStoreValue('email'),
-            pw: this.getStoreValue('pw'),
             blinkUid: this.getStoreValue('blinkUid'),
-            blinkNotificationKey: this.getStoreValue('blinkNotificationKey'),
             accountId: this.getData().id,
-            // authtoken: null,
-            // regionCode: null,
+            token: this.getStoreValue('token'),
             loggedIn: false,
             statusStorage: null,
             lastVideoRequest: null,
@@ -186,12 +186,12 @@ class accountDevice extends Homey.Device {
 
     refreshAuthTokenInterval() {
         if (!this.intervalAuthToken){
-            clearInterval(this.intervalAuthToken);
+            this.homey.clearInterval(this.intervalAuthToken);
         }
-        this.intervalAuthToken = setInterval( () => {
+        this.intervalAuthToken = this.homey.setInterval( () => {
             this.login();
             this.log("A new authtoken has been requested");
-        }, 43200000);
+        }, (this.deviceData.token.expires_in - 60)*1000 ); // Refresh token 60sec before it expires
     }
 
     // Device handling =========================================================================
@@ -277,11 +277,11 @@ class accountDevice extends Homey.Device {
     // Devices handling =========================================================================
     deviceUpdateInterval(){
         if (!this.intervalUpdateLoop){
-            clearInterval(this.intervalUpdateLoop);
+            this.homey.clearInterval(this.intervalUpdateLoop);
         }
         // first update directly, then for every interval
         // this.updateDevices();
-        this.intervalUpdateLoop = setInterval( async () => this.updateDevices(), 
+        this.intervalUpdateLoop = this.homey.setInterval( async () => this.updateDevices(), 
             60 * 1000 * this.getSetting('status_interval') // every x min
         );
     }
@@ -289,7 +289,7 @@ class accountDevice extends Homey.Device {
     async updateDevices(){
         this.log("Update devices for account "+this.deviceData.accountId+"...");
         if (!this.deviceData.loggedIn){
-            this.error("updateDvices(): Not logged in!");
+            this.error("updateDeices(): Not logged in!");
             return;
         }
         // Subscriptions
@@ -303,7 +303,7 @@ class accountDevice extends Homey.Device {
             await this.setCapabilityValue('status_storage', this.deviceData.statusStorage ).catch(error => {this.error(error)});
         }
         catch (error){
-            this.error("updateDvices()=>Subscriptions ",error.message);
+            this.error("updateDevices()=>Subscriptions ",error.message);
             let code = /code: \d*/.exec(error.message);
             let codeStr = '';
             if (code && code[0]){
@@ -321,7 +321,7 @@ class accountDevice extends Homey.Device {
             }
         }
         catch (error){
-            this.error("updateDvices()=>Homescreen ", error.message);
+            this.error("updateDevices()=>Homescreen ", error.message);
             let code = /code: \d*/.exec(error.message);
             let codeStr = '';
             if (code && code[0]){
@@ -392,7 +392,7 @@ class accountDevice extends Homey.Device {
             }
         }
         catch (error){
-            this.error("updateDvices()=>Systems ", error.message);
+            this.error("updateDevices()=>Systems ", error.message);
             let code = /code: \d*/.exec(error.message);
             let codeStr = '';
             if (code && code[0]){
@@ -407,17 +407,17 @@ class accountDevice extends Homey.Device {
     // Motion handling =========================================================================
     motionAlertInterval(){
         if (this.intervalMotionLoopSyncModule){
-            clearInterval(this.intervalMotionLoopSyncModule);
+            this.homey.clearInterval(this.intervalMotionLoopSyncModule);
         }
         if (this.intervalMotionLoopCloud){
-            clearInterval(this.intervalMotionLoopCloud);
+            this.homey.clearInterval(this.intervalMotionLoopCloud);
         }
         // Only check for motion alert is activated in device settings
         let active = this.getSetting('motion_check_enabled');
         if ( !active ){
             return;
         }
-        this.intervalMotionLoopSyncModule = setInterval( async () => {
+        this.intervalMotionLoopSyncModule = this.homey.setInterval( async () => {
             // Dependent on subscription, use cloud access or SyncModule
             if (this.deviceData.statusStorage && this.deviceData.statusStorage == 'local'){
                 // Clear all motion alerrts for all devices
@@ -427,7 +427,7 @@ class accountDevice extends Homey.Device {
             }, 
             1000 * this.getSetting('motion_interval_local') // every x sec
         );
-        this.intervalMotionLoopCloud = setInterval( async () => {
+        this.intervalMotionLoopCloud = this.homey.setInterval( async () => {
             // Dependent on subscription, use cloud access or SyncModule
             if (this.deviceData.statusStorage && this.deviceData.statusStorage == 'cloud'){
                 // Clear all motion alerrts for all devices

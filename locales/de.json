@@ -24,7 +24,8 @@
             "login_error": "Anmelde-Fehler",
             "api_error_device": "Lesen von Konto-/Gerätedaten",
             "api_error_motion_cloud": "Lesen von Bewegungs-/Videodaten (Cloud)",
-            "api_error_motion_local": "Lesen von Bewegungs-/Videodaten (SyncModul)"
+            "api_error_motion_local": "Lesen von Bewegungs-/Videodaten (SyncModul)",
+            "update_info": "Die Blink-App wurde aktualisiert. Sie verwendet nun die neue Blink oAuth2-Authentifizierung. Repariere das Gerät „Homey Blink Account“, um die Autorisierung im Falle eines Anmeldefehlers erneut durchzuführen."
         },
         "camera": {
             "snapshot": "Foto",

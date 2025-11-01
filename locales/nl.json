@@ -24,7 +24,8 @@
             "login_error": "Login fout",
             "api_error_device": "Account-/apparaatgegevens lezen",
             "api_error_motion_cloud": "Bewegings-/videogegevens lezen (cloud)",
-            "api_error_motion_local": "Bewegings-/videogegevens lezen (SyncModule)"
+            "api_error_motion_local": "Bewegings-/videogegevens lezen (SyncModule)",
+            "update_info": "De Blink-app is bijgewerkt. Deze gebruikt nu de nieuwe Blink oAuth2-autorisatie. Herstel het apparaat 'Homey Blink Account' om opnieuw te autoriseren in geval van een aanmeldingsfout."
         },
         "camera": {
             "snapshot": "Momentopname",
