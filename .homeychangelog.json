@@ -166,5 +166,9 @@
   "2.0.1": {
     "en": "Fixed error when adding SyncModule.",
     "de": "Fehler beim Hinzufügen des SyncModul korrigiert."
+  },
+  "2.0.2": {
+    "en": "Fixed token refresh.",
+    "de": "Token-Refresh korrigiert."
   }
 }

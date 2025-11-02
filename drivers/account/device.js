@@ -276,7 +276,7 @@ class accountDevice extends Homey.Device {
 
     // Devices handling =========================================================================
     deviceUpdateInterval(){
-        if (!this.intervalUpdateLoop){
+        if (this.intervalUpdateLoop){
             this.homey.clearInterval(this.intervalUpdateLoop);
         }
         // first update directly, then for every interval
