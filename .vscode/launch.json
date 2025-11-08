@@ -33,6 +33,16 @@
             "port": 9908,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/"
-        } 
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "name": "Attach Blink to Homey Pro 23 Prod",
+            "address": "192.168.1.14",
+            "port": 9908,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app/"
+        },
     ]
 }

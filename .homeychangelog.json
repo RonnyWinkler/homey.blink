@@ -170,5 +170,9 @@
   "2.0.2": {
     "en": "Fixed token refresh.",
     "de": "Token-Refresh korrigiert."
+  },
+  "2.0.3": {
+    "en": "Fixed cloud video check. Added support for Basic plan (mixed storage).",
+    "de": "Fehler beim Cloud-Video-Check korrigiert. Basic-Plan-Unterterstützung hinzugefügt (Gemischter Speicher)."
   }
 }

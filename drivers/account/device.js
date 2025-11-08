@@ -292,26 +292,6 @@ class accountDevice extends Homey.Device {
             this.error("updateDeices(): Not logged in!");
             return;
         }
-        // Subscriptions
-        try{
-            if (await this.blinkApi.hasSubscription()){
-                this.deviceData.statusStorage = 'cloud';
-            }
-            else{
-                this.deviceData.statusStorage = 'local';
-            }
-            await this.setCapabilityValue('status_storage', this.deviceData.statusStorage ).catch(error => {this.error(error)});
-        }
-        catch (error){
-            this.error("updateDevices()=>Subscriptions ",error.message);
-            let code = /code: \d*/.exec(error.message);
-            let codeStr = '';
-            if (code && code[0]){
-                codeStr = code[0];
-            }
-            this.apiStateError(this.homey.__('devices.account.api_error_device') +": "+codeStr);
-            return;
-        }
 
         // Read Homescreen Status
         try{
@@ -401,6 +381,36 @@ class accountDevice extends Homey.Device {
             this.apiStateError(this.homey.__('devices.account.api_error_device') +": "+codeStr);
             return;
         }
+
+        // Subscriptions
+        try{
+            // if (await this.blinkApi.hasSubscription()){
+            //     this.deviceData.statusStorage = 'cloud';
+            // }
+            // else{
+            //     this.deviceData.statusStorage = 'local';
+            // }
+            this.deviceData.statusStorage = await this.blinkApi.getSubscriptionType();
+            // If subscription is basic (result == 'mix'), then check the amount of cameras. 
+            // If == 1, then only 1 camera is active with basic plan. That means all videos are strored in cloud => switch to 'cloud'
+            // If > 1, then only 1 camera is cloud-based, all others are local => keep 'mix'
+            let cameraCount = this.deviceData.homescreen.doorbells.length + this.deviceData.homescreen.cameras.length + this.deviceData.homescreen.owls.length;
+            if (cameraCount == 1 && this.deviceData.statusStorage == 'mix'){
+                this.deviceData.statusStorage = 'cloud';
+            }
+            await this.setCapabilityValue('status_storage', this.deviceData.statusStorage ).catch(error => {this.error(error)});
+        }
+        catch (error){
+            this.error("updateDevices()=>Subscriptions ",error.message);
+            let code = /code: \d*/.exec(error.message);
+            let codeStr = '';
+            if (code && code[0]){
+                codeStr = code[0];
+            }
+            this.apiStateError(this.homey.__('devices.account.api_error_device') +": "+codeStr);
+            return;
+        }
+
         this.apiStateOk();
     }
 
@@ -419,7 +429,9 @@ class accountDevice extends Homey.Device {
         }
         this.intervalMotionLoopSyncModule = this.homey.setInterval( async () => {
             // Dependent on subscription, use cloud access or SyncModule
-            if (this.deviceData.statusStorage && this.deviceData.statusStorage == 'local'){
+            if (this.deviceData.statusStorage && 
+                    ( this.deviceData.statusStorage == 'local' || this.deviceData.statusStorage == 'mix' )
+                ){
                 // Clear all motion alerrts for all devices
                 await this.clearMotionAlert(null, Date.parse(this.deviceData.lastVideoRequest));
                 await this.checkMotionLocal().catch(error => this.error("motionAlertInterval(): ",error));
@@ -429,7 +441,9 @@ class accountDevice extends Homey.Device {
         );
         this.intervalMotionLoopCloud = this.homey.setInterval( async () => {
             // Dependent on subscription, use cloud access or SyncModule
-            if (this.deviceData.statusStorage && this.deviceData.statusStorage == 'cloud'){
+            if (this.deviceData.statusStorage && 
+                    ( this.deviceData.statusStorage == 'cloud' || this.deviceData.statusStorage == 'mix' )
+                ){
                 // Clear all motion alerrts for all devices
                 await this.clearMotionAlert(null, Date.parse(this.deviceData.lastVideoRequest));
                 await this.checkMotionCloud().catch(error => this.error("motionAlertInterval(): ",error));

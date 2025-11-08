@@ -26,6 +26,14 @@
                 "de": "Cloud",
                 "nl": "Cloud"
             }
+        },
+        {
+            "id": "mix",
+            "title": {
+                "en": "Mix",
+                "de": "Mix",
+                "nl": "Mix"
+            }
         }
     ]
 }
