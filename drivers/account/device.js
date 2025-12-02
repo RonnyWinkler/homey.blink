@@ -429,25 +429,25 @@ class accountDevice extends Homey.Device {
         }
         this.intervalMotionLoopSyncModule = this.homey.setInterval( async () => {
             // Dependent on subscription, use cloud access or SyncModule
-            if (this.deviceData.statusStorage && 
-                    ( this.deviceData.statusStorage == 'local' || this.deviceData.statusStorage == 'mix' )
-                ){
+            // if (this.deviceData.statusStorage && 
+            //         ( this.deviceData.statusStorage == 'local' || this.deviceData.statusStorage == 'mix' )
+            //     ){
                 // Clear all motion alerrts for all devices
                 await this.clearMotionAlert(null, Date.parse(this.deviceData.lastVideoRequest));
                 await this.checkMotionLocal().catch(error => this.error("motionAlertInterval(): ",error));
-            }
+            // }
             }, 
             1000 * this.getSetting('motion_interval_local') // every x sec
         );
         this.intervalMotionLoopCloud = this.homey.setInterval( async () => {
             // Dependent on subscription, use cloud access or SyncModule
-            if (this.deviceData.statusStorage && 
-                    ( this.deviceData.statusStorage == 'cloud' || this.deviceData.statusStorage == 'mix' )
-                ){
+            // if (this.deviceData.statusStorage && 
+            //         ( this.deviceData.statusStorage == 'cloud' || this.deviceData.statusStorage == 'mix' )
+            //     ){
                 // Clear all motion alerrts for all devices
                 await this.clearMotionAlert(null, Date.parse(this.deviceData.lastVideoRequest));
                 await this.checkMotionCloud().catch(error => this.error("motionAlertInterval(): ",error));
-            }
+            // }
             }, 
             1000 * this.getSetting('motion_interval_cloud') // every x sec
         );

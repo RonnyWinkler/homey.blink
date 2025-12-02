@@ -174,5 +174,9 @@
   "2.0.3": {
     "en": "Fixed cloud video check. Added support for Basic plan (mixed storage).",
     "de": "Fehler beim Cloud-Video-Check korrigiert. Basic-Plan-Unterterstützung hinzugefügt (Gemischter Speicher)."
+  },
+  "2.0.4": {
+    "en": "Check cloud and local video independent of subscription (quick fix)",
+    "de": "Prüfe Cloud- und lokale Video unabhaengig vom Abo."
   }
 }
