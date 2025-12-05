@@ -24,8 +24,8 @@
                 "type": "checkbox",
                 "value": true,
                 "label": {
-                    "en": "Motion alert check enabled",
-                    "de": "Bewegungsalarm-Prüfung aktiviert"
+                    "en": "Motion alert check enabled (Cloud storage)",
+                    "de": "Bewegungsalarm-Prüfung aktiviert (Cloud-Speicher)"
                 },
                 "hint": {
                     "en": "Enables checking for motion alerts based on new video recordings.",
@@ -43,6 +43,19 @@
                 "hint": {
                     "en": "Retrieval interval of motion alerts from Blink Cloud in seconds (>5 sec to avoid blocking).",
                     "de": "Abruf-Intervall von Bewegungsalarmen von der Blink-Cound in Sekunden (>5 sec zur Vermeidung von Sperrungen)."
+                }
+            },
+            {
+                "id": "motion_check_enabled_local",
+                "type": "checkbox",
+                "value": true,
+                "label": {
+                    "en": "Motion alert check enabled (local/SyncModule)",
+                    "de": "Bewegungsalarm-Prüfung aktiviert (lokal/SyncModul)"
+                },
+                "hint": {
+                    "en": "Enables checking for motion alerts based on new video recordings.",
+                    "de": "Aktiviert die Prüfung auf Bewegungsalarme anhand neuer Videoaufnahmen."
                 }
             },
             {

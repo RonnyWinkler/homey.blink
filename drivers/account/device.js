@@ -423,34 +423,38 @@ class accountDevice extends Homey.Device {
             this.homey.clearInterval(this.intervalMotionLoopCloud);
         }
         // Only check for motion alert is activated in device settings
-        let active = this.getSetting('motion_check_enabled');
-        if ( !active ){
-            return;
+        // let active = this.getSetting('motion_check_enabled');
+        // if ( !active ){
+        //     return;
+        // }
+        if (this.getSetting('motion_check_enabled_local')){
+            this.intervalMotionLoopSyncModule = this.homey.setInterval( async () => {
+                // Dependent on subscription, use cloud access or SyncModule
+                // if (this.deviceData.statusStorage && 
+                //         ( this.deviceData.statusStorage == 'local' || this.deviceData.statusStorage == 'mix' )
+                //     ){
+                    // Clear all motion alerrts for all devices
+                    await this.clearMotionAlert(null, Date.parse(this.deviceData.lastVideoRequest));
+                    await this.checkMotionLocal().catch(error => this.error("motionAlertInterval(): ",error));
+                // }
+                }, 
+                1000 * this.getSetting('motion_interval_local') // every x sec
+            );
         }
-        this.intervalMotionLoopSyncModule = this.homey.setInterval( async () => {
-            // Dependent on subscription, use cloud access or SyncModule
-            // if (this.deviceData.statusStorage && 
-            //         ( this.deviceData.statusStorage == 'local' || this.deviceData.statusStorage == 'mix' )
-            //     ){
-                // Clear all motion alerrts for all devices
-                await this.clearMotionAlert(null, Date.parse(this.deviceData.lastVideoRequest));
-                await this.checkMotionLocal().catch(error => this.error("motionAlertInterval(): ",error));
-            // }
-            }, 
-            1000 * this.getSetting('motion_interval_local') // every x sec
-        );
-        this.intervalMotionLoopCloud = this.homey.setInterval( async () => {
-            // Dependent on subscription, use cloud access or SyncModule
-            // if (this.deviceData.statusStorage && 
-            //         ( this.deviceData.statusStorage == 'cloud' || this.deviceData.statusStorage == 'mix' )
-            //     ){
-                // Clear all motion alerrts for all devices
-                await this.clearMotionAlert(null, Date.parse(this.deviceData.lastVideoRequest));
-                await this.checkMotionCloud().catch(error => this.error("motionAlertInterval(): ",error));
-            // }
-            }, 
-            1000 * this.getSetting('motion_interval_cloud') // every x sec
-        );
+        if (this.getSetting('motion_check_enabled')){
+            this.intervalMotionLoopCloud = this.homey.setInterval( async () => {
+                // Dependent on subscription, use cloud access or SyncModule
+                // if (this.deviceData.statusStorage && 
+                //         ( this.deviceData.statusStorage == 'cloud' || this.deviceData.statusStorage == 'mix' )
+                //     ){
+                    // Clear all motion alerrts for all devices
+                    await this.clearMotionAlert(null, Date.parse(this.deviceData.lastVideoRequest));
+                    await this.checkMotionCloud().catch(error => this.error("motionAlertInterval(): ",error));
+                // }
+                }, 
+                1000 * this.getSetting('motion_interval_cloud') // every x sec
+            );
+        }
     }
 
     async checkMotionCloud(){
@@ -1205,7 +1209,8 @@ class accountDevice extends Homey.Device {
         }
         if (changedKeys.indexOf("motion_interval_cloud") >= 0 || 
             changedKeys.indexOf("motion_interval_local") >= 0 ||
-            changedKeys.indexOf("motion_check_enabled") >= 0
+            changedKeys.indexOf("motion_check_enabled") >= 0 ||
+            changedKeys.indexOf("motion_check_enabled_local") >= 0
             ){
                 setTimeout( async () => this.motionAlertInterval()
                 , 

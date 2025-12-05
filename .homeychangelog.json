@@ -178,5 +178,9 @@
   "2.0.4": {
     "en": "Check cloud and local video independent of subscription (quick fix)",
     "de": "Prüfe Cloud- und lokale Video unabhaengig vom Abo."
+  },
+  "2.0.5": {
+    "en": "Added account device settings for local video check",
+    "de": "Konto-Geräteeinstellungen hinzugefügt, um lokale Video-Prüfung zu aktivieren."
   }
 }
