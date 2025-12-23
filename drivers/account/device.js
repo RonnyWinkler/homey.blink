@@ -8,8 +8,8 @@ class accountDevice extends Homey.Device {
     async onInit() {
         this.log('Blink account init: '+this.getName()+' ID: '+this.getData().id);
 
-        // Timeline information about new oAuth authorization
-        this.homey.notifications.createNotification({excerpt: this.homey.__('devices.account.update_info')}).catch(error => {this.error('Error sending notification: '+error.message)});
+        // // Timeline information about new oAuth authorization
+        // this.homey.notifications.createNotification({excerpt: this.homey.__('devices.account.update_info')}).catch(error => {this.error('Error sending notification: '+error.message)});
 
         this.deviceData = {
             email: this.getStoreValue('email'),

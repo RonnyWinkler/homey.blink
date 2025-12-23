@@ -182,5 +182,9 @@
   "2.0.5": {
     "en": "Added account device settings for local video check",
     "de": "Konto-Geräteeinstellungen hinzugefügt, um lokale Video-Prüfung zu aktivieren."
+  },
+  "2.1.0": {
+    "en": "Fixed oAuth authorization (Blink API changes)",
+    "de": "oAuth-Anmeldung korrigiert (Blink API-Änderungen)"
   }
 }

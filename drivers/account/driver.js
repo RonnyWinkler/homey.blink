@@ -140,7 +140,7 @@ class accountDriver extends Homey.Driver {
             //     await session.showView("pin_error");
             // }
             try{
-                let loginData = await this.checkAccount();
+                let loginData = await this.check2FA();
                 this.settingsData.accountId = loginData.account;
                 this.settingsData.region = loginData.region;
                 this.settingsData.token = loginData.token;
@@ -193,7 +193,7 @@ class accountDriver extends Homey.Driver {
     if (view === 'check_pin') {
         this.log("onShowView(check_pin)");
         try{
-            let loginData = await this.checkAccount();
+            let loginData = await this.check2FA();
             this.settingsData.accountId = loginData.account;
             this.settingsData.region = loginData.region;
             this.settingsData.token = loginData.token;
@@ -230,13 +230,9 @@ class accountDriver extends Homey.Driver {
             let result = await this.blinkApi.oAuthLogin(
                 this.settingsData.email,
                 this.settingsData.pw,
-                this.settingsData.pin,
                 this.settingsData.blinkUid
             );
             this.log(result);
-            // this.settingsData.accountId = result.account;
-            // this.settingsData.region = result.region;
-            // this.settingsData.token = result.token;
             return result;
         }
         catch(error){
@@ -245,20 +241,20 @@ class accountDriver extends Homey.Driver {
         }
     }
 
-    // async checkPin(){
-    //     this.log("checkPin()");
-    //     try{
-    //         let result = await this.blinkApi.verifyPin(
-    //             this.settingsData.pin
-    //             );
-    //         this.log(result);
-    //         return result;
-    //     }
-    //     catch(error){
-    //         this.log(error.message);
-    //         throw error;
-    //     }
-    // }
+    async check2FA(){
+        this.log("check2FA()");
+        try{
+            let result = await this.blinkApi.oAuthComplete2faLogin(
+                this.settingsData.pin
+            );
+            this.log(result);
+            return result;
+        }
+        catch(error){
+            this.log(error.message);
+            throw error;
+        }
+    }
 
     async onPairListDevices(session) {
         this.log("onPairListDevices()" );
