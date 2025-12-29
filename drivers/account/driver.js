@@ -48,12 +48,14 @@ class accountDriver extends Homey.Driver {
         // }
         // Uid and NotificationKey must be set with new values. Re-Auth seems to need new IDs. Old ID seem to get revoked on PW change. 
         this.settingsData = { 
-            email: device.getStoreValue('email'),
-            pw: '',
-            blinkUid: this.blinkApi.generate_uid(16), //device.getStoreValue('blinkUid'),
+            "email": device.getStoreValue('email'),
+            "pw": '',
+            // blinkUid: this.blinkApi.generate_uid(16), //device.getStoreValue('blinkUid'),
+            "blinkUid": await this.homey.cloud.getHomeyId(),
             // blinkNotificationKey: this.blinkApi.generate_uid(152), //device.getStoreValue('blinkNotificationKey'),
-            accountId: device.getData().id,
-            pin: ''
+            // accountId: device.getData().id,
+            "pin": '',
+            "accountId": 0
         };
 
         session.setHandler("settingsChanged", async (data) => {
@@ -111,7 +113,11 @@ class accountDriver extends Homey.Driver {
             //     await session.showView("account_error");
             // }
             try{
-                await this.checkAccount();
+                let loginData = await this.checkAccount();
+                this.settingsData.accountId = loginData.account;
+                this.settingsData.region = loginData.region;
+                this.settingsData.token = loginData.token;
+
                 await session.nextView();
             }
             catch(error){
@@ -177,7 +183,10 @@ class accountDriver extends Homey.Driver {
         //     await session.showView("account_error");
         // }
         try{
-            await this.checkAccount();
+            let loginData = await this.checkAccount();
+            this.settingsData.accountId = loginData.account;
+            this.settingsData.region = loginData.region;
+            this.settingsData.token = loginData.token;
             await session.nextView();
         }
         catch(error){

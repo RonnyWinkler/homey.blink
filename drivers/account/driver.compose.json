@@ -84,7 +84,7 @@
             "template": "loading",
             "navigation": {
                 "prev": "account",
-                "next": "list_devices"
+                "next": "update_device"
             }
         },
         {
@@ -116,7 +116,14 @@
         },
         {
             "id": "update_device",
-            "template": "loading"
+            "template": "loading",
+            "navigation": {
+                "next": "done"
+            }
+        },
+        {
+            "id": "done",
+            "template": "done"
         }
     ]
 }
