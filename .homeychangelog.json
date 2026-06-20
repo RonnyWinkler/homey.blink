@@ -194,5 +194,13 @@
   "2.1.2": {
     "en": "Fixed timer reset when removing the device.",
     "de": "Timer-Reset beim Entfernen des Gerätes korrigiert."
+  },
+  "2.1.3": {
+    "en": "Error handling for disconnected SD devices.",
+    "de": "Fehlerbehandlung für getrennte SD-Geräte."
+  },
+  "2.1.4": {
+    "en": "Fixed login error (2FA response).",
+    "de": "Anmelde-Fehler behoben (2FA-Antwort)."
   }
 }
