@@ -202,5 +202,9 @@
   "2.1.4": {
     "en": "Fixed login error (2FA response).",
     "de": "Anmelde-Fehler behoben (2FA-Antwort)."
+  },
+  "2.1.5": {
+    "en": "Added debug log.",
+    "de": "Debug-Log hinzugefügt."
   }
 }

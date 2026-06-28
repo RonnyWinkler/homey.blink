@@ -100,23 +100,23 @@ class accountDevice extends Homey.Device {
             await this.setSettings({
                 api_state : reason
             });
+            let state = this.getCapabilityValue('alarm_api_error');
+            if (state == null || state == false){
+                let now = Date.parse(new Date());
+                if (this.deviceData.apiErrorTimestamp == null ){
+                    this.deviceData.apiErrorTimestamp = now;
+                }
+                let diff = this.getSetting('alarm_api_wait')*1000*60;
+                let compare = this.deviceData.apiErrorTimestamp + diff;
+                if (now >= compare){
+                    this.setCapabilityValue('alarm_api_error', true);
+                    const tokens = { "reason": reason };
+                    this.apiStateErrorTrigger.trigger( this,  tokens );
+                }
+            }
         }
         catch(error){
             this.error("apiStateError(): "+error.message+" api_state:"+reason);
-        }
-        let state = this.getCapabilityValue('alarm_api_error');
-        if (state == null || state == false){
-            let now = Date.parse(new Date());
-            if (this.deviceData.apiErrorTimestamp == null ){
-                this.deviceData.apiErrorTimestamp = now;
-            }
-            let diff = this.getSetting('alarm_api_wait')*1000*60;
-            let compare = this.deviceData.apiErrorTimestamp + diff;
-            if (now >= compare){
-                this.setCapabilityValue('alarm_api_error', true);
-                const tokens = { "reason": reason };
-                this.apiStateErrorTrigger.trigger( this,  tokens );
-            }
         }
     }
 
@@ -146,7 +146,7 @@ class accountDevice extends Homey.Device {
                 this.deviceData.blinkUid,
                 this.deviceData.token,
             );
-            this.log('Token:', token);
+            // this.log('Token:', token);
             this.deviceData.token = token;
             await this.setStoreValue('token', token);
             this.deviceData.loggedIn = true;
@@ -322,6 +322,10 @@ class accountDevice extends Homey.Device {
             this.apiStateError(this.homey.__('devices.account.api_error_device') +": "+codeStr);
             return;
         }
+
+        // Debug Log
+        this.log("updateDevices(): Homescreen: ", JSON.stringify(this.deviceData.homescreen) );
+
         // Account
         if (this.deviceData.homescreen && this.deviceData.homescreen.video_stats){
             this.setCapabilityValue('measure_cloud_usage', this.deviceData.homescreen.video_stats.storage );
