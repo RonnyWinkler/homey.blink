@@ -1,5 +1,6 @@
 "use strict";
 const Homey = require('homey');
+const crypto = require('crypto');
 const blinkApi = require('../../lib/blinkApi');
 
 class accountDriver extends Homey.Driver {
@@ -12,7 +13,7 @@ class accountDriver extends Homey.Driver {
             "email": "",
             "pw": "",
             // "blinkUid": this.blinkApi.generate_uid(16),
-            "blinkUid": await this.homey.cloud.getHomeyId(),
+            "blinkUid": await this._generate_uuid(),
             // "blinkNotificationKey": this.blinkApi.generate_uid(152),
             "pin": "",
             "accountId": 0
@@ -39,6 +40,19 @@ class accountDriver extends Homey.Driver {
         });
 
     } // end onPair
+
+    async _generate_uuid() {
+        const id = await this.homey.cloud.getHomeyId();
+        const hash = crypto.createHash('sha256').update(id).digest();
+        const uuid = [
+        hash.subarray(0, 4).toString('hex'),
+        hash.subarray(4, 6).toString('hex'),
+        hash.subarray(6, 8).toString('hex'),
+        hash.subarray(8, 10).toString('hex'),
+        hash.subarray(10, 16).toString('hex')
+        ].join('-');
+        return uuid;
+    }
 
     async onRepair(session, device) {
         this.log("onRepair()");
