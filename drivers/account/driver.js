@@ -13,7 +13,7 @@ class accountDriver extends Homey.Driver {
             "email": "",
             "pw": "",
             // "blinkUid": this.blinkApi.generate_uid(16),
-            "blinkUid": await this._generate_uuid(),
+            "blinkUid": await this._generate_uuid(), //await this.homey.cloud.getHomeyId(),
             // "blinkNotificationKey": this.blinkApi.generate_uid(152),
             "pin": "",
             "accountId": 0
@@ -41,19 +41,6 @@ class accountDriver extends Homey.Driver {
 
     } // end onPair
 
-    async _generate_uuid() {
-        const id = await this.homey.cloud.getHomeyId();
-        const hash = crypto.createHash('sha256').update(id).digest();
-        const uuid = [
-        hash.subarray(0, 4).toString('hex'),
-        hash.subarray(4, 6).toString('hex'),
-        hash.subarray(6, 8).toString('hex'),
-        hash.subarray(8, 10).toString('hex'),
-        hash.subarray(10, 16).toString('hex')
-        ].join('-');
-        return uuid;
-    }
-
     async onRepair(session, device) {
         this.log("onRepair()");
 
@@ -65,7 +52,7 @@ class accountDriver extends Homey.Driver {
             "email": device.getStoreValue('email'),
             "pw": '',
             // blinkUid: this.blinkApi.generate_uid(16), //device.getStoreValue('blinkUid'),
-            "blinkUid": await this.homey.cloud.getHomeyId(),
+            "blinkUid": await this._generate_uuid(), //await this.homey.cloud.getHomeyId(),
             // blinkNotificationKey: this.blinkApi.generate_uid(152), //device.getStoreValue('blinkNotificationKey'),
             // accountId: device.getData().id,
             "pin": '',
@@ -93,6 +80,36 @@ class accountDriver extends Homey.Driver {
         // });
       
     } // end onRepair
+
+    // async _generate_uuid() {
+    //     const id = await this.homey.cloud.getHomeyId();
+    //     const hash = crypto.createHash('sha256').update(id).digest();
+    //     const uuid = [
+    //     hash.subarray(0, 4).toString('hex'),
+    //     hash.subarray(4, 6).toString('hex'),
+    //     hash.subarray(6, 8).toString('hex'),
+    //     hash.subarray(8, 10).toString('hex'),
+    //     hash.subarray(10, 16).toString('hex')
+    //     ].join('-');
+    //     return uuid;
+    // }
+    // oAuth 406 error fix: Use UUIDv4 layout
+    async _generate_uuid() {
+        const id = await this.homey.cloud.getHomeyId();
+        const hash = crypto.createHash('sha256').update(id).digest();
+
+        // Set UUID version 4 layout and RFC variant bits.
+        hash[6] = (hash[6] & 0x0f) | 0x40;
+        hash[8] = (hash[8] & 0x3f) | 0x80;
+
+        return [
+            hash.subarray(0, 4).toString('hex'),
+            hash.subarray(4, 6).toString('hex'),
+            hash.subarray(6, 8).toString('hex'),
+            hash.subarray(8, 10).toString('hex'),
+            hash.subarray(10, 16).toString('hex')
+        ].join('-').toUpperCase();
+    } 
 
     async onSettingsChanged(data){
         this.log("onSettingsChanged()");
