@@ -654,7 +654,17 @@ class accountDevice extends Homey.Device {
         }
         let videoList = [];
         for (var i = 0; i < this.deviceData.homescreen.sync_modules.length; i++) {
+
             let syncmoduleId = this.deviceData.homescreen.sync_modules[i].id;
+            
+            // Check if Sync Module has storage available
+            if (    !this.deviceData.homescreen.sync_modules[i] || 
+                    !this.deviceData.homescreen.sync_modules[i].local_storage_enabled || 
+                    this.deviceData.homescreen.sync_modules[i].local_storage_status != 'active' ){
+                console.log("getNewVideosLocal() SyncModule "+syncmoduleId+": Storage not available or not active. Skip vodeo check.");
+                continue;
+            }
+
             let systemId = this.deviceData.homescreen.sync_modules[i].network_id;
             console.log("getNewVideosLocal() SyncModule "+syncmoduleId);
             let result = {};

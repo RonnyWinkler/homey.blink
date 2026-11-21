@@ -272,7 +272,9 @@ class accountDriver extends Homey.Driver {
                 this.settingsData.pw,
                 this.settingsData.blinkUid
             );
-            this.log(result);
+            if (process.env.DEBUG === '1'){
+                this.log(result);
+            }
             return result;
         }
         catch(error){
@@ -287,7 +289,9 @@ class accountDriver extends Homey.Driver {
             let result = await this.blinkApi.oAuthComplete2faLogin(
                 this.settingsData.pin
             );
-            this.log(result);
+            if (process.env.DEBUG === '1'){
+                this.log(result);
+            }
             return result;
         }
         catch(error){

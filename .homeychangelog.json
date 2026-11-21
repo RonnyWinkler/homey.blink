@@ -222,5 +222,9 @@
   "2.1.9": {
     "en": "Fixed Blink API change (device ID UUIDv4 format).",
     "de": "Fehler behoben wg. Blink API-Änderungen (Device ID UUIDv4 Format)."
+  },
+  "2.1.10": {
+    "en": "Skip SyncModules without active storage on video check.",
+    "de": "Überspringe SyncModule ohne aktiven Speicher bei der Video-Prüfung."
   }
 }
